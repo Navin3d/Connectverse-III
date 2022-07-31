@@ -1,0 +1,68 @@
+package gmc.project.connectversev3.authservice.entities;
+
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+import gmc.project.connectversev3.authservice.models.Gender;
+import lombok.Data;
+
+@Data
+@Entity
+@Table(name = "employers")
+public class EmployerEntity implements Serializable {
+
+	private static final long serialVersionUID = -9127881262998178373L;
+	
+	@Id
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
+	@Column(name = "id")
+	private String id;
+	
+	@Column(name = "first_name", nullable = false)
+	private String firstName;
+	
+	@Column(name = "last_name")
+	private String lastName;
+	
+	@Column(name = "age")
+	private Integer age = 18;
+	
+	@Enumerated(value = EnumType.STRING)
+	private Gender gender;
+	
+	@Column(name = "aadhar_id")
+	private String aadharId;
+
+	@Column(name = "email")
+	private String email;
+	
+	@Column(name = "mobile_number")
+	private Long mobileNumber;
+		
+	@Column(name = "address")
+	private String address;
+	
+	@Column(name = "location")
+	private String location;
+	
+	@Column(name = "is_blocked")
+	private Boolean isBlocked = false;
+	
+	@OneToMany(mappedBy = "employer", cascade = CascadeType.ALL)
+	private Set<JobEntity> job = new HashSet<>();
+
+}
