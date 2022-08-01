@@ -25,7 +25,7 @@ public class AuthServiceImpl implements AuthService {
 	@Autowired
 	private EmployeeDao employeeDao;	
 	@Autowired
-	private EmployerDao employerDao;	
+	private EmployerDao employerDao;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
