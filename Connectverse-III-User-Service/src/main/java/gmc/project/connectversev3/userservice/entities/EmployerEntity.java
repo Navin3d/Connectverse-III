@@ -12,6 +12,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -61,6 +62,9 @@ public class EmployerEntity implements Serializable {
 	
 	@Column(name = "is_blocked")
 	private Boolean isBlocked = false;
+	
+	@OneToOne(optional = true)
+	private CompanyEntity company;
 	
 	@OneToMany(mappedBy = "employer", cascade = CascadeType.ALL)
 	private Set<JobEntity> job = new HashSet<>();

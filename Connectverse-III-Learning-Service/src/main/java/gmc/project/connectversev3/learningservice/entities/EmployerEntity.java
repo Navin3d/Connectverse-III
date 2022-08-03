@@ -1,4 +1,4 @@
-package gmc.project.connectversev3.authservice.entities;
+package gmc.project.connectversev3.learningservice.entities;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import gmc.project.connectversev3.authservice.models.Gender;
+import gmc.project.connectversev3.learningservice.models.Gender;
 import lombok.Data;
 
 @Data

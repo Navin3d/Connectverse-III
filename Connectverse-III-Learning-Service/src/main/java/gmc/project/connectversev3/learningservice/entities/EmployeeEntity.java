@@ -1,31 +1,29 @@
-package gmc.project.connectversev3.authservice.entities;
+package gmc.project.connectversev3.learningservice.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import gmc.project.connectversev3.authservice.models.Gender;
+import gmc.project.connectversev3.learningservice.models.Gender;
+import gmc.project.connectversev3.learningservice.models.WorkType;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "employers")
-public class EmployerEntity implements Serializable {
-
-	private static final long serialVersionUID = -9127881262998178373L;
+@Table(name = "employees")
+public class EmployeeEntity implements Serializable {
+	
+	private static final long serialVersionUID = -2116205916321723098L;
 	
 	@Id
 	@GeneratedValue(generator = "uuid")
@@ -45,6 +43,13 @@ public class EmployerEntity implements Serializable {
 	@Enumerated(value = EnumType.STRING)
 	private Gender gender;
 	
+	@Enumerated(value = EnumType.STRING)
+	private WorkType prefferedWorkType;
+	
+	@Lob
+	@Column(name = "cv_url")
+	private String cvUrl;
+	
 	@Column(name = "aadhar_id")
 	private String aadharId;
 
@@ -60,13 +65,25 @@ public class EmployerEntity implements Serializable {
 	@Column(name = "location")
 	private String location;
 	
+	@Column(name = "expected_wage_per_hour")
+	private Integer expectedWagePerHour;
+	
+	@Column(name = "expected_working_hour_per_week")
+	private Integer expectedWorkingHoursPerWeek;
+	
+	@Column(name = "is_technical_worler")
+	private Boolean isTechnicalWorker = false;
+	
+	@Column(name = "is_occupied")
+	private Boolean isOccupied = false;
+	
 	@Column(name = "is_blocked")
-	private Boolean isBlocked = false;
+	private Boolean isBlocked = true;
 	
-	@OneToOne(optional = true)
-	private CompanyEntity company;
+	@ManyToOne(optional = true)
+	private JobEntity job;
 	
-	@OneToMany(mappedBy = "employer", cascade = CascadeType.ALL)
-	private Set<JobEntity> job = new HashSet<>();
-
+	@ManyToOne(optional = true)
+	private HamletEntity hamlet;
+	
 }

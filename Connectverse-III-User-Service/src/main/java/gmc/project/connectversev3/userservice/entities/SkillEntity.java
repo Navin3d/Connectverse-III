@@ -1,4 +1,4 @@
-package gmc.project.connectversev3.learningservice.entities;
+package gmc.project.connectversev3.userservice.entities;
 
 import java.io.Serializable;
 import java.util.HashSet;
