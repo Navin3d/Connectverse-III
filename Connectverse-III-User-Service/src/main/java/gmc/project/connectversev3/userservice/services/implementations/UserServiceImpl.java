@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public EmployeeEntity findEmployeeByUserName(String userName) {
-		EmployeeEntity foundEmployee = null;		
+		EmployeeEntity foundEmployee = null;
 		if(userName.contains("@")) {
 			foundEmployee = employeeDao.findByEmail(userName);
 		} else {
@@ -57,8 +57,8 @@ public class UserServiceImpl implements UserService {
 			} catch (Exception e) {
 				foundEmployee = employeeDao.findById(userName).orElse(null);
 			}
-		}		
-		if(foundEmployee == null) throw new UserNotFoundException("Employee Not found...");		
+		}
+		if(foundEmployee == null) throw new UserNotFoundException("Employee Not found...");
 		return foundEmployee;
 	}
 
@@ -72,7 +72,6 @@ public class UserServiceImpl implements UserService {
 			employeeEntity.setAadharId(bCryptPasswordEncoder.encode(employeeEntity.getAadharId()));
 			employeesDetached.add(employeeEntity);
 		});
-		
 		employeeDao.saveAllAndFlush(employeesDetached);
 	}
 
