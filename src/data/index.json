@@ -1,0 +1,184 @@
+{
+  "Header": {
+    "title": "Connectverse",
+    "paragraph": "Communication - The Human Connection is the Key to personal and carrier success..."
+  },
+  "About": {
+    "paragraph": "Connectverse is a platform that allows the user to create a project and join other great minds inside their project.Also the user who wants to do a project but don't know how to start...Well this is a goto website",
+    "Why": [
+      "Lorem ipsum dolor",
+      "Tempor incididunt",
+      "Lorem ipsum dolor",
+      "Incididunt ut labore"
+    ],
+    "Why2": [
+      "Aliquip ex ea commodo",
+      "Lorem ipsum dolor",
+      "Exercitation ullamco",
+      "Lorem ipsum dolor"
+    ]
+  },
+  "Gallery": [
+    {
+      "title": "Project Title",
+      "largeImage": "images/portfolio/01-large.jpg",
+      "smallImage": "images/portfolio/01-small.jpg"
+    },
+    {
+      "title": "Project Title",
+      "largeImage": "images/portfolio/02-large.jpg",
+      "smallImage": "images/portfolio/02-small.jpg"
+    },
+    {
+      "title": "Project Title",
+      "largeImage": "images/portfolio/03-large.jpg",
+      "smallImage": "images/portfolio/03-small.jpg"
+    },
+    {
+      "title": "Project Title",
+      "largeImage": "images/portfolio/04-large.jpg",
+      "smallImage": "images/portfolio/04-small.jpg"
+    },
+    {
+      "title": "Project Title",
+      "largeImage": "images/portfolio/05-large.jpg",
+      "smallImage": "images/portfolio/05-small.jpg"
+    },
+    {
+      "title": "Project Title",
+      "largeImage": "images/portfolio/06-large.jpg",
+      "smallImage": "images/portfolio/06-small.jpg"
+    },
+    {
+      "title": "Project Title",
+      "largeImage": "images/portfolio/07-large.jpg",
+      "smallImage": "images/portfolio/07-small.jpg"
+    },
+    {
+      "title": "Project Title",
+      "largeImage": "images/portfolio/08-large.jpg",
+      "smallImage": "images/portfolio/08-small.jpg"
+    },
+    {
+      "title": "Project Title",
+      "largeImage": "images/portfolio/09-large.jpg",
+      "smallImage": "images/portfolio/09-small.jpg"
+    }
+  ],
+  "Services": [
+    {
+      "icon": "fa fa-shield",
+      "name": "Security",
+      "text": "We keep Connectverse safe, secure, and free of spam and abuse so that this can be the platform where developers come together to create."
+    },
+    {
+      "icon": "fa fa-cart-arrow-down",
+      "name": "Purchase",
+      "text": "Buy the exclusive membership and learning content taught by worldwide experts"
+    },
+    {
+      "icon": "fa fa-cloud-download",
+      "name": "Software",
+      "text": "Subscribe to notifications for new software or download the latest version"
+    },
+    {
+      "icon": "fa fa-handshake-o",
+      "name": "Support",
+      "text": "SLA in place to ensure a response within 30 minutes for urgent requests with our Premium Support experience."
+    },
+    {
+      "icon": "fa fa-plane",
+      "name": "exposure",
+      "text": "Have revolutionary ideas? Join here to travel around the world and publish thoughts " 
+    },
+    {
+      "icon": "fa fa-pie-chart",
+      "name": "Statistics",
+      "text": "Press here to know more about yourself and see how much progress you made"
+    }
+  ],
+  "Testimonials": [
+    {
+      "img": "./images/testimonials/Loga.jpeg",
+      "text": "\"Hi I am loga siva from Panimalar Engineering college, this is a great website that allows me to connect with other college students to do various projects\"",
+      "name": "Siva"
+    },
+    {
+      "img": "./images/testimonials/Kaushik.jpeg",
+      "text": "\"Hello there this is a fantastic website and the features are also amazing.Keep up the Good work\"",
+      "name": "Kaushik"
+    },
+    {
+      "img": "./images/testimonials/Krishna.jpeg",
+      "text": "\"one of the best goto website for beginners. the concept of this website is good\"",
+      "name": "Krishna"
+    },
+    {
+      "img": "./images/testimonials/Lakshman_Mahadevan.jpeg",
+      "text": "\"Amazing website....it's like a full fledged workplace and also very user-friendly website\"",
+      "name": "Lacks"
+    },
+    {
+      "img": "./images/testimonials/Parithraan.jpg",
+      "text": "\"Great work...! I have visited this website in both laptop and mobile the features are easy to understand and easy to use, its really excellent work. \"",
+      "name": "Parithraan"
+    },
+    {
+      "img": "./images/Kishore_dp.jpg",
+      "text": "\"A really good place to search for project and to get involved with superb project, will soon become a premium member\"",
+      "name": "Kishore"
+    }
+  ],
+  "Team": [
+    {
+      "img": "./images/Navin.jpg",
+      "name": "Navin@3d",
+      "job": "Director"
+    },
+    {
+      "img": "./images/Ishani_Akka_Senior.jpeg",
+      "name": "Ishani Saravanan",
+      "job": "Senior Designer"
+    },
+    {
+      "img": "./images/Loga.jpeg",
+      "name": "Siva",
+      "job": "Senior Designer"
+    },
+    {
+      "img": "./images/Naveen_Kumar.jpeg",
+      "name": "Naveen Kumar",
+      "job": "Chief Developer"
+    }
+  ],
+  "Contact": {
+    "address": "4321 California St, San Francisco, CA 12345 ",
+    "phone": "+1 123 456 1234",
+    "email": "info@company.com",
+    "facebook": "fb.com",
+    "twitter": "twitter.com",
+    "youtube": "youtube.com"
+  },
+  "Features": [
+    {
+      "icon": "fa fa-comments-o",
+      "title": "COMMUNICATE",
+      "text": "Communicate with other great minds to join them and thrive for success"
+    },
+    {
+      "icon": "fa fa-bullhorn",
+      "title": "Announcement",
+      "text": "Welcome to our website as you can see stil some of the pages are still in process ,but visit our website frequently for more content and activites "
+    },
+    {
+      "icon": "fa fa-group",
+      "title": "Community",
+      "text": "Post questions and get answers from other users and connectverse experts"
+    },
+    {
+      "icon": "fa fa-graduation-cap",
+      "title": "Learning",
+      "text": "Need to improve your? We provide with good learning "
+    }
+  ]
+}
