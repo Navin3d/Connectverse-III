@@ -7,6 +7,7 @@ import { Award } from "react-bootstrap-icons";
 // import CourseHeader from "../components/course/CourseHeader";
 import CourseContents from "../components/course/CourseContents";
 import CourseFeatures from "../components/course/CourseFeatures";
+import Comments from "../components/forums/Comments";
 
 import Data from "../data";
 
@@ -72,15 +73,82 @@ const INITIALSTATE = {
     ]
 };
 
+const INITIALCOMMENTS = [
+    {
+        id: 1,
+        likes: 10,
+        reports: 100,
+        comment: "We supply a series of design principles, practical patterns and high quality design resources to help people create their product prototypes beautifully and efficiently.",
+        replies: [
+            {
+                id: 1,
+                likes: 10,
+                reports: 100,
+                reply: "Fuck You"
+            },
+            {
+                id: 2,
+                likes: 100,
+                reports: 10,
+                reply: "sam suni"
+            }
+        ],
+    },
+    {
+        id: 2,
+        likes: 10,
+        reports: 100,
+        comment: "We supply a series of design principles, practical patterns and high quality design resources to help people create their product prototypes beautifully and efficiently.",
+        replies: [
+            {
+                id: 1,
+                likes: 10,
+                reports: 100,
+                reply: "Fuck You"
+            },
+            {
+                id: 2,
+                likes: 100,
+                reports: 10,
+                reply: "sam suni"
+            }
+        ],
+    },
+    {
+        id: 3,
+        likes: 10,
+        reports: 100,
+        comment: "We supply a series of design principles, practical patterns and high quality design resources to help people create their product prototypes beautifully and efficiently.",
+        replies: [
+            {
+                id: 1,
+                likes: 10,
+                reports: 100,
+                reply: "Fuck You"
+            },
+            {
+                id: 2,
+                likes: 100,
+                reports: 10,
+                reply: "sam suni"
+            }
+        ]
+    }
+];
+
+
 const CourseDetail = () => {
 
     const { cid } = useParams();
+
+    const [comments, setComments] = useState(INITIALCOMMENTS);
 
     const [activeTab, setActiveTab] = useState();
     const [detailsHidden, setDetailsHidden] = useState(false);
     const [roadMapHidden, setRoadMapHidden] = useState(true);
     const [videoHidden, setVideoHidden] = useState(true);
     const [featuresHidden, setFeaturesHidden] = useState(true);
+    const [forumHidden, setForumHidden] = useState(true);
 
     const [course, setCourse] = useState(INITIALSTATE);
 
@@ -91,21 +159,31 @@ const CourseDetail = () => {
             setRoadMapHidden(true);
             setVideoHidden(true);
             setFeaturesHidden(true);
+            setForumHidden(true);
         } else if (activeKey == 2) {
             setDetailsHidden(true);
             setRoadMapHidden(false);
             setVideoHidden(true);
             setFeaturesHidden(true);
+            setForumHidden(true);
         } else if(activeKey == 3) {
             setDetailsHidden(true);
             setRoadMapHidden(true);
             setVideoHidden(false);
             setFeaturesHidden(true);
-        } else {
+            setForumHidden(true);
+        } else if(activeKey == 4) {
             setDetailsHidden(true);
             setRoadMapHidden(true);
             setVideoHidden(true);
             setFeaturesHidden(false);
+            setForumHidden(true);
+        } else {
+            setDetailsHidden(true);
+            setRoadMapHidden(true);
+            setVideoHidden(true);
+            setFeaturesHidden(true);
+            setForumHidden(false);
         }
     }
 
@@ -188,6 +266,7 @@ const CourseDetail = () => {
                         <TabPane tab="Road Map" key="2" />
                         <TabPane tab="Video" key="3" />
                         <TabPane tab="Features" key="4" />
+                        <TabPane tab="Forums" key="5" />
                     </Tabs>
                     }
                 >
@@ -202,14 +281,29 @@ const CourseDetail = () => {
                     </div>
                 </Row>
                 <div hidden={roadMapHidden}>
-                    <h1>Road Maps</h1>
+                    <h4 className='side-headings'>Road Map</h4>
                 </div>
                 <div hidden={videoHidden} className="course-video">
-                    <iframe  width="1200" height="700" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen src={ course.youtubeUrl } ></iframe>
+                    <h4 className='side-headings'>References Videos</h4>
+                    <Row>
+                        <Col sm={1}></Col>
+                        <Col sm={10}>
+                        <iframe  width="100%" height="700px" title="YouTube video player" frameborder="0" allow="picture-in-pictur; fullscreene" src={ course.youtubeUrl } allowFullScreen></iframe>
+                        </Col>
+                        <Col sm={1}></Col>
+                    </Row>
                 </div>
                 <div hidden={featuresHidden}>
                     <h4>Features</h4>
                     <CourseFeatures />
+                </div>
+                <div hidden={forumHidden}>
+                    <h4 className='side-headings'>Forums</h4>
+                    {
+                        comments.map(comment => (
+                            <Comments key={comment.id} id={comment.id} comment={comment.comment} likesc={comment.likes} reportsc={comment.reports} replies={comment.replies} />
+                        ))
+                    }
                 </div>
             </Container>
         </div>
