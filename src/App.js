@@ -1,4 +1,4 @@
-import AppRouter from "./routers/AppRouter";
+import AppRouter from "./routers";
 
 import "./styles/base/font-awesome.css";
 
