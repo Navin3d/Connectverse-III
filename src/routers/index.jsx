@@ -13,6 +13,8 @@ import JobJoining from "../pages/JobJoining";
 import Profile from "../pages/ProfilePage";
 import PageNotFound from "../pages/404Page";
 
+import Footer from "../components/base/Footer";
+
 
 const AppRouter = () => (
   <BrowserRouter>
@@ -29,6 +31,7 @@ const AppRouter = () => (
       <Route path="/profile" element={<Profile />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
+    <Footer />
   </BrowserRouter>
 );
 
