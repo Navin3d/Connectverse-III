@@ -16,15 +16,16 @@ import gmc.project.connectversev3.learningservice.services.SkillService;
 
 @Service
 public class SkillServiceImpl implements SkillService {
-	
+
 	@Autowired
 	private SkillDao skillDao;
 
 	@Override
 	public SkillEntity findById(String id) {
 		SkillEntity foundSkill = skillDao.findById(id).orElse(null);
-		if(foundSkill == null) throw new SkillNotFoundException("Skill id: " + id); 
-		return null;
+		if (foundSkill == null)
+			throw new SkillNotFoundException("Skill id: " + id);
+		return foundSkill;
 	}
 
 	@Override
@@ -50,12 +51,25 @@ public class SkillServiceImpl implements SkillService {
 	public void saveSkill(SkillModel skillModel) {
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-		if(skillModel.getId() == null) {
+		if (skillModel.getId() == null) {
 			SkillEntity detached = modelMapper.map(skillModel, SkillEntity.class);
-			skillDao.save(detached);
+			SkillEntity saved = skillDao.save(detached);
+			saved.getCourseContents().forEach(courseContents -> {
+				courseContents.setSkill(saved);
+			});
+			skillDao.save(saved);
 		} else {
 			SkillEntity existing = findById(skillModel.getId());
-			modelMapper.map(skillModel, existing);
+			existing.setTittle(skillModel.getTittle());
+			existing.setSubTittle(skillModel.getSubTittle());
+			existing.setSkillsGained(skillModel.getSkillsGained());
+			existing.setProvider(skillModel.getProvider());
+			existing.setJobTittles(skillModel.getJobTittles());
+			existing.setPreRequirements(skillModel.getPreRequirements());
+			existing.setAverageTimeToFinishCourse(skillModel.getAverageTimeToFinishCourse());
+			existing.setJobsCanBeApplied(skillModel.getJobsCanBeApplied());
+			existing.setImageUrl(skillModel.getImageUrl());
+			existing.setIsHidden(skillModel.getIsHidden());
 			skillDao.save(existing);
 		}
 	}

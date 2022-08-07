@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,12 @@ public class SkillController {
 	@GetMapping
 	private ResponseEntity<List<SkillModel>> getAllSkills() {
 		List<SkillModel> returnValue = skillService.findAllSkills();
+		return ResponseEntity.status(HttpStatus.OK).body(returnValue);
+	}
+	
+	@GetMapping(path = "/{skillId}")
+	private ResponseEntity<SkillModel> getASkills(@PathVariable String skillId) {
+		SkillModel returnValue = skillService.findASkill(skillId);
 		return ResponseEntity.status(HttpStatus.OK).body(returnValue);
 	}
 	

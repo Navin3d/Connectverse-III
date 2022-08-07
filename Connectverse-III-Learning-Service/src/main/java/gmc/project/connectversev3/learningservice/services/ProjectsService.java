@@ -8,4 +8,5 @@ import gmc.project.connectversev3.learningservice.models.ProjectModel;
 public interface ProjectsService {
 	public ProjectEntity findById(String id);
 	public List<ProjectModel> getAllValidprojects(Boolean isHidden);
+	public void saveProject(ProjectEntity project);
 }

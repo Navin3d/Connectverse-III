@@ -48,6 +48,11 @@ public class ProjectEntity implements Serializable {
 	@Column(name = "is_enabled")
 	private Boolean isHidden = true;
 	
+	private Boolean isCompleted = false;
+	
+	@ManyToMany(mappedBy = "projects")
+	private Set<EmployeeEntity> team = new HashSet<>();
+	
 	@ManyToMany(mappedBy = "projects")
 	private Set<SkillEntity> skills = new HashSet<>();
 

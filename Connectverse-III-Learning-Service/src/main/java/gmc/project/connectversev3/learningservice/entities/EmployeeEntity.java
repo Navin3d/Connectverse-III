@@ -1,6 +1,8 @@
 package gmc.project.connectversev3.learningservice.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -85,5 +88,8 @@ public class EmployeeEntity implements Serializable {
 	
 	@ManyToOne(optional = true)
 	private HamletEntity hamlet;
+	
+	@ManyToMany
+	private Set<ProjectEntity> projects = new HashSet<>();
 	
 }

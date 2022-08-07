@@ -1,6 +1,8 @@
 package gmc.project.connectversev3.learningservice.models;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import lombok.Data;
 
@@ -11,12 +13,32 @@ public class SkillModel implements Serializable {
 	
 	private String id;
 	
+	private String tittle;
+	
+	private String subTittle;
+	
+	private String skillsGained;
+	
+	private String provider;
+	
+	private String jobTittles;
+	
+	private String preRequirements;
+	
+	private String averageTimeToFinishCourse;
+	
+	private String jobsCanBeApplied;
+	
+	private String roadMapUrl;
+	
+	private String youtubeUrl;
+	
+	private String useFulLink;
+	
 	private String imageUrl;
 	
-	private String name;
+	private Boolean isHidden;
 	
-	private String subTitte;
-	
-	private String description;
+	private Set<CourseContentModel> courseContents = new HashSet<>();
 	
 }
