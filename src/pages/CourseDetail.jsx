@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from 'react-bootstrap';
 import { Button, Descriptions, PageHeader, Statistic, Tabs } from 'antd';
@@ -151,6 +152,29 @@ const CourseDetail = () => {
     const [forumHidden, setForumHidden] = useState(true);
 
     const [course, setCourse] = useState(INITIALSTATE);
+    const [loading, setLoading] = useState(false);
+
+    const getACourses = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.get(`${Data.AppSettings.baseUrl}/skill/${cid}`);
+            setCourse(response.data);
+        } catch (e) {
+            console.error(e);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+
+    useEffect(() => {
+        // const fetchedCourse = Data.Courses.filter(course => (course.id == cid))[0];
+        
+        // const toSet = (fetchedCourse.length === 0) ? INITIALSTATE : fetchedCourse;
+        // setCourse(toSet);
+        getACourses();
+    }, []);
+
 
     const handleTabChange = (activeKey) => {
         setActiveTab(activeKey);
@@ -187,14 +211,6 @@ const CourseDetail = () => {
         }
     }
 
-    useEffect(() => {
-        const fetchedCourse = Data.Courses.filter(course => (course.id == cid))[0];
-        
-        const toSet = (fetchedCourse.length === 0) ? INITIALSTATE : fetchedCourse;
-        setCourse(toSet);
-    }, []);
-
-
     /* Thalaviti */
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -209,7 +225,7 @@ const CourseDetail = () => {
         <Descriptions size="small" column={column}>
             <Descriptions.Item label="Provider">{ course.provider }</Descriptions.Item>
             <Descriptions.Item label="Skills Involved">
-            <a>{ course.skills }</a>
+            <a>{ course.skillsGained }</a>
             </Descriptions.Item>
             <Descriptions.Item label="Job Tittles">
                 { course.jobTittles }
