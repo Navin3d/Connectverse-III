@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -88,6 +89,12 @@ public class EmployeeEntity implements Serializable {
 	
 	@ManyToOne(optional = true)
 	private HamletEntity hamlet;
+	
+	@OneToMany(mappedBy = "projectAdmin")
+	private Set<ProjectEntity> adminOfProjects = new HashSet<>();
+	
+	@ManyToMany
+	private Set<ProjectEntity> requestedProjects = new HashSet<>();
 	
 	@ManyToMany
 	private Set<ProjectEntity> projects = new HashSet<>();
