@@ -24,11 +24,11 @@ const AppRouter = () => (
       <Route path="/course/:cid" element={<CourseDetail />} />
       <Route path="/projects" element={<ProjectList />} />
       <Route path="/project/:pid" element={<ProjectDetail />} />
-      <Route path="/project/join" element={<ProjectJoining />} />
+      <Route path="/project/:pid/join" element={<ProjectJoining />} />
       <Route path="/jobs" element={<JobList />} />
       <Route path="/job/:jid" element={<JobDetail />} />
       <Route path="/job/join" element={<JobJoining />} />
-      <Route path="/profile" element={<Profile />} />
+      <Route path="/profile/:pid" element={<Profile />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     <Footer />

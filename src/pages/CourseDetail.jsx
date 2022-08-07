@@ -80,17 +80,20 @@ const INITIALCOMMENTS = [
         likes: 10,
         reports: 100,
         comment: "We supply a series of design principles, practical patterns and high quality design resources to help people create their product prototypes beautifully and efficiently.",
+        commentedBy: "suni", 
         replies: [
             {
                 id: 1,
                 likes: 10,
                 reports: 100,
+                commentedBy: "suni",
                 reply: "Fuck You"
             },
             {
                 id: 2,
                 likes: 100,
                 reports: 10,
+                commentedBy: "suni",
                 reply: "sam suni"
             }
         ],
@@ -100,17 +103,20 @@ const INITIALCOMMENTS = [
         likes: 10,
         reports: 100,
         comment: "We supply a series of design principles, practical patterns and high quality design resources to help people create their product prototypes beautifully and efficiently.",
+        commentedBy: "suni",
         replies: [
             {
                 id: 1,
                 likes: 10,
                 reports: 100,
+                commentedBy: "suni",
                 reply: "Fuck You"
             },
             {
                 id: 2,
                 likes: 100,
                 reports: 10,
+                commentedBy: "suni",
                 reply: "sam suni"
             }
         ],
@@ -120,17 +126,20 @@ const INITIALCOMMENTS = [
         likes: 10,
         reports: 100,
         comment: "We supply a series of design principles, practical patterns and high quality design resources to help people create their product prototypes beautifully and efficiently.",
+        commentedBy: "suni",
         replies: [
             {
                 id: 1,
                 likes: 10,
                 reports: 100,
+                commentedBy: "suni",
                 reply: "Fuck You"
             },
             {
                 id: 2,
                 likes: 100,
                 reports: 10,
+                commentedBy: "suni",
                 reply: "sam suni"
             }
         ]
@@ -317,7 +326,7 @@ const CourseDetail = () => {
                     <h4 className='side-headings'>Forums</h4>
                     {
                         comments.map(comment => (
-                            <Comments key={comment.id} id={comment.id} comment={comment.comment} likesc={comment.likes} reportsc={comment.reports} replies={comment.replies} />
+                            <Comments key={comment.id} id={comment.id} comment={comment.comment} likesc={comment.likes} reportsc={comment.reports} commentedBy={comment.commentedBy} replies={comment.replies} />
                         ))
                     }
                 </div>

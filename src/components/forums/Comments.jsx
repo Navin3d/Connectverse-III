@@ -6,7 +6,7 @@ import React, { createElement, useState } from 'react';
 import Reply from './Reply';
 
 
-const Comments = ({ id, comment, likesc, reportsc, replies }) => {
+const Comments = ({ id, comment, likesc, reportsc, commentedBy, replies }) => {
 
     const [likes, setLikes] = useState(likesc);
     const [reports, setReports] = useState(reportsc);
@@ -46,7 +46,7 @@ const Comments = ({ id, comment, likesc, reportsc, replies }) => {
         <div>
             <Comment
                 actions={actions}
-                author={<a>Han Solo</a>}
+                author={commentedBy}
                 avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
                 content={
                     <p>

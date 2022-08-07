@@ -11,7 +11,7 @@ import Data from "../data/index.json";
 
 const CourseList = () => {
 
-    const [courses, setCourses] = useState([]);
+    const [courses, setCourses] = useState(Data.Courses);
     const [loading, setLoading] = useState(false);
 
     const getCourses = async () => {
@@ -27,7 +27,7 @@ const CourseList = () => {
     }
 
     useEffect(() => {
-        getCourses();
+        // getCourses();
     }, []);
 
     return (
