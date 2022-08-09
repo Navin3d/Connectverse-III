@@ -35,6 +35,7 @@ const INITIALSTATE = {
     projectType: "INTERMEDIATE",
     skills: Data.Courses,
     startedAt: "01-01-2022",
+    isCompleted: false,
     projectAdmin: {
         id: 111,
         firstName: "Rajni"
@@ -52,79 +53,6 @@ const INITIALSTATE = {
         },
     ]
 };
-
-const INITIALCOMMENTS = [
-    {
-        id: 1,
-        likes: 10,
-        reports: 100,
-        comment: "We supply a series of design principles, practical patterns and high quality design resources to help people create their product prototypes beautifully and efficiently.",
-        commentedBy: "suni",
-        replies: [
-            {
-                id: 1,
-                likes: 10,
-                reports: 100,
-                commentedBy: "suni",
-                reply: "Fuck You"
-            },
-            {
-                id: 2,
-                likes: 100,
-                reports: 10,
-                commentedBy: "suni",
-                reply: "sam suni"
-            }
-        ],
-    },
-    {
-        id: 2,
-        likes: 10,
-        reports: 100,
-        comment: "We supply a series of design principles, practical patterns and high quality design resources to help people create their product prototypes beautifully and efficiently.",
-        commentedBy: "suni",
-        replies: [
-            {
-                id: 1,
-                likes: 10,
-                reports: 100,
-                commentedBy: "suni",
-                reply: "Fuck You"
-            },
-            {
-                id: 2,
-                likes: 100,
-                reports: 10,
-                commentedBy: "suni",
-                reply: "sam suni"
-            }
-        ],
-    },
-    {
-        id: 3,
-        likes: 10,
-        reports: 100,
-        comment: "We supply a series of design principles, practical patterns and high quality design resources to help people create their product prototypes beautifully and efficiently.",
-        commentedBy: "suni",
-        replies: [
-            {
-                id: 1,
-                likes: 10,
-                reports: 100,
-                commentedBy: "suni",
-                reply: "Fuck You"
-            },
-            {
-                id: 2,
-                likes: 100,
-                reports: 10,
-                commentedBy: "suni",
-                reply: "sam suni"
-            }
-        ]
-    }
-];
-
 
 const ProjectDetailPage = () => {
 
@@ -145,6 +73,7 @@ const ProjectDetailPage = () => {
 
 
     const [isTeamMate, setIsTeamMate] = useState(false);
+    const [isProjectAdmin, setIsProjectAdmin] = useState(false);
 
     const [project, setProject] = useState(INITIALSTATE);
     const [loading, setLoading] = useState(false);
@@ -186,6 +115,7 @@ const ProjectDetailPage = () => {
 
     const handleAgreementOk = () => {
         setIsTeamMate(!isTeamMate);
+        setIsProjectAdmin(!isProjectAdmin);
         setScrollableModal(!scrollableModal);
         message.success("You are in project now...");
     }
@@ -193,7 +123,14 @@ const ProjectDetailPage = () => {
     const handleAgreementCancel = () => {
         setScrollableModal(!scrollableModal);
         message.error("You can't join project without accepting agrement....");
-    } 
+    }
+
+    const handleProjectClose = () => {
+        project.isCompleted = !project.isCompleted;
+        setProject(project);
+        console.log("Proj3ect: ", project);
+        window.location.reload();
+    }
 
     useEffect(() => {
         // setProject(toSet);
@@ -304,9 +241,9 @@ const ProjectDetailPage = () => {
                     title={project.tittle}
                     subTitle={project.subTittle}
                     extra={[
-                        // <Button key="3">Operation</Button>,
-                        <Button hidden={!isTeamMate} key="2" onClick={() => { setAddNoticeHidden(!addNoticeHidden) }} className='btn btn-warning'>Add Notice</Button>,
-                        <Button hidden={isTeamMate} key="1" onClick={handleJoinProject} style={{ backgroundColor: "green", color: "white" }} >
+                        <Button hidden={!isProjectAdmin & !project.isCompleted} onClick={handleProjectClose} className="btn btn-outline-danger" key="3">Close Project</Button>,
+                        <Button hidden={!isTeamMate | project.isCompleted} key="2" onClick={() => { setAddNoticeHidden(!addNoticeHidden) }} className='btn btn-warning'>Add Notice</Button>,
+                        <Button hidden={isTeamMate | project.isCompleted} key="1" onClick={handleJoinProject} style={{ backgroundColor: "green", color: "white" }} >
                             <Award /> Join Project
                         </Button>,
                     ]}

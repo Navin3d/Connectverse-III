@@ -88,7 +88,7 @@ const ProjectJoiningPage = () => {
                 // loadMore={loadMore}
                 dataSource={list}
                 renderItem={(item) => (
-                    <List.Item className='project-list-card'
+                    <List.Item className='project-joining-card'
                         actions={[<NavLink key="list-loadmore-edit" onClick={handleAccept}>Accept</NavLink>, <NavLink key="list-loadmore-more" onClick={handleReject}>Reject</NavLink>]}
                     >
                         <Skeleton avatar title={false} loading={item.loading} active>

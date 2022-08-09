@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect, createElement } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { Container } from "react-bootstrap";
 import { People } from 'react-bootstrap-icons';
@@ -11,23 +11,23 @@ import "../styles/pages/project-list.css";
 
 
 const data = Array.from({
-    length: 100,
+    length: 23,
 }).map((_, i) => ({
     id: i,
-    title: `ant design part ${i}`,
+    title: `Project Tittle ${i}`,
     subTittle: "Fuck You...",
     totalMembers: 10,
-    description: 'Ant Design, a design language for background applications, is refined by Ant UED Team.',
+    description: 'This project is basically designed to take up my life and sleep and also litttle amount f existing peace from me',
     detailedDescription: "",
     durationInMonths: 8,
     projectType: "INTERMEDIATE",
     skills: Data.Courses,
-    content: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
+    content: 'This project is basically designed to take up my life and sleep and also litttle amount f existing peace from me.',
 }));
 
 const IconText = ({ icon, text }) => (
     <Space>
-        {React.createElement(icon)}
+        {createElement(icon)}
         {text}
     </Space>
 );
@@ -35,6 +35,12 @@ const IconText = ({ icon, text }) => (
 const ProjectListPage = () => {
 
     const navigate = useNavigate();
+
+    const [projects, setProjects] = useState([]);
+
+    useEffect(() => {
+
+    }, []);
 
     return (
         <Container>

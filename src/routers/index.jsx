@@ -13,6 +13,10 @@ import JobJoining from "../pages/JobJoining";
 import Profile from "../pages/ProfilePage";
 import PageNotFound from "../pages/404Page";
 
+
+import AddPage1 from "../pages/AddPage1";
+import AddPage2 from "../pages/AddPage2";
+
 import Footer from "../components/base/Footer";
 
 
@@ -27,8 +31,10 @@ const AppRouter = () => (
       <Route path="/project/:pid/join" element={<ProjectJoining />} />
       <Route path="/jobs" element={<JobList />} />
       <Route path="/job/:jid" element={<JobDetail />} />
-      <Route path="/job/join" element={<JobJoining />} />
+      <Route path="/job/:jid/join" element={<JobJoining />} />
       <Route path="/profile/:pid" element={<Profile />} />
+      <Route path="/addPage1" element={<AddPage1 />} />
+      <Route path="/addPage2" element={<AddPage2 />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     <Footer />
