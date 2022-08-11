@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from 'react-bootstrap';
 import { Button, Descriptions, PageHeader, Statistic, Tabs } from 'antd';
@@ -79,17 +80,20 @@ const INITIALCOMMENTS = [
         likes: 10,
         reports: 100,
         comment: "We supply a series of design principles, practical patterns and high quality design resources to help people create their product prototypes beautifully and efficiently.",
+        commentedBy: "suni", 
         replies: [
             {
                 id: 1,
                 likes: 10,
                 reports: 100,
+                commentedBy: "suni",
                 reply: "Fuck You"
             },
             {
                 id: 2,
                 likes: 100,
                 reports: 10,
+                commentedBy: "suni",
                 reply: "sam suni"
             }
         ],
@@ -99,17 +103,20 @@ const INITIALCOMMENTS = [
         likes: 10,
         reports: 100,
         comment: "We supply a series of design principles, practical patterns and high quality design resources to help people create their product prototypes beautifully and efficiently.",
+        commentedBy: "suni",
         replies: [
             {
                 id: 1,
                 likes: 10,
                 reports: 100,
+                commentedBy: "suni",
                 reply: "Fuck You"
             },
             {
                 id: 2,
                 likes: 100,
                 reports: 10,
+                commentedBy: "suni",
                 reply: "sam suni"
             }
         ],
@@ -119,17 +126,20 @@ const INITIALCOMMENTS = [
         likes: 10,
         reports: 100,
         comment: "We supply a series of design principles, practical patterns and high quality design resources to help people create their product prototypes beautifully and efficiently.",
+        commentedBy: "suni",
         replies: [
             {
                 id: 1,
                 likes: 10,
                 reports: 100,
+                commentedBy: "suni",
                 reply: "Fuck You"
             },
             {
                 id: 2,
                 likes: 100,
                 reports: 10,
+                commentedBy: "suni",
                 reply: "sam suni"
             }
         ]
@@ -151,6 +161,29 @@ const CourseDetail = () => {
     const [forumHidden, setForumHidden] = useState(true);
 
     const [course, setCourse] = useState(INITIALSTATE);
+    const [loading, setLoading] = useState(false);
+
+    const getACourses = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.get(`${Data.AppSettings.baseUrl}/skill/${cid}`);
+            setCourse(response.data);
+        } catch (e) {
+            console.error(e);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+
+    useEffect(() => {
+        // const fetchedCourse = Data.Courses.filter(course => (course.id == cid))[0];
+        
+        // const toSet = (fetchedCourse.length === 0) ? INITIALSTATE : fetchedCourse;
+        // setCourse(toSet);
+        getACourses();
+    }, []);
+
 
     const handleTabChange = (activeKey) => {
         setActiveTab(activeKey);
@@ -187,14 +220,6 @@ const CourseDetail = () => {
         }
     }
 
-    useEffect(() => {
-        const fetchedCourse = Data.Courses.filter(course => (course.id == cid))[0];
-        
-        const toSet = (fetchedCourse.length === 0) ? INITIALSTATE : fetchedCourse;
-        setCourse(toSet);
-    }, []);
-
-
     /* Thalaviti */
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -209,7 +234,7 @@ const CourseDetail = () => {
         <Descriptions size="small" column={column}>
             <Descriptions.Item label="Provider">{ course.provider }</Descriptions.Item>
             <Descriptions.Item label="Skills Involved">
-            <a>{ course.skills }</a>
+            <a>{ course.skillsGained }</a>
             </Descriptions.Item>
             <Descriptions.Item label="Job Tittles">
                 { course.jobTittles }
@@ -301,7 +326,7 @@ const CourseDetail = () => {
                     <h4 className='side-headings'>Forums</h4>
                     {
                         comments.map(comment => (
-                            <Comments key={comment.id} id={comment.id} comment={comment.comment} likesc={comment.likes} reportsc={comment.reports} replies={comment.replies} />
+                            <Comments key={comment.id} id={comment.id} comment={comment.comment} likesc={comment.likes} reportsc={comment.reports} commentedBy={comment.commentedBy} replies={comment.replies} />
                         ))
                     }
                 </div>

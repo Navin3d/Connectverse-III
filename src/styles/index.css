@@ -78,6 +78,7 @@ p.intro {
 a {
   color: #608dfd;
   font-weight: 400;
+  text-decoration: none;
 }
 
 a:hover,

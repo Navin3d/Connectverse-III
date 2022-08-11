@@ -1,4 +1,7 @@
 {
+  "AppSettings": {
+    "baseUrl": "http://192.168.129.72:8080"
+  },
   "Header": {
     "title": "Connectverse",
     "paragraph": "Communication - The Human Connection is the Key to personal and carrier success..."
@@ -187,7 +190,7 @@
       "tittle": "Excel",
       "subTittle": "Excel",
       "provider": "IIT Madras",
-      "skills": "Advanced knowledge in Excel",
+      "skillsGained": "Advanced knowledge in Excel",
       "jobTittles": "Project Managers, Business Analysts, Data Journalists, Accountants",
       "preRequirements": "Basic Computer knowledge.",
       "averageTimeToFinishCourse": 50,
