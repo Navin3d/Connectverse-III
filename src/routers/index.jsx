@@ -14,7 +14,7 @@ import Profile from "../pages/ProfilePage";
 import PageNotFound from "../pages/404Page";
 
 import Footer from "../components/base/Footer";
-
+import NavBar from "../components/base/NavBar";
 
 const AppRouter = () => (
   <BrowserRouter>
@@ -29,6 +29,7 @@ const AppRouter = () => (
       <Route path="/job/:jid" element={<JobDetail />} />
       <Route path="/job/join" element={<JobJoining />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/nav" element={<NavBar />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     <Footer />

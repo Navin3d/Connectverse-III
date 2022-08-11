@@ -1,10 +1,12 @@
-import "../styles/pages/project-list.css";
+import React from "react";
+import Projectcard from "./Project-card";
 
-
-const ProjectListPage = () => (
+function ProjectList() {
+  return (
     <div>
-        <h1>ProjectListPage</h1>
+      <Projectcard />
     </div>
-);
+  );
+}
 
-export default ProjectListPage;
+export default ProjectList;
