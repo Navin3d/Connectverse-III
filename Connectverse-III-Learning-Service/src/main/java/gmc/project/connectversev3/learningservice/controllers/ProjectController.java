@@ -37,6 +37,30 @@ public class ProjectController {
 		return ResponseEntity.status(HttpStatus.OK).body(returnValue);
 	}
 	
+	@GetMapping(path = "/{projectId}/complete/{employeeId}")
+	private ResponseEntity<String> completeProject(@PathVariable String projectId, @PathVariable String employeeId) {
+		projectsService.finishProject(Long.valueOf(projectId), employeeId);
+		return ResponseEntity.status(HttpStatus.OK).body("Project Completed by Project Admin.");
+	}
+	
+	@GetMapping(path = "/{projectId}/join/{employeeId}")
+	private ResponseEntity<String> joinProject(@PathVariable String projectId, @PathVariable String employeeId) {
+		projectsService.requestJoinProject(Long.valueOf(projectId), employeeId);
+		return ResponseEntity.status(HttpStatus.OK).body("Request Successfully sent to Project Admin.");
+	}
+	
+	@GetMapping(path = "/{projectId}/accept/{employeeId}")
+	private ResponseEntity<String> joinProjectApprove(@PathVariable String projectId, @PathVariable String employeeId) {
+		projectsService.joinProjectAccept(Long.valueOf(projectId), employeeId);
+		return ResponseEntity.status(HttpStatus.OK).body("Request accepted by Project Admin.");
+	}
+	
+	@GetMapping(path = "/{projectId}/reject/{employeeId}")
+	private ResponseEntity<String> joinProjectDecline(@PathVariable String projectId, @PathVariable String employeeId) {
+		projectsService.joinProjectReject(Long.valueOf(projectId), employeeId);
+		return ResponseEntity.status(HttpStatus.OK).body("Request denied by Project Admin.");
+	}
+	
 	@PostMapping
 	private ResponseEntity<String> createOrUpdateProject(@RequestBody ProjectCreateOrUpdateModel projectCreateOrUpdateModel) {
 		projectsService.saveProject(projectCreateOrUpdateModel);

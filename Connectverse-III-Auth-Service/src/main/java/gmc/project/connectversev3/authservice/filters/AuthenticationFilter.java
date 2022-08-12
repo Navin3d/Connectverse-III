@@ -99,8 +99,8 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 					.setSubject(userName)
 					.signWith(hmacKey)
 					.compact();
-			response.setHeader("Authorization", "GMC-"+token);
-			response.setHeader("Refresh_Token", "GMC-"+refreshToken);
+			response.setHeader("Authorization", "GMC "+token);
+			response.setHeader("Refresh_Token", "GMC "+refreshToken);
 			response.setHeader("Employer_Id", foundUser.getId());
 		}
 	}

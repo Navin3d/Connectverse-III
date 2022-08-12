@@ -184,4 +184,60 @@ public class ProjectServiceImpl implements ProjectsService {
 		return returnValue;
 	}
 
+	@Override
+	public void requestJoinProject(Long projectId, String employeeId) {
+		ProjectEntity foundProject = findById(projectId);
+		EmployeeEntity requestedPerson = employeeDao.findById(employeeId).orElse(null);
+		if(requestedPerson == null)
+			throw new UserNotFoundException("EmployeeId: " + employeeId);
+		if(foundProject.getTotalMembers() == foundProject.getTeam().size())
+			throw new ProjectRulesViolationException("The requirent of the project is already satisfied...");
+		foundProject.getPersonsRequested().add(requestedPerson);
+		ProjectEntity saved = projectDao.save(foundProject);
+		requestedPerson.getRequestedProjects().add(saved);
+		employeeDao.save(requestedPerson);
+	}
+
+	@Override
+	public void joinProjectAccept(Long projectId, String employeeId) {
+		ProjectEntity foundProject = findById(projectId);
+		EmployeeEntity requestedPerson = employeeDao.findById(employeeId).orElse(null);
+		if(requestedPerson == null)
+			throw new UserNotFoundException("EmployeeId: " + employeeId);
+		foundProject.getPersonsRequested().remove(requestedPerson);
+		foundProject.getTeam().add(requestedPerson);
+		ProjectEntity saved = projectDao.save(foundProject);
+		requestedPerson.getRequestedProjects().remove(foundProject);
+		requestedPerson.getProjects().add(saved);
+		employeeDao.save(requestedPerson);
+	}
+
+	@Override
+	public void joinProjectReject(Long projectId, String employeeId) {
+		ProjectEntity foundProject = findById(projectId);
+		EmployeeEntity requestedPerson = employeeDao.findById(employeeId).orElse(null);
+		if(requestedPerson == null)
+			throw new UserNotFoundException("EmployeeId: " + employeeId);
+		foundProject.getPersonsRequested().remove(requestedPerson);
+		projectDao.save(foundProject);
+		requestedPerson.getRequestedProjects().remove(foundProject);
+		employeeDao.save(requestedPerson);
+	}
+
+	@Override
+	public void finishProject(Long projectId, String employeeId) {
+		ProjectEntity foundProject = findById(projectId);
+		EmployeeEntity requestedPerson = employeeDao.findById(employeeId).orElse(null);
+		if(requestedPerson == null)
+			throw new UserNotFoundException("EmployeeId: " + employeeId);
+		foundProject.setIsCompleted(true);
+		foundProject.setIsHidden(true);
+		if(!foundProject.getProjectAdmin().equals(requestedPerson))
+			throw new ProjectRulesViolationException("Only Project Admin can close Projects");
+		foundProject.setProjectAdmin(null);
+		projectDao.save(foundProject);
+		requestedPerson.setAdminOfProject(null);
+		employeeDao.save(requestedPerson);
+	}
+
 }
