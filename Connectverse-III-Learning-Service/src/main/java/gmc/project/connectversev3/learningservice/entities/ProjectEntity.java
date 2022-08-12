@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -71,6 +72,15 @@ public class ProjectEntity implements Serializable {
 	@Column(name = "started_on")
 	private LocalDate startedOn;
 	
+	@Column(name = "project_owner_id")
+	private String projectCreaterId;
+	
+	@Column(name = "project_owner_name")
+	private String projectCreaterName;
+
+	@Column(name = "project_content")
+	private String content;
+	
 	@OneToOne(targetEntity = EmployeeEntity.class)
 	private EmployeeEntity projectAdmin;
 	
@@ -90,12 +100,16 @@ public class ProjectEntity implements Serializable {
 	@OneToMany(mappedBy = "project")
 	private Set<MessageEntity> messages;
 	
+	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+	private Set<NoticeEntity> notices;
+	
 	public ProjectEntity() {
 		super();
 		this.skills = new HashSet<>();
 		this.personsRequested = new HashSet<>();
 		this.team = new HashSet<>();
 		this.messages = new HashSet<>();
+		this.notices = new HashSet<>();
 	}
 
 }

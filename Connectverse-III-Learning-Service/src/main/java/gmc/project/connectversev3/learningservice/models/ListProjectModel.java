@@ -22,5 +22,9 @@ public class ListProjectModel implements Serializable {
 	private Integer durationInMonths;
 		
 	private Integer totalMembers;
+	
+	private String skillImage;
+	
+	private String content;
 
 }

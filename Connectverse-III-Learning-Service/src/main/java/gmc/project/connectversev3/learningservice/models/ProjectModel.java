@@ -44,12 +44,15 @@ public class ProjectModel implements Serializable {
 		
 	private List<MessageModel> messages;
 	
+	private List<NoticeModel> notices;
+	
 	public ProjectModel() {
 		super();
 		this.skills = new ArrayList<>();
 		this.joiningRequests = new ArrayList<>();
 		this.team = new ArrayList<>();
 		this.messages = new ArrayList<>();
+		this.notices = new ArrayList<>();
 	}
 
 }

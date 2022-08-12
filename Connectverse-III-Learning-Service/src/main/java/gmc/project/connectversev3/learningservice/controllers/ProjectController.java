@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import gmc.project.connectversev3.learningservice.models.ProjectCreateOrUpdateModel;
 import gmc.project.connectversev3.learningservice.models.ProjectModel;
 import gmc.project.connectversev3.learningservice.models.ListProjectModel;
+import gmc.project.connectversev3.learningservice.models.NoticeModel;
 import gmc.project.connectversev3.learningservice.services.ProjectsService;
 
 @RestController
@@ -65,6 +66,12 @@ public class ProjectController {
 	private ResponseEntity<String> createOrUpdateProject(@RequestBody ProjectCreateOrUpdateModel projectCreateOrUpdateModel) {
 		projectsService.saveProject(projectCreateOrUpdateModel);
 		return ResponseEntity.status(HttpStatus.OK).body("Project Saved Successfully...");
+	}
+	
+	@PostMapping(path = "/notice/add")
+	private ResponseEntity<String> createOrUpdateProject(@RequestBody NoticeModel projectNotice) {
+		projectsService.addNotice(projectNotice);
+		return ResponseEntity.status(HttpStatus.OK).body("Notice Successfully Added...");
 	}
 	
 	@DeleteMapping
