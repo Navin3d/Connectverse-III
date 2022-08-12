@@ -4,20 +4,28 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Data
+//@Getter
+//@Setter
 @Entity
+//@EqualsAndHashCode(exclude = {"courseContents", "jobs"})
 @Table(name = "skills")
 public class SkillEntity implements Serializable {
 
@@ -28,19 +36,43 @@ public class SkillEntity implements Serializable {
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
 	
-	@Lob
-	private String imageUrl;
+	private String tittle;
 	
-	private String name;
+	private String subTittle;
 	
-	private String subTitte;
+	private String skillsGained;
 	
-	private String description;
+	private String provider;
+	
+	private String jobTittles;
+	
+	private String preRequirements;
+	
+	private String averageTimeToFinishCourse;
+	
+	private String jobsCanBeApplied;
 	
 	@Lob
 	private String roadMapUrl;
 	
+	@Lob
+	private String youtubeUrl;
+	
+	@Lob
+	private String useFulLink;
+	
+	@Lob
+	private String imageUrl;
+	
+	private Boolean isHidden;
+	
+	@OneToMany(mappedBy = "skill", cascade = CascadeType.ALL)
+	private Set<CourseContentEntity> courseContents = new HashSet<>();
+	
 	@ManyToMany
 	private Set<ProjectEntity> projects = new HashSet<>();
 
+	@ManyToMany
+	private Set<JobEntity> jobs = new HashSet<>();
+	
 }

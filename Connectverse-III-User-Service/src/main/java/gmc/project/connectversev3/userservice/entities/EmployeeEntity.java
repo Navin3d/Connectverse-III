@@ -1,6 +1,8 @@
 package gmc.project.connectversev3.userservice.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,17 +11,26 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import gmc.project.connectversev3.userservice.models.Gender;
+import gmc.project.connectversev3.userservice.models.State;
 import gmc.project.connectversev3.userservice.models.WorkType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+//@Data
+@Getter
+@Setter
 @Entity
+//@EqualsAndHashCode(exclude = {"adminOfProjects", "requestedProjects", "projects"})
 @Table(name = "employees")
 public class EmployeeEntity implements Serializable {
 	
@@ -65,6 +76,9 @@ public class EmployeeEntity implements Serializable {
 	@Column(name = "location")
 	private String location;
 	
+	@Enumerated(value = EnumType.STRING)
+	private State state;
+	
 	@Column(name = "expected_wage_per_hour")
 	private Integer expectedWagePerHour;
 	
@@ -85,5 +99,14 @@ public class EmployeeEntity implements Serializable {
 	
 	@ManyToOne(optional = true)
 	private HamletEntity hamlet;
+	
+	@OneToMany(mappedBy = "projectAdmin")
+	private Set<ProjectEntity> adminOfProjects = new HashSet<>();
+	
+	@ManyToMany
+	private Set<ProjectEntity> requestedProjects = new HashSet<>();
+	
+	@ManyToMany
+	private Set<ProjectEntity> projects = new HashSet<>();
 	
 }

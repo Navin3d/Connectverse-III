@@ -10,4 +10,6 @@ public interface SkillService {
 	public List<SkillModel> findAllSkills();
 	public SkillModel findASkill(String id);
 	public void saveSkill(SkillModel skillModel);
+	public void saveManySkills(List<SkillModel> skills);
+	public void deleteAllSkills();
 }

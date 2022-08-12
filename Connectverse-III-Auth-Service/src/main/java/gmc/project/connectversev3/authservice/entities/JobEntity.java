@@ -9,13 +9,13 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
 
 import gmc.project.connectversev3.authservice.models.WorkType;
 import lombok.Data;
@@ -28,10 +28,8 @@ public class JobEntity implements Serializable {
 	private static final long serialVersionUID = -8048295257824581897L;
 
 	@Id
-	@GeneratedValue(generator = "uuid")
-	@GenericGenerator(name = "uuid", strategy = "uuid2")
-	@Column(name = "id")
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
 	@Column(name = "tittle")
 	private String tittle;
@@ -71,6 +69,12 @@ public class JobEntity implements Serializable {
 	
 	@OneToMany(mappedBy = "job")
 	private Set<EmployeeEntity> employees = new HashSet<>();
+	
+	@OneToMany(mappedBy = "job")
+	private Set<MessageEntity> messages = new HashSet<>();
+	
+	@ManyToMany(mappedBy = "jobs")
+	private Set<SkillEntity> skills = new HashSet<>();
 	
 	@ManyToOne
 	private EmployerEntity employer;

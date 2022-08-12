@@ -1,5 +1,5 @@
 package gmc.project.connectversev3.userservice.models;
 
-public enum ProjectType {
+public enum DifficultyLevel {
 	BEGINNERS, INTERMEDIATE, EXPERT
 }

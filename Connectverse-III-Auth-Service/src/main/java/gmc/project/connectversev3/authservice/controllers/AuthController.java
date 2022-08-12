@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import gmc.project.connectversev3.authservice.entities.EmployeeEntity;
-import gmc.project.connectversev3.authservice.entities.EmployerEntity;
 import gmc.project.connectversev3.authservice.models.EmployeeModel;
 import gmc.project.connectversev3.authservice.models.EmployerModel;
 import gmc.project.connectversev3.authservice.services.AuthService;

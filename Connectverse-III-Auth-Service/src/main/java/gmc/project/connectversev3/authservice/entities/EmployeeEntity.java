@@ -1,25 +1,38 @@
 package gmc.project.connectversev3.authservice.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import gmc.project.connectversev3.authservice.models.Gender;
+import gmc.project.connectversev3.authservice.models.State;
 import gmc.project.connectversev3.authservice.models.WorkType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+//@Getter
+//@Setter
 @Entity
+//@EqualsAndHashCode(onlyExplicitlyIncluded = true) // important
+@EqualsAndHashCode(exclude = {"requestedProjects", "projects", "adminOfProject"})
 @Table(name = "employees")
 public class EmployeeEntity implements Serializable {
 	
@@ -65,6 +78,9 @@ public class EmployeeEntity implements Serializable {
 	@Column(name = "location")
 	private String location;
 	
+	@Enumerated(value = EnumType.STRING)
+	private State state;
+	
 	@Column(name = "expected_wage_per_hour")
 	private Integer expectedWagePerHour;
 	
@@ -85,5 +101,34 @@ public class EmployeeEntity implements Serializable {
 	
 	@ManyToOne(optional = true)
 	private HamletEntity hamlet;
+	
+	@OneToOne(mappedBy = "projectAdmin", cascade = CascadeType.PERSIST, targetEntity = ProjectEntity.class)
+	private ProjectEntity adminOfProject;
+	
+	@ManyToMany(cascade = {
+          CascadeType.PERSIST,
+          CascadeType.MERGE
+  })
+	@JoinTable(name = "employees_projects_requests", 
+		joinColumns = @JoinColumn(name = "user_id"),
+		inverseJoinColumns = @JoinColumn(name = "project_id")
+	)
+	private Set<ProjectEntity> requestedProjects;
+	
+	@ManyToMany(cascade = {
+          CascadeType.PERSIST,
+          CascadeType.MERGE
+  })
+	@JoinTable(name = "employees_projects", 
+		joinColumns = @JoinColumn(name = "user_id"),
+		inverseJoinColumns = @JoinColumn(name = "project_id")
+	)	
+	private Set<ProjectEntity> projects;
+	
+	public EmployeeEntity() {
+		super();
+		this.requestedProjects = new HashSet<>();
+		this.projects = new HashSet<>();
+	}
 	
 }

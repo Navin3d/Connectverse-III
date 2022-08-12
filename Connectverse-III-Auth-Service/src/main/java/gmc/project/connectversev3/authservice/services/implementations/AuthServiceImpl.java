@@ -17,6 +17,7 @@ import gmc.project.connectversev3.authservice.entities.EmployeeEntity;
 import gmc.project.connectversev3.authservice.entities.EmployerEntity;
 import gmc.project.connectversev3.authservice.models.EmployeeModel;
 import gmc.project.connectversev3.authservice.models.EmployerModel;
+import gmc.project.connectversev3.authservice.models.WorkType;
 import gmc.project.connectversev3.authservice.services.AuthService;
 
 @Service
@@ -79,6 +80,8 @@ public class AuthServiceImpl implements AuthService {
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);		
 		EmployeeEntity detachedEmployee = modelMapper.map(employeeModel, EmployeeEntity.class);
+		detachedEmployee.setIsTechnicalWorker(true);
+		detachedEmployee.setPrefferedWorkType(WorkType.TECHNICAL);
 		detachedEmployee.setAadharId(bCryptPasswordEncoder.encode(detachedEmployee.getAadharId()));
 		employeeDao.save(detachedEmployee);
 	}

@@ -1,4 +1,4 @@
-package gmc.project.connectversev3.learningservice.entities;
+package gmc.project.connectversev3.authservice.entities;
 
 import java.io.Serializable;
 

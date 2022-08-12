@@ -14,6 +14,7 @@ import gmc.project.connectversev3.learningservice.exceptions.SkillNotFoundExcept
 import gmc.project.connectversev3.learningservice.models.SkillModel;
 import gmc.project.connectversev3.learningservice.services.SkillService;
 
+
 @Service
 public class SkillServiceImpl implements SkillService {
 
@@ -72,6 +73,18 @@ public class SkillServiceImpl implements SkillService {
 			existing.setIsHidden(skillModel.getIsHidden());
 			skillDao.save(existing);
 		}
+	}
+
+	@Override
+	public void saveManySkills(List<SkillModel> skills) {
+		skills.forEach(skill -> {
+			saveSkill(skill);
+		});
+	}
+
+	@Override
+	public void deleteAllSkills() {
+		skillDao.deleteAll();
 	}
 
 }

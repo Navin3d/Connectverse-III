@@ -1,8 +1,8 @@
 package gmc.project.connectversev3.learningservice.models;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import lombok.Data;
 
@@ -39,6 +39,6 @@ public class SkillModel implements Serializable {
 	
 	private Boolean isHidden;
 	
-	private Set<CourseContentModel> courseContents = new HashSet<>();
+	private List<CourseContentModel> courseContents = new ArrayList<>();
 	
 }

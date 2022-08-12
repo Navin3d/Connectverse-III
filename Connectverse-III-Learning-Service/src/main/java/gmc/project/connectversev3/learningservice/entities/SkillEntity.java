@@ -16,12 +16,13 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 
 @Data
+//@Getter
+//@Setter
 @Entity
-@EqualsAndHashCode(exclude = {"courseContents"})
+//@EqualsAndHashCode(exclude = {"courseContents", "jobs"})
 @Table(name = "skills")
 public class SkillEntity implements Serializable {
 
@@ -65,7 +66,10 @@ public class SkillEntity implements Serializable {
 	@OneToMany(mappedBy = "skill", cascade = CascadeType.ALL)
 	private Set<CourseContentEntity> courseContents = new HashSet<>();
 	
-	@ManyToMany
+	@ManyToMany(mappedBy = "skills", cascade = CascadeType.ALL)
 	private Set<ProjectEntity> projects = new HashSet<>();
 
+	@ManyToMany
+	private Set<JobEntity> jobs = new HashSet<>();
+	
 }
