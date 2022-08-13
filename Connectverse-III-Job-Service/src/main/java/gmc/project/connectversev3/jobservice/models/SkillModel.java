@@ -1,4 +1,4 @@
-package gmc.project.connectversev3.learningservice.models;
+package gmc.project.connectversev3.jobservice.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -38,8 +38,6 @@ public class SkillModel implements Serializable {
 	private String imageUrl;
 	
 	private Boolean isHidden;
-	
-	private List<CommentModel> comments = new ArrayList<>();
 	
 	private List<CourseContentModel> courseContents = new ArrayList<>();
 	

@@ -8,9 +8,19 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import gmc.project.connectversev3.learningservice.daos.CommentDao;
+import gmc.project.connectversev3.learningservice.daos.EmployeeDao;
 import gmc.project.connectversev3.learningservice.daos.SkillDao;
+import gmc.project.connectversev3.learningservice.entities.CommentEntity;
+import gmc.project.connectversev3.learningservice.entities.EmployeeEntity;
+import gmc.project.connectversev3.learningservice.entities.ReplyEntity;
 import gmc.project.connectversev3.learningservice.entities.SkillEntity;
+import gmc.project.connectversev3.learningservice.exceptions.CommentNotFoundException;
+import gmc.project.connectversev3.learningservice.exceptions.ReplyNotFoundException;
 import gmc.project.connectversev3.learningservice.exceptions.SkillNotFoundException;
+import gmc.project.connectversev3.learningservice.exceptions.UserNotFoundException;
+import gmc.project.connectversev3.learningservice.models.CommentModel;
+import gmc.project.connectversev3.learningservice.models.ReplyModel;
 import gmc.project.connectversev3.learningservice.models.SkillModel;
 import gmc.project.connectversev3.learningservice.services.SkillService;
 
@@ -20,6 +30,10 @@ public class SkillServiceImpl implements SkillService {
 
 	@Autowired
 	private SkillDao skillDao;
+	@Autowired
+	private CommentDao commentDao;
+	@Autowired
+	private EmployeeDao employeeDao;
 
 	@Override
 	public SkillEntity findById(String id) {
@@ -85,6 +99,92 @@ public class SkillServiceImpl implements SkillService {
 	@Override
 	public void deleteAllSkills() {
 		skillDao.deleteAll();
+	}
+
+	@Override
+	public void addCommentToSkill(CommentModel commentModel) {
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		CommentEntity detached = modelMapper.map(commentModel, CommentEntity.class);
+		SkillEntity foundSkill = findById(commentModel.getSkillId());
+		EmployeeEntity commentedBy = employeeDao.findById(commentModel.getCommentedBy()).orElse(null);
+		if(commentedBy == null) 
+			throw new UserNotFoundException("User Id: " + commentModel.getCommentedBy());
+		detached.setSkill(foundSkill);
+		detached.setCommentedBy(commentedBy.getFirstName());
+		detached.setLikes(0);
+		detached.setReports(0);
+		foundSkill.getComments().add(detached);
+		skillDao.save(foundSkill);
+	}
+
+	@Override
+	public void addReplyToSkillComment(ReplyModel replyModel) {
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		ReplyEntity detached = modelMapper.map(replyModel, ReplyEntity.class);
+		SkillEntity foundSkill = findById(replyModel.getSkillId());
+		EmployeeEntity commentedBy = employeeDao.findById(replyModel.getCommentedBy()).orElse(null);
+		if(commentedBy == null) 
+			throw new UserNotFoundException("User Id: " + replyModel.getCommentedBy());
+		CommentEntity foundComment = commentDao.findById(replyModel.getCommentId()).orElse(null);
+		if(foundComment == null)
+			throw new CommentNotFoundException("Comment Id: " + replyModel.getCommentId());
+		detached.setCommentedBy(commentedBy.getFirstName());
+		detached.setLikes(0);
+		detached.setReports(0);
+		detached.setComment(foundComment);
+		foundComment.getReplies().add(detached);
+		CommentEntity saved = commentDao.save(foundComment);
+		foundSkill.getComments().remove(foundComment);
+		foundSkill.getComments().add(saved);
+		skillDao.save(foundSkill);
+	}
+
+	@Override
+	public void likeAComment(String commentId) {
+		CommentEntity foundComment = commentDao.findById(commentId).orElse(null);
+		if(foundComment == null)
+			throw new CommentNotFoundException("Comment Id: " + commentId);
+		foundComment.setLikes(foundComment.getLikes()+1);
+		commentDao.save(foundComment);
+	}
+
+	@Override
+	public void reportAComment(String commentId) {
+		CommentEntity foundComment = commentDao.findById(commentId).orElse(null);
+		if(foundComment == null)
+			throw new CommentNotFoundException("Comment Id: " + commentId);
+		foundComment.setReports(foundComment.getReports()+1);
+		commentDao.save(foundComment);
+	}
+
+	@Override
+	public void likeAReply(String commentId, String replyId) {
+		CommentEntity foundComment = commentDao.findById(commentId).orElse(null);
+		if(foundComment == null)
+			throw new CommentNotFoundException("Comment Id: " + commentId);
+		ReplyEntity foundReply = foundComment.getReplies().stream().filter(reply -> reply.getId().equals(replyId)).findFirst().orElse(null);
+		if(foundReply == null)
+			throw new ReplyNotFoundException("Reply Id: " + replyId);
+		foundComment.getReplies().remove(foundReply);
+		foundReply.setLikes(foundReply.getLikes()+1);
+		foundComment.getReplies().add(foundReply);
+		commentDao.save(foundComment);
+	}
+
+	@Override
+	public void reportAReply(String commentId, String replyId) {
+		CommentEntity foundComment = commentDao.findById(commentId).orElse(null);
+		if(foundComment == null)
+			throw new CommentNotFoundException("Comment Id: " + commentId);
+		ReplyEntity foundReply = foundComment.getReplies().stream().filter(reply -> reply.getId().equals(replyId)).findFirst().orElse(null);
+		if(foundReply == null)
+			throw new ReplyNotFoundException("Reply Id: " + replyId);
+		foundComment.getReplies().remove(foundReply);
+		foundReply.setReports(foundReply.getReports()+1);
+		foundComment.getReplies().add(foundReply);
+		commentDao.save(foundComment);
 	}
 
 }

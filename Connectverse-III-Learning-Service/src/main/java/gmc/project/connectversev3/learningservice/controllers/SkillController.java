@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import gmc.project.connectversev3.learningservice.models.CommentModel;
+import gmc.project.connectversev3.learningservice.models.ReplyModel;
 import gmc.project.connectversev3.learningservice.models.SkillModel;
 import gmc.project.connectversev3.learningservice.services.SkillService;
 
@@ -39,6 +41,42 @@ public class SkillController {
 	private ResponseEntity<String> saveSkills(@RequestBody SkillModel skillModel) {
 		skillService.saveSkill(skillModel);
 		return ResponseEntity.status(HttpStatus.OK).body("Skill Successfully saved...");
+	}
+	
+	@PostMapping(path = "/comment/add")
+	private ResponseEntity<String> addComment(@RequestBody CommentModel commentModel) {
+		skillService.addCommentToSkill(commentModel);
+		return ResponseEntity.status(HttpStatus.OK).body("Comment Posted...");
+	}
+	
+	@GetMapping(path = "/comment/{commentId}/like")
+	private ResponseEntity<String> likeComment(@PathVariable String commentId) {
+		skillService.likeAComment(commentId);
+		return ResponseEntity.status(HttpStatus.OK).body("Liked...");
+	}
+	
+	@GetMapping(path = "/comment/{commentId}/report")
+	private ResponseEntity<String> reportComment(@PathVariable String commentId) {
+		skillService.reportAComment(commentId);
+		return ResponseEntity.status(HttpStatus.OK).body("Reported...");
+	}
+	
+	@PostMapping(path = "/reply/add")
+	private ResponseEntity<String> addReply(@RequestBody ReplyModel replyModel) {
+		skillService.addReplyToSkillComment(replyModel);
+		return ResponseEntity.status(HttpStatus.OK).body("Reply Posted...");
+	}
+	
+	@GetMapping(path = "/comment/{commentId}/reply/{replyId}/like")
+	private ResponseEntity<String> likeReply(@PathVariable String commentId, @PathVariable String replyId) {
+		skillService.likeAReply(commentId, replyId);
+		return ResponseEntity.status(HttpStatus.OK).body("Liked...");
+	}
+	
+	@GetMapping(path = "/comment/{commentId}/reply/{replyId}/report")
+	private ResponseEntity<String> reportReply(@PathVariable String commentId, @PathVariable String replyId) {
+		skillService.reportAReply(commentId, replyId);
+		return ResponseEntity.status(HttpStatus.OK).body("Reported...");
 	}
 	
 	@PostMapping(path = "/many")
