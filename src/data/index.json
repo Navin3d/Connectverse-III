@@ -92,7 +92,7 @@
     {
       "icon": "fa fa-plane",
       "name": "exposure",
-      "text": "Have revolutionary ideas? Join here to travel around the world and publish thoughts " 
+      "text": "Have revolutionary ideas? Join here to travel around the world and publish thoughts "
     },
     {
       "icon": "fa fa-pie-chart",
@@ -210,7 +210,7 @@
             "Excel: Advanced Formatting Techniques",
             "Excel: Creating a Basic Dashboard",
             "Excel: Charts in Depth",
-            "Excel: PivotTables in Depth"           
+            "Excel: PivotTables in Depth"
           ]
         },
         {
@@ -274,7 +274,7 @@
             "Repeat the process for other data"
           ]
         },
-        {         
+        {
           "id": "f",
           "tittle": "Charts in Depth",
           "subTittles": [
@@ -287,7 +287,7 @@
             "Add another variable"
           ]
         },
-        {                 
+        {
           "id": "g",
           "tittle": "PivotTables in Depth",
           "subTittles": [
@@ -317,18 +317,18 @@
       "youtubeUrl": "https://www.youtube.com/embed/c5HAwKX-suM",
       "useFulLink": "https://roadmap.sh/java",
       "imageUrl": "https://lms.gcktvm.in/pluginfile.php/253/course/overviewfiles/IMG-20210628-WA0002-800x445.jpg",
-      "courseContents":[
+      "courseContents": [
         {
           "id": "a",
           "tittle": "Skills Required to become a Database Administrator",
           "subTittles": [
             "Database Development Tools",
-            "Basic Sql Queries",  
-            "Improving Queries",  
+            "Basic Sql Queries",
+            "Improving Queries",
             "Database Design",
-            "Intermediate SQL", 
-            "Advanced SQL", 
-            "Procedural Language", 
+            "Intermediate SQL",
+            "Advanced SQL",
+            "Procedural Language",
             "Database Objects",
             "Database Administration"
           ]
@@ -429,10 +429,7 @@
         {
           "id": "i",
           "tittle": "Datatbase Objects",
-          "subTittles": [
-            "Views",
-            "Oracle Synonyms"
-          ]
+          "subTittles": ["Views", "Oracle Synonyms"]
         },
         {
           "id": "j",
@@ -461,7 +458,7 @@
       "youtubeUrl": "https://www.youtube.com/embed/VtLXKU1PpRU",
       "useFulLink": "https://roadmap.sh/java",
       "imageUrl": "https://i.ytimg.com/vi/bFeZ7OlmoZc/maxresdefault.jpg",
-      "courseContents":[
+      "courseContents": [
         {
           "id": "a",
           "tittle": "Skills Required to become a 3d designer",
@@ -549,9 +546,7 @@
         {
           "id": "h",
           "tittle": "Z Brush",
-          "subTittles": [
-            "3D sculpting"
-          ]
+          "subTittles": ["3D sculpting"]
         },
         {
           "id": "i",
@@ -582,23 +577,17 @@
         {
           "id": "l",
           "tittle": "World Creator",
-          "subTittles": [
-            "Creating realistic terrain for 3D worlds"
-          ]
+          "subTittles": ["Creating realistic terrain for 3D worlds"]
         },
         {
           "id": "m",
           "tittle": "Houdini or Xparticles",
-          "subTittles": [
-            " Particle simulations like water, sand, snow etc"
-          ]
+          "subTittles": [" Particle simulations like water, sand, snow etc"]
         },
         {
           "id": "n",
           "tittle": "Real flow",
-          "subTittles": [
-            " Dedicated water simulations in 3D"
-          ]
+          "subTittles": [" Dedicated water simulations in 3D"]
         }
       ]
     },
@@ -1183,13 +1172,13 @@
       "id": 5,
       "tittle": "UI Developer Zero to Master",
       "subTittle": "UI Developer",
-      "jobsCanBeApplied":"Can apply to Front end Developer jobs.",
+      "jobsCanBeApplied": "Can apply to Front end Developer jobs.",
       "provider": "IIT Madras",
       "skills": "Advanced Frontend Developer",
       "jobTittles": "UI/UX Developer",
       "preRequirements": "Basic Computer knowledge.",
       "averageTimeToFinishCourse": 50,
-      
+
       "roadMapUrl": "",
       "youtubeUrl": "https://www.youtube.com/embed/G3e-cpL7ofc",
       "useFulLink": "https://roadmap.sh/java",
@@ -1771,6 +1760,106 @@
             "How to use Putty",
             "How to use WinScp"
           ]
+        }
+      ]
+    }
+  ],
+  "Projects": [
+    {
+      "id": "a",
+      "tittle": "Java Backend",
+      "subTittle": "Hotel-Management",
+      "provider": "Sam",
+      "skillsRequired": "React,Java(Spring Boot),Sql,GitHub",
+      "required": "Frontend/Backend Developer",
+      "preRequirements": "Coding Skills",
+      "averageTimeToProject": 50,
+      "ProjectsCanBeApplied": "Can add it to your profile as Project Experience",
+      "imageUrl": "https://icon-library.com/images/java-icon-images/java-icon-images-4.jpg",
+      "shortDesc": [
+        "A Hotel Management",
+        "React,Java,Sql",
+        "Required:Frontend/Backend Developer"
+      ],
+      "ProjectContents": [
+        {
+          "id": "a",
+          "tittle": "Skills Required to work in this Project",
+          "subTittles": [
+            "React-Js",
+            "CSS",
+            "Java",
+            "Spring-Boot",
+            "SQL",
+            "GitHub"
+          ]
+        },
+        {
+          "id": "b",
+          "tittle": "Project Description",
+          "subTittles": [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "jQuery",
+            "TypeScript",
+            "NodeJS",
+            "NodeJS"
+          ]
+        },
+        {
+          "id": "c",
+          "tittle": "Project Duration",
+          "subTittles": ["Daily:2hrs", "Total:50Days"]
+        }
+      ]
+    },
+    {
+      "id": "a",
+      "tittle": "Java Backend",
+      "subTittle": "Hotel-Management",
+      "provider": "Sam",
+      "skillsRequired": "React,Java(Spring Boot),Sql,GitHub",
+      "required": "Frontend/Backend Developer",
+      "preRequirements": "Coding Skills",
+      "averageTimeToProject": 50,
+      "shortDesc": [
+        "A Hotel Management",
+        "React,Java,Sql",
+        "Required:Frontend/Backend Developer"
+      ],
+      "ProjectsCanBeApplied": "Can add it to your profile as Project Experience",
+      "imageUrl": "https://icon-library.com/images/java-icon-images/java-icon-images-4.jpg",
+      "projectsContents": [
+        {
+          "id": "a",
+          "tittle": "Skills Required to work in this Project",
+          "subTittles": [
+            "React-Js",
+            "CSS",
+            "Java",
+            "Spring-Boot",
+            "SQL",
+            "GitHub"
+          ]
+        },
+        {
+          "id": "b",
+          "tittle": "Project Description",
+          "subTittles": [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "jQuery",
+            "TypeScript",
+            "NodeJS",
+            "NodeJS"
+          ]
+        },
+        {
+          "id": "c",
+          "tittle": "Project Duration",
+          "subTittles": ["Daily:2hrs", "Total:50Days"]
         }
       ]
     }

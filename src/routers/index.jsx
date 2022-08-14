@@ -13,13 +13,11 @@ import JobJoining from "../pages/JobJoining";
 import Profile from "../pages/ProfilePage";
 import PageNotFound from "../pages/404Page";
 
-
 import AddPage1 from "../pages/AddPage1";
 import AddPage2 from "../pages/AddPage2";
 import Formpage from "../pages/Formpage";
 
 import Footer from "../components/base/Footer";
-
 
 const AppRouter = () => (
   <BrowserRouter>

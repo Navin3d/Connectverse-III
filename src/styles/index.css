@@ -124,19 +124,19 @@ footer {
   padding: 50px;
 }
 
-footer a{
+footer a {
   text-decoration: none;
   color: #fff;
-  font-size: small
-}
-
-footer p{
-  color: #fff;
-  
-}
-footer h5{
-  font-size:14px;
-}
-footer p{
   font-size: small;
 }
+
+footer p {
+  color: #fff;
+}
+footer h5 {
+  font-size: 14px;
+}
+footer p {
+  font-size: small;
+}
+
