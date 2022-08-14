@@ -5,7 +5,7 @@ import { FlagFilled, FlagOutlined, LikeFilled, LikeOutlined } from '@ant-design/
 import moment from 'moment';
 
 
-const SingleComment = ({ id, likesc, reportsc, comment }) => {
+const SingleComment = ({ id, likesc, reportsc, comment, commentedBy }) => {
     const [likes, setLikes] = useState(likesc);
     const [reports, setReports] = useState(reportsc);
     const [action, setAction] = useState(null);
@@ -40,7 +40,7 @@ const SingleComment = ({ id, likesc, reportsc, comment }) => {
     return (
         <Comment
             actions={actions}
-            author={<a>Han Solo</a>}
+            author={commentedBy}
             avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
             content={
                 <p>

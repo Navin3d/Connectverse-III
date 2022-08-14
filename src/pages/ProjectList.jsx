@@ -1,9 +1,10 @@
 import { useState, useEffect, createElement } from "react";
+import axios from "axios";
 import { useNavigate, NavLink } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { People } from "react-bootstrap-icons";
-import { LikeOutlined, EyeOutlined } from "@ant-design/icons";
-import { Avatar, List, Space } from "antd";
+import { EyeOutlined, CalendarOutlined } from "@ant-design/icons";
+import { Avatar, List, Space, message } from "antd";
 
 import Data from "../data";
 
@@ -20,10 +21,8 @@ const data = Array.from({
     "This project is basically designed to take up my life and sleep and also litttle amount f existing peace from me",
   detailedDescription: "",
   durationInMonths: 8,
-  projectType: "INTERMEDIATE",
-  skills: Data.Courses,
-  content:
-    "This project is basically designed to take up my life and sleep and also litttle amount f existing peace from me.",
+  skillImage: "https://joeschmoe.io/api/v1/random",
+  content: "This project is basically designed to take up my life and sleep and also litttle amount f existing peace from me, This project is basically designed to take up my life and sleep and also litttle amount f existing peace from meThis project is basically designed to take up my life and sleep and also litttle amount f existing peace from me"
 }));
 
 const IconText = ({ icon, text }) => (
@@ -38,7 +37,27 @@ const ProjectListPage = () => {
 
   const [projects, setProjects] = useState([]);
 
-  useEffect(() => {}, []);
+  const baseUrl = Data.AppSettings.baseUrl;
+
+  const initProjects = async () => {
+    try {
+      message.warn("Fetching Projects...");
+      const response = await axios.get(`${baseUrl}/project`);
+      console.log(response.data);
+      setProjects(response.data);
+      if (response.status == 200) {
+        message.success("Successfully initialized...");
+        console.log(projects[0]);
+      }
+    } catch (e) {
+      message.error("Error Fetchind Data...");
+      console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    initProjects();
+  }, []);
 
   return (
     <Container>
@@ -51,7 +70,7 @@ const ProjectListPage = () => {
           },
           pageSize: 6,
         }}
-        dataSource={data}
+        dataSource={projects}
         // footer={
         //   <div>
         //     <b>ant design</b> footer part
@@ -73,8 +92,8 @@ const ProjectListPage = () => {
                   key="list-vertical-star-o"
                 />,
                 <IconText
-                  icon={LikeOutlined}
-                  text="156"
+                  icon={CalendarOutlined}
+                  text={item.durationInMonths}
                   key="list-vertical-like-o"
                 />,
                 <IconText
@@ -87,14 +106,17 @@ const ProjectListPage = () => {
                 <img
                   width={272}
                   alt="logo"
-                  src={`${item.skills[0].imageUrl}`}
+                  src={`${item.skillImage}`}
                 />
               }
             >
               <List.Item.Meta
                 avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
                 title={
-                  <NavLink to={`/project/${item.id}`}>{item.title}</NavLink>
+                  <div>
+                    <NavLink to={`/project/${item.id}`}>{item.tittle}</NavLink>
+                    <p style={{ fontSize: "10px" }} >{ item.subTittle }</p>
+                  </div>
                 }
                 description={item.description}
               />

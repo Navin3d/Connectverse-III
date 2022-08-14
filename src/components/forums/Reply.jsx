@@ -92,7 +92,7 @@ const Reply = ({ replies }) => {
       {comments.length > 0 && <CommentList comments={comments} />}
       {
         replies.map(reply => (
-          <SingleComment id={reply.id} likesc={reply.likes} reportsc={reply.reports} comment={reply.reply} />
+          <SingleComment id={reply.id} likesc={reply.likes} reportsc={reply.reports} comment={reply.reply} commentedBy={reply.commentedBy}/>
         ))
       }
       <Comment

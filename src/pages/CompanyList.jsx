@@ -9,7 +9,7 @@ import "../styles/pages/course-list.css";
 import Data from "../data/index.json";
 
 
-const CourseList = () => {
+const CompanyList = () => {
 
     const [courses, setCourses] = useState(Data.Courses);
     const [loading, setLoading] = useState(false);
@@ -51,4 +51,4 @@ const CourseList = () => {
     );
 };
 
-export default CourseList;
+export default CompanyList;

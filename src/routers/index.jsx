@@ -27,6 +27,8 @@ const AppRouter = () => (
       <Route path="/projects" element={<ProjectList />} />
       <Route path="/project/:pid" element={<ProjectDetail />} />
       <Route path="/project/:pid/join" element={<ProjectJoining />} />
+      <Route path="/companies" element={<CourseList />} />
+      <Route path="/company/:cid" element={<CourseDetail />} />
       <Route path="/jobs" element={<JobList />} />
       <Route path="/job/:jid" element={<JobDetail />} />
       <Route path="/job/:jid/join" element={<JobJoining />} />

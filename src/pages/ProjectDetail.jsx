@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from "axios";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, NavLink, useNavigate } from "react-router-dom";
 import { Container, Row, Col } from 'react-bootstrap';
 import { Button, Descriptions, PageHeader, Spin, Tabs, Modal, message } from 'antd';
 import {
@@ -14,6 +14,7 @@ import {
     MDBModalFooter,
 } from 'mdb-react-ui-kit';
 import { Award } from "react-bootstrap-icons";
+import { getToken, getUserId } from '../utils/auth';
 
 import CourseCard from '../components/course/Card';
 import Notice from '../components/project/Notice';
@@ -36,10 +37,14 @@ const INITIALSTATE = {
     skills: Data.Courses,
     startedAt: "01-01-2022",
     isCompleted: false,
-    projectAdmin: {
-        id: 111,
-        firstName: "Rajni"
-    },
+    projectAdminId: 111,
+    projectAdminName: "Rajni",
+    team: [
+        {
+            "id": 1,
+            "firstName": "Nfn"
+        }
+    ],
     notices: [
         {
             id: 1,
@@ -57,6 +62,7 @@ const INITIALSTATE = {
 const ProjectDetailPage = () => {
 
     const { pid } = useParams();
+    const navigate = useNavigate();
 
     const [activeTab, setActiveTab] = useState();
     const [detailsHidden, setDetailsHidden] = useState(false);
@@ -78,27 +84,26 @@ const ProjectDetailPage = () => {
     const [project, setProject] = useState(INITIALSTATE);
     const [loading, setLoading] = useState(false);
 
-    const getAProject = async () => {
-        try {
-            setLoading(true);
-            const response = await axios.get(`${Data.AppSettings.baseUrl}/skill/${pid}`);
-            setProject(response.data);
-        } catch (e) {
-            console.error(e);
-        } finally {
-            setLoading(false);
-        }
-    }
-
     const handleJoinProject = () => {
         setScrollableModal(!scrollableModal);
     }
 
-    const handleOk = () => {
-        showNotice();
+    const handleOk = async () => {
         console.log(title);
         setConfirmLoading(true);
+        const body = {
+            message: title,
+            sentBy: getUserId(),
+            projectId: pid
+        };
+        const headers = { Authorization: getToken() };
+        const response = await axios.post(`${baseUrl}/project/notice/add`, body ,{ headers });
         setTimeout(() => {
+            if(response.status == 200) {
+                message.success(response.data);
+                getAProject();
+                showNotice();
+            }
             setAddNoticeHidden(false);
             setConfirmLoading(false);
         }, 2000);
@@ -111,13 +116,23 @@ const ProjectDetailPage = () => {
 
     const handleChange = (e) => {
         setTittle(e.target.value);
-    }
+    };
 
-    const handleAgreementOk = () => {
-        setIsTeamMate(!isTeamMate);
-        setIsProjectAdmin(!isProjectAdmin);
-        setScrollableModal(!scrollableModal);
-        message.success("You are in project now...");
+    const handleAgreementOk = async () => {
+        const headers = { Authorization: getToken() };
+
+        try {
+            const request = await axios.get(`${baseUrl}/project/${project.id}/join/${getUserId()}`, { headers });
+            if(request.status == 200){ 
+                message.success(request.data);
+                setScrollableModal(!scrollableModal);
+            }
+        } catch(e) {
+            console.log(e);
+            message.error("Error Joining Proejct...")
+        }
+
+        // message.success("You are in project now...");
     }
 
     const handleAgreementCancel = () => {
@@ -132,9 +147,47 @@ const ProjectDetailPage = () => {
         window.location.reload();
     }
 
+    const baseUrl = Data.AppSettings.baseUrl;
+
+    const getAProject = async () => {
+        try {
+            setLoading(true);
+            message.warn("Initializing...");
+            const headers = { Authorization: getToken() };
+            const response = await axios.get(`${baseUrl}/project/${pid}`, { headers });
+            setProject(response.data);
+            if(response.status == 200) {
+                console.log(response.data);
+                // message.success("Successfully initialized...");
+
+                const userId = getUserId();
+
+                console.log(response.data)
+            
+                if(response.data.projectAdminId == userId) {
+                    setIsProjectAdmin(true);
+                    setIsTeamMate(true);
+                    console.log("isTeamMate " + isTeamMate + " isProjectAdmin " + isProjectAdmin);
+                }
+                response.data.team.map(member => {
+                    console.log(member)
+                    if(member.id == userId) {
+                        setIsTeamMate(true);
+                        console.log("isTeamMate " + isTeamMate + " isProjectAdmin " + isProjectAdmin);
+                    }
+                });
+            }
+        } catch (e) {
+            console.error(e);
+            message.error("Error Fetchind Data...");
+        } finally {
+            setLoading(false);
+        }
+    }
+
     useEffect(() => {
         // setProject(toSet);
-        // getAProject();
+        getAProject();
     }, []);
 
 
@@ -193,15 +246,15 @@ const ProjectDetailPage = () => {
     const renderContent = (column = 2) => (
         <Descriptions size="small" column={column}>
             <Descriptions.Item label="Project Id">{project.id}</Descriptions.Item>
-            <Descriptions.Item label="Project Admin"><NavLink to={`/profile/${project.projectAdmin.id}`}>{project.projectAdmin.firstName}</NavLink></Descriptions.Item>
+            <Descriptions.Item label="Project Admin"><NavLink to={`/profile/${project.projectAdminId}`}>{project.projectAdminName}</NavLink></Descriptions.Item>
             <Descriptions.Item label="Team Count">{project.totalMembers}</Descriptions.Item>
             <Descriptions.Item label="Project Duration">
                 <a>{project.durationInMonths} Months</a>
             </Descriptions.Item>
             <Descriptions.Item label="Project Type">
-                {project.projectType}
+                {project.difficultyLevel}
             </Descriptions.Item>
-            <Descriptions.Item label="Started On">{project.startedAt}</Descriptions.Item>
+            <Descriptions.Item label="Started On">{project.startedOn}</Descriptions.Item>
             <Descriptions.Item label="Description">{project.description}</Descriptions.Item>
         </Descriptions>
     );
@@ -242,6 +295,7 @@ const ProjectDetailPage = () => {
                     subTitle={project.subTittle}
                     extra={[
                         <Button hidden={!isProjectAdmin & !project.isCompleted} onClick={handleProjectClose} className="btn btn-outline-danger" key="3">Close Project</Button>,
+                        <Button hidden={!isProjectAdmin & !project.isCompleted} onClick={() => { navigate(`/project/${project.id}/join`) }} className="btn btn-outline-info" key="3">View Joining requests</Button>,
                         <Button hidden={!isTeamMate | project.isCompleted} key="2" onClick={() => { setAddNoticeHidden(!addNoticeHidden) }} className='btn btn-warning'>Add Notice</Button>,
                         <Button hidden={isTeamMate | project.isCompleted} key="1" onClick={handleJoinProject} style={{ backgroundColor: "green", color: "white" }} >
                             <Award /> Join Project
@@ -293,7 +347,7 @@ const ProjectDetailPage = () => {
                     <h4>Notice</h4>
                     {
                         project.notices.map(notice => (
-                            <Notice key={notice.id} id={notice.id} title={notice.title} postedBy={notice.postedBy} />
+                            <Notice key={notice.id} id={notice.id} title={notice.message} postedBy={notice.sentBy} />
                         ))
                     }
 

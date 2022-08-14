@@ -1100,5 +1100,376 @@
                 ]
             }
         ]
+    },
+    {
+        "tittle": "Java Developer Training",
+        "subTittle": "Java Developer",
+        "jobsCanBeApplied": "Can apply to Java Developer Jobs.",
+        "provider": "IIT Madras",
+        "skills": "Java, Spring Boot",
+        "jobTittles": "Java Developer",
+        "preRequirements": "Basic Computer knowledge.",
+        "averageTimeToFinishCourse": "80 Days",
+        "roadMapUrl": "",
+        "youtubeUrl": "https://www.youtube.com/embed/zvR-Oif_nxg",
+        "useFulLink": "https://roadmap.sh/java",
+        "imageUrl": "https://developer.okta.com/assets-jekyll/blog/spring-boot-docker/spring-boot-docker-7869dc100d2d806bcf6222147a4b1bcb74bea4d21a62b2b6d726fdec8932ca0b.png",
+        "courseContents": [
+            {
+                "tittle": "Skills Required to become a Backend/Server-side Developer.",
+                "subTittles": [
+                    "Java - 20 days",
+                    "Servlet / JSP – 2 days",
+                    "Database (MySQL) – 1 day",
+                    "Maven – 1 day",
+                    "Hibernate framework.  – 2 days",
+                    "Spring Framework (Core, AOP, MVC, DATA JPA, JDBC) – 10 days",
+                    "Server (Tomcat) – 1 day",
+                    "Web Service (REST & SOAP) – 1 day",
+                    "Junit (Unit Testing) – 1 day",
+                    "Security – 1 day",
+                    "Git – 1 day",
+                    "Agile – 1 day",
+                    "DevOps Basics – 1 day",
+                    "Docker – 1 day",
+                    "Kubernetes – 1 day",
+                    "Cloud Computing (Basics) – 1 day",
+                    "Unix Basics – 1 day",
+                    "Basic exposure to HTML and CSS – 1 day",
+                    "XML, YML – 1 day"
+                ]
+            },
+            {
+                "tittle": "Core Java.",
+                "subTittles": [
+                    "How to install Java",
+                    "Difference between JDK and JRE",
+                    "JDK folder structure",
+                    "How to set the environment variable (PATH and JAVA_HOME )",
+                    "What is JVM and byte code?",
+                    "Understand the development tools available in JAVA_HOME\bin directory.",
+                    "What is class and object? How to create object?",
+                    "What is keyword?",
+                    "What is local variable? What is identifier?",
+                    "What is comment? Single line and multi-line",
+                    "Data types – primitive and reference / object",
+                    "Variable types – Local, instance, class",
+                    "Casting – implicit, explicit",
+                    "Operator – Arithmetic , Relational , Ternary",
+                    "Loops and Control structure",
+                    "Method / Function / Constructor",
+                    "Overloading, Overriding",
+                    "Variable scopes",
+                    "Array",
+                    "String class",
+                    "Packages and access modifiers",
+                    "Instance member vs class members",
+                    "this,  super , final",
+                    "Inheritance",
+                    "Interface vs abstract class",
+                    "Exception Handling",
+                    "Collections",
+                    "Java 5 and 7 features",
+                    "Inner class",
+                    "Java 8",
+                    "JDBC",
+                    "Thread Basics",
+                    "Singleton pattern"
+                ]
+            },
+            {
+                "tittle": "Servlet/JSP",
+                "subTittles": [
+                    "Static web pages, Dynamic Web application",
+                    "What is HTTP Protocol?",
+                    "What is Http Request and Http Response?",
+                    "Request Headers / body / Query Params",
+                    "Response Headers / status code / body",
+                    "Headers: Accept / Content – Type / Authorization ",
+                    "Response Status Codes",
+                    "What is JEE?",
+                    "What is API , Specification and Providers?",
+                    "1 – Tier, 2 – Tier, 3 – Tier, N – Tier architecture / application",
+                    "Web Server?",
+                    "What is web container / EJB container?",
+                    "What is Servlet and Lifecycle ?",
+                    "Types of Http Request methods",
+                    "GET vs POST",
+                    "HttpRequest , HttpResponse object",
+                    "ServletContext object",
+                    "HttpSession management",
+                    "Cookies",
+                    "What is Interceptor?",
+                    "What is Filter?",
+                    "What is Listener? Types of Listener?",
+                    "What is JSP?",
+                    "Tag Lib Libraires",
+                    "MVC Pattern"
+                ]
+            },
+            {
+                "tittle": "Database",
+                "subTittles": [
+                    "What is Database?",
+                    "How to install My SQL and My SQL workbench?",
+                    "How to create database and table in My SQL?",
+                    "What is Table/Row/Column?",
+                    "What is Primary key?",
+                    "What is Foreign Key?",
+                    "What is composite key?",
+                    "What is Auto increment?",
+                    "What is NOT NULL constraint?",
+                    "What is unique key?",
+                    "CRUD operation in Database?",
+                    "Scalar vs Group functions?",
+                    "Relationship between tables? One to one, one to many, many to many",
+                    "Inner join, outer join, self-join, cross join"
+                ]
+            },
+            {
+                "tittle": "Maven",
+                "subTittles": [
+                    "What is Maven",
+                    "How to set up maven",
+                    "Create/Import a Maven project in eclipse",
+                    "Maven POM explaination",
+                    "How to define the dependency",
+                    "groupID/artfiactId/Version of project  ",
+                    "Packaging types - Default Package type",
+                    "Project Inheritance in maven",
+                    "Multi Module Projects in Maven",
+                    "Maven project structure",
+                    "Maven transitive dependency",
+                    "Maven dependency scope",
+                    "Maven Repositories - Local, Intermediate, public",
+                    "Maven Plugins",
+                    "Maven support in eclipse"
+                ]
+            },
+            {
+                "tittle": "Hibernate",
+                "subTittles": [
+                    "What is Hibernate?",
+                    "What is ORM and ORM framework?",
+                    "What is DAO pattern?",
+                    "Hibernate Architecture components?",
+                    "Persistence/ Entity class",
+                    "Annotations used in Entity class.",
+                    "Entity class with component class",
+                    "Mapping associations",
+                    "What is cascade?",
+                    "What is Lazy loading Eager loading?",
+                    "Object state",
+                    "Mapping inheritance",
+                    "HQL"
+                ]
+            },
+            {
+                "tittle": "Spring",
+                "subTittles": [
+                    "What is Spring?",
+                    "Why is spring called application framework?",
+                    "Spring container",
+                    "Spring framework",
+                    "Spring benefits",
+                    "Spring Features",
+                    "IOC and AOP"
+                ]
+            },
+            {
+                "tittle": "Spring Core",
+                "subTittles": [
+                    "What is Bean",
+                    "Spring IOC container",
+                    "How to define the spring bean",
+                    "Bean Factory vs Application Context",
+                    "Spring lifecycle",
+                    "Bean scopes"
+                ]
+            },
+            {
+                "tittle": "Spring AOP",
+                "subTittles": [
+                    "What is AOP and benefits",
+                    "AOP Concepts",
+                    "Types of advice"
+                ]
+            },
+            {
+                "tittle": "Spring MVC",
+                "subTittles": [
+                    "What is the use of Spring MVC?",
+                    "Important components of Spring MVC",
+                    "What is Front Controller pattern",
+                    "What is DispatchServlet",
+                    "Annotations used in Spring MVC",
+                    "Controller and RestController",
+                    "RequestMapping",
+                    "RequestParam",
+                    "PathVariable",
+                    "RequestHeader",
+                    "ModelAttribute",
+                    "RequestBody",
+                    "Validated",
+                    "Component , Service, Repository",
+                    "Component Scan"
+                ]
+            },
+            {
+                "tittle": "Spring JDBC",
+                "subTittles": [
+                    "What is DataSource?",
+                    "What is JdbcTemplate ?",
+                    "What is RowMapper?",
+                    "What is PreparedStatementSetter",
+                    "How to do CRUD with Spring JDBC?"
+                ]
+            },
+            {
+                "tittle": "Spring Data JPA",
+                "subTittles": [
+                    "Benefit of Spring DATA JPA",
+                    "How to create a Spring Data Repository class",
+                    "CRUDRepository, JpaRepository, PagingSortingRepository",
+                    "@Query ",
+                    "Filter the records using findBy…",
+                    "CRUD with Spring DATA JPA"
+                ]
+            },
+            {
+                "tittle": "Spring Boot",
+                "subTittles": [
+                    "How to create a Spring boot application?",
+                    "Advantage of Spring Boot?",
+                    "What is Spring boot starter?",
+                    "Spring Boot Application main class  / @SpringBootApplication",
+                    "@EnableAutoConfiguraion / @Configuration",
+                    "application.properties or application.yml",
+                    "Spring boot dev tool starter",
+                    "Spring boot actuator",
+                    "How to run the Spring boot application",
+                    "@Value , @ConfigurationProperties"
+                ]
+            },
+            {
+                "tittle": "Server",
+                "subTittles": [
+                    "What is Server?",
+                    "Types of Server?",
+                    "What is WebServer?",
+                    "How to install Tomcate Server?",
+                    "How to deploy a application in the Tomcate Server"
+                ]
+            },
+            {
+                "tittle": "Webservice",
+                "subTittles": [
+                    "What is Distributed Computing?",
+                    "What is SOA Architecture?",
+                    "What is Webservice?",
+                    "What is interoperable?",
+                    "Homogeneous/Heterogeneous Applications?",
+                    "Transport protocol vs Message protocol?",
+                    "Synchronous vs Asynchronous?",
+                    "Webservice Benefits?",
+                    "Types of Webservice?"
+                ]
+            },
+            {
+                "tittle": "Junit",
+                "subTittles": [
+                    "Type of Testing?",
+                    "What is unit testing? who will do this?",
+                    "Testing frameworks?",
+                    "Writing first JUnit test?",
+                    "JUnit test lifecycle and related annotations?",
+                    "What is Mock Frameworks?",
+                    "Writing JUnit test with Mocktio?",
+                    "Mocktio annotations?"
+                ]
+            },
+            {
+                "tittle": "Security",
+                "subTittles": [
+                    "Security Introduction",
+                    "Network/application/database data Security",
+                    "HTTPS and SSL Certificate?",
+                    "SSL Authentication?",
+                    "SSL Authentication?",
+                    "Two-factor authentication?",
+                    "Securing API with JWT?"
+                ]
+            },
+            {
+                "tittle": "Git",
+                "subTittles": [
+                    "What is Version Control? Git, SVN, CVS",
+                    "What is repository?",
+                    "How to install Git on Windows?",
+                    "How to create a account in GitHub?",
+                    "How to create a repository in GitHub?",
+                    "Setting Up SSH Authentication to use GitHub?",
+                    "Git commands?",
+                    "How to create braches? ",
+                    "What is merging?",
+                    "What is pull request in Git?",
+                    "GitHub vs Bitbucket?"
+                ]
+            },
+            {
+                "tittle": "Agile",
+                "subTittles": [
+                    "What is AgileModel-Scrum?",
+                    "Scrum Team?",
+                    "Role of each member in the Scrum Team?",
+                    "Product Planning/Spring Planning/Sprint Execution",
+                    "Sprint Review/Spring Retrospective Meeting"
+                ]
+            },
+            {
+                "tittle": "Docker",
+                "subTittles": [
+                    "Docker Introduction (VM, Container)",
+                    "Docker Architecture",
+                    "Installing Docker Desktop on window",
+                    "Building Docker images - using dockerFile",
+                    "How to create/drop Docker container",
+                    "How to create MySQL DB, Tomcat Server using Docker image",
+                    "Docker commands"
+                ]
+            },
+            {
+                "tittle": "Kubernetes",
+                "subTittles": [
+                    "What is Kubernetes? Why Kubernetes?",
+                    "Kubernetes Architecture",
+                    "Kubernetes Architecture",
+                    "kubectl commands ",
+                    "What us PODs?",
+                    "Replication Controllers and ReplicaSets?",
+                    "Deploy/Scaleup an application using Kubernetes?"
+                ]
+            },
+            {
+                "tittle": "Cloud Computing(Basics)",
+                "subTittles": [
+                    "What is Cloud Computing?",
+                    "Service Models?",
+                    "Essential Characteristics?",
+                    "What is Data Center?",
+                    "How to create a instance in AWS?",
+                    "How to run a Spring Boot application in AWS?"
+                ]
+            },
+            {
+                "tittle": "Unix(Basics)",
+                "subTittles": [
+                    "Unix basic commands",
+                    "How to install Java in Unix",
+                    "How to use Putty",
+                    "How to use WinScp"
+                ]
+            }
+        ]
     }
 ]

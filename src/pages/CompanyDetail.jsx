@@ -147,7 +147,7 @@ const INITIALCOMMENTS = [
 ];
 
 
-const CourseDetail = () => {
+const CompanyDetail = () => {
 
     const { cid } = useParams();
 
@@ -341,4 +341,4 @@ const CourseDetail = () => {
     );
 };
 
-export default CourseDetail;
+export default CompanyDetail;
