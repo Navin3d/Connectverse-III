@@ -27,6 +27,9 @@
     box-shadow: 2px 2px 2px 2px rgb(121, 121, 121);
     padding: 20px 2px 2px 2px;
     border-radius: 5px;
+   
+       
+   
 
 }
 .head-top{
@@ -67,4 +70,27 @@
 }
 .space{
     margin-top: 30px;
+}
+.head-2{
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 800;
+ 
+
+}
+.project-box{
+    border: 1px solid white;
+    margin-bottom: 20px;
+    box-shadow: 3px 3px rgb(248, 248, 248);
+    
+}
+.para-1{
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 100;
+    margin-bottom:40px ;
+}
+.content h6{
+    color: aliceblue;
+    text-align: center;
 }

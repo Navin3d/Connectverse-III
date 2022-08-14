@@ -8,65 +8,81 @@ const Formpage = () => {
           <div class="testbox">
       <form action="/">
         <div class="banner">
-          <h1>Form page</h1>
+          <h1>PROJECT CREATION</h1>
         </div>
         <div class="colums">
+     
           <div class="item">
-            <label for="fname"> First Name<span>*</span></label>
-            <input id="fname" type="text" name="fname" required/>
-          </div>
-          <div class="item">
-            <label for="lname"> Last Name<span>*</span></label>
+            <label for="lname"> Title<span>*</span></label>
             <input id="lname" type="text" name="lname" required/>
           </div>
           <div class="item">
-            <label for="address1">Address 1<span>*</span></label>
+            <label for="address1">SubTitle<span>*</span></label>
             <input id="address1" type="text"   name="address1" required/>
           </div>
           <div class="item">
-            <label for="address2">Address 2<span>*</span></label>
+            <label for="address2">Description<span>*</span></label>
             <input id="address2" type="text"   name="address2" required/>
           </div>
           <div class="item">
-            <label for="state">State<span>*</span></label>
+            <label for="state">Detailed Description<span>*</span></label>
             <input id="state" type="text"   name="state" required/>
           </div>
           <div class="item">
-            <label for="zip">Zip/Postal Code<span>*</span></label>
+            <label for="zip">Duration In Months<span>*</span></label>
             <input id="zip" type="text" name="zip" required/>
           </div>
           <div class="item">
-            <label for="city">City<span>*</span></label>
+            <label for="city">Difficulty Level<span>*</span></label>
             <input id="city" type="text"   name="city" required/>
           </div>
           <div class="item">
-            <label for="eaddress">Email Address<span>*</span></label>
+            <label for="eaddress">Total Members<span>*</span></label>
             <input id="eaddress" type="text"   name="eaddress" required/>
           </div>
           <div class="item">
-            <label for="phone">Phone<span>*</span></label>
-            <input id="phone" type="tel"   name="phone" required/>
+            
+    <div className="space-2"></div>
+            <div class="dropdown-1">
+              <button class="btn btn-secondary dropdown-toggle id" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Skills
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Java</a></li>
+                <li><a class="dropdown-item" href="#">c</a></li>
+                <li><a class="dropdown-item" href="#">Python</a></li>
+              </ul>
+            </div>
+            
           </div>
-        </div>
+          
+
+           
+              
+          </div>
+          <div className="space"></div>
         <div className="row">
         <div class="question">
         
-          <label>Membership Type .</label>
+          <label>Is completed .</label>
          
           <div class="question-answer">
           
             <div>
               <input  type="radio" value="none" id="radio_2" name="type"/>
-              <label for="radio_2" class="radio"><span>Premium</span></label>
+              <label for="radio_2" class="radio"><span>Yes</span></label>
             </div>
             <div>
               <input  type="radio" value="none" id="radio_3" name="type"/>
-              <label for="radio_3" class="radio"><span>Ultimate</span></label>
+              <label for="radio_3" class="radio"><span>No</span></label>
             </div>
           </div>
         </div>
         </div>
-       
+
+
+
+
         <div className="space-1"></div>
         <h2 className='terms-condition'>Terms and Conditions</h2>
         <input type="checkbox" name="checkbox1"/>

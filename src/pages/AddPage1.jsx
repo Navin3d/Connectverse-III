@@ -11,10 +11,7 @@ const Formpage = () => {
           <h1>Job Detail Page</h1>
         </div>
         <div class="colums">
-          <div class="item">
-            <label for="fname"> Id<span>*</span></label>
-            <input id="fname" type="text" name="fname" required/>
-          </div>
+
           <div class="item">
             <label for="lname"> Title<span>*</span></label>
             <input id="lname" type="text" name="lname" required/>
@@ -43,36 +40,141 @@ const Formpage = () => {
             <label for="eaddress">State<span>*</span></label>
             <input id="eaddress" type="text"   name="eaddress" required/>
           </div>
-          <div class="item">
-            <label for="phone">JobType<span>*</span></label>
-            <input id="phone" type="text"   name="phone" required/>
-          </div>
-          <div class="item">
-            <label for="phone">Driving license<span>*</span></label>
-            <input id="phone" type="text"   name="phone" required/>
-          </div>
-          <div class="item">
-            <label for="phone">Vechicle wanted<span>*</span></label>
-            <input id="phone" type="text"   name="phone" required/>
-          </div>
+
+
           <div class="item">
             <label for="phone">Required worker<span>*</span></label>
             <input id="phone" type="text"   name="phone" required/>
           </div>
-          <div class="item">
-            <label for="phone">Workstarted<span>*</span></label>
-            <input id="phone" type="text"   name="phone" required/>
-          </div>
-          <div class="item">
-            <label for="phone">Skills Id<span>*</span></label>
-            <input id="phone" type="text"   name="phone" required/>
-          </div>
-          <div class="item">
-            <label for="phone">EmployeeId<span>*</span></label>
-            <input id="phone" type="text"   name="phone" required/>
+
+
+
           </div>
 
-        </div>
+
+
+
+
+        <div className="row">
+
+            
+<div className="col">
+            <div className="space-2"></div>
+
+<div className="row">
+<div class="question">
+
+<label>Work Started .</label>
+
+<div class="question-answer">
+
+  <div>
+    <input  type="radio" value="none" id="radio_2" name="type"/>
+    <label for="radio_2" class="radio"><span>Yes</span></label>
+  </div>
+  <div>
+    <input  type="radio" value="none" id="radio_3" name="type"/>
+    <label for="radio_3" class="radio"><span>No</span></label>
+  </div>
+</div>
+</div>
+</div>
+</div>
+
+<div className="col">
+            <div className="space-2"></div>
+
+<div className="row">
+<div class="question">
+
+<label>Driving liscence .</label>
+
+<div class="question-answer">
+
+  <div>
+    <input  type="radio" value="none" id="radio_2" name="type"/>
+    <label for="radio_2" class="radio"><span>Yes</span></label>
+  </div>
+  <div>
+    <input  type="radio" value="none" id="radio_3" name="type"/>
+    <label for="radio_3" class="radio"><span>No</span></label>
+  </div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+<div className="col">
+            <div className="space-2"></div>
+
+<div className="row">
+<div class="question">
+
+
+
+<div class="question-answer">
+<label className='downwards'>Vehicle Wanted .</label>
+  <div>
+    <input  type="radio" value="none" id="radio_2" name="type"/>
+    <label for="radio_2" class="radio"><span>Yes</span></label>
+  </div>
+  <div>
+    <input  type="radio" value="none" id="radio_3" name="type"/>
+    <label for="radio_3" class="radio"><span>No</span></label>
+  </div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+</div>
+
+<div className="row">
+<div className="col">
+
+<div className="space-2"></div>
+    <div class="dropdown-1">
+      <button class="btn btn-secondary dropdown-toggle id" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Skills
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Java</a></li>
+        <li><a class="dropdown-item" href="#">c</a></li>
+        <li><a class="dropdown-item" href="#">Python</a></li>
+      </ul>
+    </div>
+
+    </div>
+
+
+    <div className="col">
+
+<div className="space-2"></div>
+    <div class="dropdown-1">
+      <button class="btn btn-secondary dropdown-toggle id" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Job Type
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">farming</a></li>
+        <li><a class="dropdown-item" href="#">construction</a></li>
+        <li><a class="dropdown-item" href="#">food supply</a></li>
+      </ul>
+    </div>
+
+    </div>
+    </div>
+
+            
   
        
         <div className="space"></div>

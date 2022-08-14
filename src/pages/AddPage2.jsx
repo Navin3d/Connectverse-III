@@ -80,6 +80,8 @@ const AddPage2 = () => {
                                 </div>
                         </div>
                     </div>
+
+                  
                     <div className="row">
                      
                         <div className="col"></div>
@@ -95,7 +97,47 @@ const AddPage2 = () => {
                         <div className="col"><button className="edit space-p-page"><i class="fa-solid fa-pen-to-square"></i>Edit</button></div>
                     </div>
                 </div>
-            
+                <div className="space-p-page"></div>
+            <div className="background">
+                <div className="container">
+                <div className="row">
+                    <div className="col">
+                    <div className="space"></div>
+                            <h2 className="head-2">Project Details</h2>
+                            <p className="para-1">Description of your project</p>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col">
+                        <div className="project-box">
+                            <div className="row">
+                                <div className="col">
+                        <div className="content">
+                        <div className="space-p-page"></div>
+                            <h6>Requested projects : connectverse</h6>
+                            <div className="space-p-page"></div>
+                            <h6>Job applied: farming</h6>
+                            <div className="space-p-page"></div>
+                            
+                        </div>
+                        </div>
+                        <div className="col">
+                        <div className="content">
+                            <div className="space-p-page"></div>
+                            <h6> Projects : connectverse</h6>
+                            <div className="space-p-page"></div>
+                            <h6> Job:fetching water</h6>
+                            <div className="space-p-page"></div>
+                            
+                        </div>
+                        </div>
+                        
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
         </div>
     );
 };
