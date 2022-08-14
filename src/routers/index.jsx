@@ -16,6 +16,7 @@ import PageNotFound from "../pages/404Page";
 
 import AddPage1 from "../pages/AddPage1";
 import AddPage2 from "../pages/AddPage2";
+import Formpage from "../pages/Formpage";
 
 import Footer from "../components/base/Footer";
 
@@ -36,6 +37,7 @@ const AppRouter = () => (
       <Route path="/addPage1" element={<AddPage1 />} />
       <Route path="/addPage2" element={<AddPage2 />} />
       <Route path="*" element={<PageNotFound />} />
+      <Route path="Formpage" element={<Formpage/>}/>
     </Routes>
     <Footer />
   </BrowserRouter>
