@@ -82,21 +82,9 @@ const AddPage2 = () => {
                     </div>
 
                   
-                    <div className="row">
-                     
-                        <div className="col"></div>
-                        <div className="col"></div>
-                        <div className="col"></div>
-                        <div className="col"></div>
-                        <div className="col"></div>
-                        <div className="col"></div>
-                        <div className="col"></div>
-                        <div className="col"></div>
-                        <div className="col"></div>
-                      
-                        <div className="col"><button className="edit space-p-page"><i class="fa-solid fa-pen-to-square"></i>Edit</button></div>
-                    </div>
+
                 </div>
+                <div className="space"></div>
                 <div className="space-p-page"></div>
             <div className="background">
                 <div className="container">
@@ -138,6 +126,20 @@ const AddPage2 = () => {
                 </div>
                 </div>
             </div>
+            <div className="row">
+                     
+                     <div className="col"></div>
+                     <div className="col"></div>
+                     <div className="col"></div>
+                     <div className="col"></div>
+                     <div className="col"></div>
+                     <div className="col"></div>
+                     <div className="col"></div>
+                     <div className="col"></div>
+                     <div className="col"></div>
+                   
+                     <div className="col"><button className="edit space-p-page"><i class="fa-solid fa-pen-to-square"></i>Edit</button></div>
+                 </div>
         </div>
     );
 };
