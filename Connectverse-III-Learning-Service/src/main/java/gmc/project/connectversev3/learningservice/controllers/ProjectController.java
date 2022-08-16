@@ -69,8 +69,14 @@ public class ProjectController {
 	}
 	
 	@PostMapping(path = "/notice/add")
-	private ResponseEntity<String> createOrUpdateProject(@RequestBody NoticeModel projectNotice) {
+	private ResponseEntity<String> addProjectNotice(@RequestBody NoticeModel projectNotice) {
 		projectsService.addNotice(projectNotice);
+		return ResponseEntity.status(HttpStatus.OK).body("Notice Successfully Added...");
+	}
+	
+	@PostMapping(path = "/notice/remove")
+	private ResponseEntity<String> removeProjectNotice(@RequestBody NoticeModel projectNotice) {
+		projectsService.removeNotice(projectNotice);
 		return ResponseEntity.status(HttpStatus.OK).body("Notice Successfully Added...");
 	}
 	

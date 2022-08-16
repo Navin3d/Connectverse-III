@@ -1,8 +1,6 @@
 package gmc.project.connectversev3.learningservice.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,7 +9,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -53,7 +50,7 @@ public class EmployerEntity implements Serializable {
 	
 	@Column(name = "mobile_number")
 	private Long mobileNumber;
-		
+
 	@Column(name = "address")
 	private String address;
 	
@@ -63,10 +60,7 @@ public class EmployerEntity implements Serializable {
 	@Column(name = "is_blocked")
 	private Boolean isBlocked = false;
 	
-	@OneToOne(optional = true)
+	@OneToOne(optional = true, cascade = CascadeType.PERSIST)
 	private CompanyEntity company;
-	
-	@OneToMany(mappedBy = "employer", cascade = CascadeType.ALL)
-	private Set<JobEntity> job = new HashSet<>();
 
 }

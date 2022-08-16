@@ -283,4 +283,14 @@ public class ProjectServiceImpl implements ProjectsService {
 		projectDao.save(foundProject);
 	}
 
+	@Override
+	public void removeNotice(NoticeModel noticeModel) {
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		ProjectEntity foundProject = findById(noticeModel.getProjectId());
+		NoticeEntity foundNotice = foundProject.getNotices().stream().filter(notice -> notice.getId().equals(noticeModel.getId())).findFirst().orElse(null);
+		foundProject.getNotices().remove(foundNotice);
+		projectDao.save(foundProject);
+	}
+
 }

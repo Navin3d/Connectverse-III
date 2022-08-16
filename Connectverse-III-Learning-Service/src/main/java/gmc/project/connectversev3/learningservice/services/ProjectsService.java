@@ -13,6 +13,7 @@ public interface ProjectsService {
 	public ProjectModel findOneProject(Long projectId);
 	public void finishProject(Long projectId, String employeeId);
 	public void addNotice(NoticeModel noticeModel);
+	public void removeNotice(NoticeModel noticeModel);
 	public List<ListProjectModel> getAllValidprojects(Boolean isHidden);
 	public void saveProject(ProjectCreateOrUpdateModel projectCreateOrUpdateModel);
 	public void requestJoinProject(Long projectId, String employeeId);
