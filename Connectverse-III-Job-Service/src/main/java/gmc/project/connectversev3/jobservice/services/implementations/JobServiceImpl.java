@@ -27,6 +27,8 @@ import gmc.project.connectversev3.jobservice.models.JobCreateOrUpdateModel;
 import gmc.project.connectversev3.jobservice.models.JobModel;
 import gmc.project.connectversev3.jobservice.models.ListJobModel;
 import gmc.project.connectversev3.jobservice.services.JobService;
+import gmc.project.connectversev3.jobservice.services.ProphetServiceFeignClient;
+import gmc.project.connectversev3.jobservice.shared.MailingModel;
 
 @Service
 public class JobServiceImpl implements JobService {
@@ -41,6 +43,8 @@ public class JobServiceImpl implements JobService {
 	private EmployerDao employerDao;
 	@Autowired
 	private EmployeeDao employeeDao;
+	@Autowired
+	private ProphetServiceFeignClient prophetServiceFeignClient;
 
 	@Override
 	public JobEntity findOne(Long jobId) {
@@ -157,6 +161,12 @@ public class JobServiceImpl implements JobService {
 		foundEmployee.setJob(foundJob);
 		foundJob.getEmployees().add(foundEmployee);
 		jobDao.save(foundJob);
+		
+		MailingModel mail = new MailingModel();
+		mail.setTo(foundEmployee.getEmail());
+		mail.setSubject("Stage-1 Passed" + foundJob.getTittle());
+		mail.setBody("Your resume have been short listed for next round of filteration in a job " + foundJob.getTittle() + " Posted By " + foundJob.getCompany().getName() + " All The Best!.");
+		prophetServiceFeignClient.sendMail(mail);		
 	}
 
 	@Override
@@ -168,6 +178,12 @@ public class JobServiceImpl implements JobService {
 		foundEmployee.getJobsApplied().remove(foundJob);
 		foundJob.getEmployeesApplied().remove(foundEmployee);
 		jobDao.save(foundJob);
+		
+		MailingModel mail = new MailingModel();
+		mail.setTo(foundEmployee.getEmail());
+		mail.setSubject("Job Update" + foundJob.getTittle());
+		mail.setBody("Your Resuma is wonderful and meets all qualifications that we wanted but unfortunately we won't be moving forward with your application in a job " + foundJob.getTittle() + " Posted By " + foundJob.getCompany().getName() + " Best Of Luck!.");
+		prophetServiceFeignClient.sendMail(mail);
 	}
 
 }
