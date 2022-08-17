@@ -32,7 +32,7 @@ import lombok.EqualsAndHashCode;
 //@Setter
 @Entity
 //@EqualsAndHashCode(onlyExplicitlyIncluded = true) // important
-@EqualsAndHashCode(exclude = {"requestedProjects", "projects", "adminOfProject"})
+@EqualsAndHashCode(exclude = {"requestedProjects", "projects", "adminOfProject", "job", "jobsApplied"})
 @Table(name = "employees")
 public class EmployeeEntity implements Serializable {
 	
@@ -81,6 +81,15 @@ public class EmployeeEntity implements Serializable {
 	@Enumerated(value = EnumType.STRING)
 	private State state;
 	
+	@Column(name = "ready_to_relocate")
+	private Boolean readyToRelocate;
+	
+	@Column(name = "has_driving_license")
+	private Boolean hasDrivingLicence;
+	
+	@Column(name = "has_vehicle")
+	private Boolean hasVehicle;
+	
 	@Column(name = "expected_wage_per_hour")
 	private Integer expectedWagePerHour;
 	
@@ -89,15 +98,18 @@ public class EmployeeEntity implements Serializable {
 	
 	@Column(name = "is_technical_worler")
 	private Boolean isTechnicalWorker = false;
-	
+		
 	@Column(name = "is_occupied")
 	private Boolean isOccupied = false;
 	
 	@Column(name = "is_blocked")
 	private Boolean isBlocked = true;
 	
-	@ManyToOne(optional = true)
-	private JobEntity job;
+	@Column(name = "physical_health_points")
+	private Integer physicalHealthPoints;
+	
+	@Column(name = "mental_health_points")
+	private Integer mentalHealthPoints;
 	
 	@ManyToOne(optional = true)
 	private HamletEntity hamlet;
@@ -106,9 +118,9 @@ public class EmployeeEntity implements Serializable {
 	private ProjectEntity adminOfProject;
 	
 	@ManyToMany(cascade = {
-          CascadeType.PERSIST,
-          CascadeType.MERGE
-  })
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
 	@JoinTable(name = "employees_projects_requests", 
 		joinColumns = @JoinColumn(name = "user_id"),
 		inverseJoinColumns = @JoinColumn(name = "project_id")
@@ -116,19 +128,26 @@ public class EmployeeEntity implements Serializable {
 	private Set<ProjectEntity> requestedProjects;
 	
 	@ManyToMany(cascade = {
-          CascadeType.PERSIST,
-          CascadeType.MERGE
-  })
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
 	@JoinTable(name = "employees_projects", 
 		joinColumns = @JoinColumn(name = "user_id"),
 		inverseJoinColumns = @JoinColumn(name = "project_id")
 	)	
 	private Set<ProjectEntity> projects;
 	
+	@ManyToMany(cascade = CascadeType.PERSIST)
+	private Set<JobEntity> jobsApplied;
+	
+	@ManyToOne
+	private JobEntity job;
+	
 	public EmployeeEntity() {
 		super();
 		this.requestedProjects = new HashSet<>();
 		this.projects = new HashSet<>();
+		this.jobsApplied = new HashSet<>();
 	}
 	
 }

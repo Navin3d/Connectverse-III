@@ -37,7 +37,7 @@ public class ReplyEntity implements Serializable {
     
 	private String commentedBy;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private CommentEntity comment;
 
 }

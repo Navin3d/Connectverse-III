@@ -17,15 +17,13 @@ import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
 
 @Data
 //@Getter
 //@Setter
 @Entity
-//@EqualsAndHashCode(exclude = {"courseContents", "jobs"})
+@EqualsAndHashCode(exclude = {"comments"})
 @Table(name = "skills")
 public class SkillEntity implements Serializable {
 
@@ -67,9 +65,12 @@ public class SkillEntity implements Serializable {
 	private Boolean isHidden;
 	
 	@OneToMany(mappedBy = "skill", cascade = CascadeType.ALL)
+	private Set<CommentEntity> comments = new HashSet<>();
+	
+	@OneToMany(mappedBy = "skill", cascade = CascadeType.ALL)
 	private Set<CourseContentEntity> courseContents = new HashSet<>();
 	
-	@ManyToMany
+	@ManyToMany(mappedBy = "skills", cascade = CascadeType.ALL)
 	private Set<ProjectEntity> projects = new HashSet<>();
 
 	@ManyToMany

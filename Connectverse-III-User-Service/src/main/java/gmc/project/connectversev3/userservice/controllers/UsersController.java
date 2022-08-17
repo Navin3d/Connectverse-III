@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +33,12 @@ public class UsersController {
 		return ResponseEntity.status(HttpStatus.CREATED).body("The Users have been added to this website...");
 	}
 	
+	@GetMapping(path = "/e-shram/transfer")
+	private ResponseEntity<String> fetchDataFromEshram() {
+		userService.fetchFromEshram();
+		return ResponseEntity.status(HttpStatus.OK).body("Data Migrated Successfully...");
+	}
+	
 	@GetMapping(path = "/employee/{employeeId}")
 	private ResponseEntity<EmployeeEntity> getAEmployee(@PathVariable String employeeId) {
 		EmployeeEntity returnValue = userService.findEmployeeByUserName(employeeId);
@@ -54,6 +61,12 @@ public class UsersController {
 	private ResponseEntity<String> updateAEmployer(@RequestBody EmployerModel employerEntity) {
 		userService.updateEmployer(employerEntity);
 		return ResponseEntity.status(HttpStatus.OK).body("Updated Successfully...");
+	}
+	
+	@DeleteMapping
+	private ResponseEntity<String> deleteManyUsers() {
+		userService.deleteAllEmployees();
+		return ResponseEntity.status(HttpStatus.OK).body("Employees Deleted");
 	}
 
 }

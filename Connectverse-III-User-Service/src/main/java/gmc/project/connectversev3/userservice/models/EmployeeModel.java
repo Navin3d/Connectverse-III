@@ -33,10 +33,26 @@ public class EmployeeModel implements Serializable {
 	
 	private String location;
 	
+	private State state;
+	
+	private Boolean readyToRelocate;
+	
+	private Boolean hasDrivingLicence;
+	
+	private Boolean hasVehicle;
+	
 	private Integer expectedWagePerHour;
 	
 	private Integer expectedWorkingHoursPerWeek;
 	
-	private Boolean isTechnicalWorker = false;
+	private Boolean isTechnicalWorker;
+		
+	private Boolean isOccupied;
+	
+	private Boolean isBlocked;
+	
+	private Integer physicalHealthPoints;
+	
+	private Integer mentalHealthPoints;
 
 }

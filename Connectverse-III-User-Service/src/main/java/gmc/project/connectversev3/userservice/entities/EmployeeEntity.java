@@ -4,16 +4,19 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -23,14 +26,13 @@ import gmc.project.connectversev3.userservice.models.State;
 import gmc.project.connectversev3.userservice.models.WorkType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
-//@Data
-@Getter
-@Setter
+@Data
+//@Getter
+//@Setter
 @Entity
-//@EqualsAndHashCode(exclude = {"adminOfProjects", "requestedProjects", "projects"})
+//@EqualsAndHashCode(onlyExplicitlyIncluded = true) // important
+@EqualsAndHashCode(exclude = {"requestedProjects", "projects", "adminOfProject", "job", "jobsApplied"})
 @Table(name = "employees")
 public class EmployeeEntity implements Serializable {
 	
@@ -67,6 +69,9 @@ public class EmployeeEntity implements Serializable {
 	@Column(name = "email")
 	private String email;
 	
+	@Column(name = "batch_no")
+	private Integer batchNo;
+	
 	@Column(name = "mobile_number")
 	private Long mobileNumber;
 		
@@ -79,6 +84,15 @@ public class EmployeeEntity implements Serializable {
 	@Enumerated(value = EnumType.STRING)
 	private State state;
 	
+	@Column(name = "ready_to_relocate")
+	private Boolean readyToRelocate;
+	
+	@Column(name = "has_driving_license")
+	private Boolean hasDrivingLicence;
+	
+	@Column(name = "has_vehicle")
+	private Boolean hasVehicle;
+	
 	@Column(name = "expected_wage_per_hour")
 	private Integer expectedWagePerHour;
 	
@@ -87,26 +101,56 @@ public class EmployeeEntity implements Serializable {
 	
 	@Column(name = "is_technical_worler")
 	private Boolean isTechnicalWorker = false;
-	
+		
 	@Column(name = "is_occupied")
 	private Boolean isOccupied = false;
 	
 	@Column(name = "is_blocked")
 	private Boolean isBlocked = true;
 	
-	@ManyToOne(optional = true)
-	private JobEntity job;
+	@Column(name = "physical_health_points")
+	private Integer physicalHealthPoints;
+	
+	@Column(name = "mental_health_points")
+	private Integer mentalHealthPoints;
 	
 	@ManyToOne(optional = true)
 	private HamletEntity hamlet;
 	
-	@OneToMany(mappedBy = "projectAdmin")
-	private Set<ProjectEntity> adminOfProjects = new HashSet<>();
+	@OneToOne(mappedBy = "projectAdmin", cascade = CascadeType.PERSIST, targetEntity = ProjectEntity.class)
+	private ProjectEntity adminOfProject;
 	
-	@ManyToMany
-	private Set<ProjectEntity> requestedProjects = new HashSet<>();
+	@ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+	@JoinTable(name = "employees_projects_requests", 
+		joinColumns = @JoinColumn(name = "user_id"),
+		inverseJoinColumns = @JoinColumn(name = "project_id")
+	)
+	private Set<ProjectEntity> requestedProjects;
 	
-	@ManyToMany
-	private Set<ProjectEntity> projects = new HashSet<>();
+	@ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+	@JoinTable(name = "employees_projects", 
+		joinColumns = @JoinColumn(name = "user_id"),
+		inverseJoinColumns = @JoinColumn(name = "project_id")
+	)	
+	private Set<ProjectEntity> projects;
+	
+	@ManyToMany(cascade = CascadeType.PERSIST)
+	private Set<JobEntity> jobsApplied;
+	
+	@ManyToOne
+	private JobEntity job;
+	
+	public EmployeeEntity() {
+		super();
+		this.requestedProjects = new HashSet<>();
+		this.projects = new HashSet<>();
+		this.jobsApplied = new HashSet<>();
+	}
 	
 }

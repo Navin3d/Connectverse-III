@@ -4,16 +4,20 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(exclude = {"replies", "skill"})
 @Table(name = "comments")
 @Entity
 @Data
@@ -34,7 +38,10 @@ public class CommentEntity implements Serializable {
 	
 	private String commentedBy;
 	
-	@OneToMany
+	@ManyToOne(cascade = CascadeType.ALL)
+	private SkillEntity skill;
+	
+	@OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
 	private Set<ReplyEntity> replies = new HashSet<>();
 
 }
