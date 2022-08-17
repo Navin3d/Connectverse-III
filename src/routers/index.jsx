@@ -21,6 +21,11 @@ import NavBar from "../components/base/NavBar";
 import Chat from "../components/chat/Chat";
 import LoginPage from "../pages/LoginPage";
 import { JobCreation } from "../pages/JobCreation";
+
+import Formpage from "../pages/Formpage";
+
+import Footer from "../components/base/Footer";
+
 const AppRouter = () => (
   <BrowserRouter>
     <Routes>
@@ -42,8 +47,9 @@ const AppRouter = () => (
       <Route path="/login" element={<LoginPage />} />
       <Route path="/chat" element={<Chat />} />
       <Route path="*" element={<PageNotFound />} />
+      <Route path="Formpage" element={<Formpage />} />
     </Routes>
-    {/* <Footer /> */}
+    <Footer />
   </BrowserRouter>
 );
 
