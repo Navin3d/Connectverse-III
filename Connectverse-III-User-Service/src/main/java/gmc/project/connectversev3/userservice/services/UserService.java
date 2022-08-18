@@ -13,7 +13,7 @@ public interface UserService {
 	public EmployeeEntity findEmployeeByUserName(String userName);
 	public void updateEmployer(EmployerModel employerEntity);
 	public void updateEmployee(EmployeeModel employeeEntity);	
-	public void createManyEmployees(List<EmployeeModel> employees);
+	public List<EmployeeEntity> createManyEmployees(List<EmployeeModel> employees);
 	public void deleteAllEmployees();
-	public void fetchFromEshram();
+	public List<EmployeeEntity> fetchFromEshram();
 }

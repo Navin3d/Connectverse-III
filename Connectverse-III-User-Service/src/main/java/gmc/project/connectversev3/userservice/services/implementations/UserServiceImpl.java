@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void createManyEmployees(List<EmployeeModel> employees) {
+	public List<EmployeeEntity> createManyEmployees(List<EmployeeModel> employees) {
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		SiteSettingsEntity batchNo = siteSettingsDao.findById(1L).orElse(null);
@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserService {
 			employeeEntity.setBatchNo(Integer.valueOf(batchNo.getField1()));
 			employeesDetached.add(employeeEntity);
 		});
-		employeeDao.saveAllAndFlush(employeesDetached);
+		List<EmployeeEntity> saved = employeeDao.saveAllAndFlush(employeesDetached);
 		Integer latestBatch = Integer.valueOf(batchNo.getField1())+1;
 		Long totalEmployeeCount = employeeDao.count();
 		Integer addedCount = employees.size();
@@ -100,6 +100,7 @@ public class UserServiceImpl implements UserService {
 		batchNo.setField2(totalEmployeeCount.toString());
 		batchNo.setField3(addedCount.toString());
 		siteSettingsDao.save(batchNo);
+		return saved;
 		
 	}
 
@@ -146,18 +147,31 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void fetchFromEshram() {
-		String url = environment.getProperty("eShramUrl");
+	public List<EmployeeEntity> fetchFromEshram() {
+		String eShramUrl = environment.getProperty("eShramUrl");
+		String mlServerWageCalculation = environment.getProperty("mlServerWageCalculation");
+		String mlServerWorkingCalculation = environment.getProperty("mlServerWorkingCalculation");
+
 		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<EmployeeModel[]> response = restTemplate.getForEntity(url, EmployeeModel[].class);
+		ResponseEntity<EmployeeModel[]> response = restTemplate.getForEntity(eShramUrl, EmployeeModel[].class);
 		List<EmployeeModel> employees = new ArrayList<>();
 		for(EmployeeModel employee :response.getBody()) {
 			log.debug(employee.getFirstName());
 			employee.setId(null);
+			ResponseEntity<Integer> expectedWage = restTemplate.getForEntity(mlServerWageCalculation, Integer.class);
+			ResponseEntity<Integer> workTime = restTemplate.getForEntity(mlServerWorkingCalculation, Integer.class);
+
+			employee.setExpectedWagePerHour(expectedWage.getBody());
+			if(workTime.getBody() == 0) {
+				employee.setExpectedWorkingHoursPerWeek(20);
+			} else {
+				employee.setExpectedWorkingHoursPerWeek(40);
+			}
 			employees.add(employee);
 		}
-		createManyEmployees(employees);
-		restTemplate.delete(url);
+		List<EmployeeEntity> savedEmployees = createManyEmployees(employees);
+		restTemplate.delete(eShramUrl);
+		return savedEmployees;
 	}
 
 }
