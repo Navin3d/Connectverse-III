@@ -10,9 +10,9 @@ export const getRefreshToken = () => (
 export const getUserId = () => {
     var userId;
 
-    if(localStorage.getItem("Employee_Id") != "undefined") {
+    if(localStorage.getItem("Employee_Id") != null) {
         userId = localStorage.getItem("Employee_Id");
-    } else if(localStorage.getItem("Employer_Id") != "undefined") {
+    } else if(localStorage.getItem("Employer_Id") != null) {
         userId = localStorage.getItem("Employer_Id");
     } else {
         userId = null;
@@ -49,5 +49,6 @@ export const handleLogout = () => {
     localStorage.removeItem("Refresh_Token");
     localStorage.removeItem("Employee_Id");
     localStorage.removeItem("Employer_Id");
+    window.location.reload();
 }
  

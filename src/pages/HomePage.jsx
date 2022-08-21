@@ -14,7 +14,6 @@ import SmoothScroll from "smooth-scroll";
 
 import "../styles/pages/home.css";
 
-
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
   speedAsDuration: true,
@@ -25,7 +24,7 @@ const App = () => {
 
   useEffect(() => {
     document.title = "Connectverse";
-    
+
     setLandingPageData(JsonData);
   }, []);
 

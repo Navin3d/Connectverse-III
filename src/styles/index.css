@@ -117,7 +117,7 @@ hr {
 *****************************************************************************************************/
 footer {
   margin-top: 20px;
-  background-color: #6372ff;
+  background: linear-gradient(to right, #050850 0%, #474dc0 100%);
   color: #fff;
   max-width: 100%;
   height: auto;
