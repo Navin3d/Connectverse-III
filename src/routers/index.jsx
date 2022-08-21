@@ -13,21 +13,14 @@ import JobDetail from "../pages/JobDetail";
 import CompanyList from "../pages/CompanyList";
 import CompanyDetail from "../pages/CompanyDetail";
 import JobJoining from "../pages/JobJoining";
-import Profile from "../pages/ProfilePage";
 import PageNotFound from "../pages/404Page";
-
-import AddPage1 from "../pages/AddPage1";
-import AddPage2 from "../pages/AddPage2";
+import Login2 from "../pages/Login2";
 import NavBar from "../components/base/NavBar";
-// import Footer from "../components/base/Footer";
 import Chat from "../components/chat/Chat";
-import LoginPage from "../pages/LoginPage";
 import { JobCreation } from "../pages/JobCreation";
-
-import Formpage from "../pages/Formpage";
-
 import Footer from "../components/base/Footer";
-
+import Signup2 from "../pages/Signup2";
+import Profile2 from "../pages/Profile2";
 const AppRouter = () => (
   <BrowserRouter>
     <Routes>
@@ -36,6 +29,10 @@ const AppRouter = () => (
       <Route path="/employerreg" element={<EmployerReg />} />
       <Route path="/jobcreation" element={<JobCreation />} />
       <Route path="/nav" element={<NavBar />} />
+      <Route path="/login" element={<Login2 />} />
+      <Route path="/signup" element={<Signup2 />} />
+      <Route path="/profile" element={<Profile2 />} />
+
       <Route path="/course/:cid" element={<CourseDetail />} />
       <Route path="/projects" element={<ProjectList />} />
       <Route path="/project/:pid" element={<ProjectDetail />} />
@@ -45,13 +42,8 @@ const AppRouter = () => (
       <Route path="/jobs" element={<JobList />} />
       <Route path="/job/:jid" element={<JobDetail />} />
       <Route path="/job/:jid/join" element={<JobJoining />} />
-      <Route path="/profile/:pid" element={<Profile />} />
-      <Route path="/addPage1" element={<AddPage1 />} />
-      <Route path="/addPage2" element={<AddPage2 />} />
-      <Route path="/login" element={<LoginPage />} />
       <Route path="/chat" element={<Chat />} />
       <Route path="*" element={<PageNotFound />} />
-      <Route path="Formpage" element={<Formpage />} />
     </Routes>
     <Footer />
   </BrowserRouter>

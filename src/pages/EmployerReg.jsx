@@ -29,7 +29,7 @@ export default function EmployerReg() {
               <TextField
                 id="outlined-basic"
                 label="FirstName"
-                variant="outlined"
+             variant="outlined"
                 fullWidth
               />
             </Grid>
