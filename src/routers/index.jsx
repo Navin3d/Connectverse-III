@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import HomePage from "../pages/HomePage";
+import EmployerReg from "../pages/EmployerReg";
 import CourseList from "../pages/CourseList";
 import CourseDetail from "../pages/CourseDetail";
 import ProjectList from "../pages/ProjectList";
@@ -17,6 +18,12 @@ import PageNotFound from "../pages/404Page";
 
 import AddPage1 from "../pages/AddPage1";
 import AddPage2 from "../pages/AddPage2";
+import NavBar from "../components/base/NavBar";
+// import Footer from "../components/base/Footer";
+import Chat from "../components/chat/Chat";
+import LoginPage from "../pages/LoginPage";
+import { JobCreation } from "../pages/JobCreation";
+
 import Formpage from "../pages/Formpage";
 
 import Footer from "../components/base/Footer";
@@ -26,6 +33,9 @@ const AppRouter = () => (
     <Routes>
       <Route path="/" element={<HomePage />} exact={true} />
       <Route path="/courses" element={<CourseList />} />
+      <Route path="/employerreg" element={<EmployerReg />} />
+      <Route path="/jobcreation" element={<JobCreation />} />
+      <Route path="/nav" element={<NavBar />} />
       <Route path="/course/:cid" element={<CourseDetail />} />
       <Route path="/projects" element={<ProjectList />} />
       <Route path="/project/:pid" element={<ProjectDetail />} />
@@ -38,8 +48,10 @@ const AppRouter = () => (
       <Route path="/profile/:pid" element={<Profile />} />
       <Route path="/addPage1" element={<AddPage1 />} />
       <Route path="/addPage2" element={<AddPage2 />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/chat" element={<Chat />} />
       <Route path="*" element={<PageNotFound />} />
-      <Route path="Formpage" element={<Formpage/>}/>
+      <Route path="Formpage" element={<Formpage />} />
     </Routes>
     <Footer />
   </BrowserRouter>
