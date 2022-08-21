@@ -17,10 +17,11 @@ import PageNotFound from "../pages/404Page";
 import Login2 from "../pages/Login2";
 import NavBar from "../components/base/NavBar";
 import Chat from "../components/chat/Chat";
-import { JobCreation } from "../pages/JobCreation";
+import JobCreation from "../pages/JobCreation";
 import Footer from "../components/base/Footer";
 import Signup2 from "../pages/Signup2";
 import Profile2 from "../pages/Profile2";
+import ProjectCreation from "../pages/ProjectCreation";
 const AppRouter = () => (
   <BrowserRouter>
     <Routes>
@@ -28,6 +29,7 @@ const AppRouter = () => (
       <Route path="/courses" element={<CourseList />} />
       <Route path="/employerreg" element={<EmployerReg />} />
       <Route path="/jobcreation" element={<JobCreation />} />
+      <Route path="/projectcreation" element={<ProjectCreation />} />
       <Route path="/nav" element={<NavBar />} />
       <Route path="/login" element={<Login2 />} />
       <Route path="/signup" element={<Signup2 />} />
