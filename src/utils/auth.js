@@ -27,6 +27,14 @@ export const getUserId = () => {
     // "36a2f340-ec69-41cb-9815-a24fcfd40995" // employer Id
 };
 
+export const getEmployerId = () => (
+    localStorage.getItem("Employer_Id") != "" ? localStorage.getItem("Employer_Id") : null
+);
+
+export const getEmployeeId = () => (
+    localStorage.getItem("Employee_Id") != "" ? localStorage.getItem("Employee_Id") : null
+);
+
 export const handleLogin = (headers) => {
     console.log(headers);
     const { employer_id, employee_id, authorization, refresh_token } = headers;

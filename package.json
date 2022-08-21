@@ -30,6 +30,7 @@
     "jwt-decode": "^3.1.2",
     "mdb-react-ui-kit": "^4.1.0",
     "mdb-ui-kit": "^4.4.0",
+    "multiselect-react-dropdown": "^2.0.25",
     "pug": "^3.0.2",
     "react": "^18.2.0",
     "react-accessible-accordion": "^5.0.0",
