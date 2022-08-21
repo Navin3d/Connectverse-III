@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Stack } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Reactimg from "../assets/images/react.png";
-import "./Card2.css";
+import "../styles/pages/Card2.css";
 function Card() {
   return (
     <Container>

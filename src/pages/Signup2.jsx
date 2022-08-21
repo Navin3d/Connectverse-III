@@ -1,5 +1,5 @@
 import React from "react";
-import "./Signup2.css";
+import "../styles/pages/Signup2.css";
 import Signupimg from "../assets/images/Signup.jpg";
 import {
   Grid,

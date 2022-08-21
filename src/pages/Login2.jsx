@@ -1,5 +1,5 @@
 import React from "react";
-import "./Login2.css";
+import "../styles/pages/Login2.css";
 
 import loginimg from "../assets/images/login-img.jpg";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import "./Profile2.css";
+import "../styles/pages/Profile2.css";
 import { Container, Grid, Stack, Fab } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import EditIcon from "@mui/icons-material/Edit";
