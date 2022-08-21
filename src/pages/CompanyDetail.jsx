@@ -1,9 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createElement } from "react";
+import { useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from 'react-bootstrap';
 import { Button, Descriptions, PageHeader, Statistic, Tabs, Modal } from 'antd';
-import { Award } from "react-bootstrap-icons";
+import { EyeOutlined, CalendarOutlined } from "@ant-design/icons";
+import { Avatar, List, Space, message } from "antd";
+import { People } from "react-bootstrap-icons";
+
+import { CheckCircleFill } from "react-bootstrap-icons";
+import { getToken } from "../utils/auth";
 
 // import CourseHeader from "../components/course/CourseHeader";
 import CourseContents from "../components/course/CourseContents";
@@ -80,7 +86,7 @@ const INITIALCOMMENTS = [
         likes: 10,
         reports: 100,
         comment: "We supply a series of design principles, practical patterns and high quality design resources to help people create their product prototypes beautifully and efficiently.",
-        commentedBy: "suni", 
+        commentedBy: "suni",
         replies: [
             {
                 id: 1,
@@ -146,8 +152,15 @@ const INITIALCOMMENTS = [
     }
 ];
 
+const IconText = ({ icon, text }) => (
+    <Space>
+        {createElement(icon)}
+        {text}
+    </Space>
+);
 
 const CompanyDetail = () => {
+    const navigate = useNavigate();
 
     const { cid } = useParams();
 
@@ -160,14 +173,15 @@ const CompanyDetail = () => {
     const [featuresHidden, setFeaturesHidden] = useState(true);
     const [forumHidden, setForumHidden] = useState(true);
 
-    const [course, setCourse] = useState(INITIALSTATE);
+    const [company, setCompany] = useState(INITIALSTATE);
     const [loading, setLoading] = useState(false);
 
-    const getACourses = async () => {
+    const getACompany = async () => {
         try {
             setLoading(true);
-            const response = await axios.get(`${Data.AppSettings.baseUrl}/skill/${cid}`);
-            setCourse(response.data);
+            const headers = { Authorization: getToken() };
+            const response = await axios.get(`${Data.AppSettings.baseUrl}/company/${cid}`, { headers });
+            setCompany(response.data);
             setComments(response.data.comments);
         } catch (e) {
             console.error(e);
@@ -177,51 +191,27 @@ const CompanyDetail = () => {
     }
 
     const handleAddComment = () => {
-        
+
     }
 
 
     useEffect(() => {
         // const fetchedCourse = Data.Courses.filter(course => (course.id == cid))[0];
-        
+
         // const toSet = (fetchedCourse.length === 0) ? INITIALSTATE : fetchedCourse;
         // setCourse(toSet);
-        getACourses();
+        getACompany();
     }, []);
 
 
     const handleTabChange = (activeKey) => {
         setActiveTab(activeKey);
-        if(activeKey == 1) {
+        if (activeKey == 1) {
             setDetailsHidden(false);
             setRoadMapHidden(true);
-            setVideoHidden(true);
-            setFeaturesHidden(true);
-            setForumHidden(true);
-        } else if (activeKey == 2) {
-            setDetailsHidden(true);
-            setRoadMapHidden(false);
-            setVideoHidden(true);
-            setFeaturesHidden(true);
-            setForumHidden(true);
-        } else if(activeKey == 3) {
-            setDetailsHidden(true);
-            setRoadMapHidden(true);
-            setVideoHidden(false);
-            setFeaturesHidden(true);
-            setForumHidden(true);
-        } else if(activeKey == 4) {
-            setDetailsHidden(true);
-            setRoadMapHidden(true);
-            setVideoHidden(true);
-            setFeaturesHidden(false);
-            setForumHidden(true);
         } else {
             setDetailsHidden(true);
-            setRoadMapHidden(true);
-            setVideoHidden(true);
-            setFeaturesHidden(true);
-            setForumHidden(false);
+            setRoadMapHidden(false);
         }
     }
 
@@ -237,24 +227,24 @@ const CompanyDetail = () => {
 
     const renderContent = (column = 2) => (
         <Descriptions size="small" column={column}>
-            <Descriptions.Item label="Provider">{ course.provider }</Descriptions.Item>
-            <Descriptions.Item label="Skills Involved">
-            <a>{ course.skillsGained }</a>
+            <Descriptions.Item label="Id">{company.id}</Descriptions.Item>
+            <Descriptions.Item label="Name">
+                <a>{company.name}</a>
             </Descriptions.Item>
-            <Descriptions.Item label="Job Tittles">
-                { course.jobTittles }
+            <Descriptions.Item label="Employees In Company">
+                {company.noOfEmployees}
             </Descriptions.Item>
-            <Descriptions.Item label="Pre-Requirements">{ course.preRequirements }</Descriptions.Item>
-            <Descriptions.Item label="Average Time To Finish Course">{ course.averageTimeToFinishCourse }</Descriptions.Item>
+            <Descriptions.Item label="Owned-By">{company.ownedBy}</Descriptions.Item>
+            {/* <Descriptions.Item label="Jobs Posted">{company.jobs}</Descriptions.Item> */}
         </Descriptions>
     );
 
     const extraContent = (
         <div
             style={{
-            display: 'flex',
-            width: 'max-content',
-            justifyContent: 'flex-end',
+                display: 'flex',
+                width: 'max-content',
+                justifyContent: 'flex-end',
             }}
         >
             {/* <Statistic
@@ -275,29 +265,26 @@ const CompanyDetail = () => {
         </div>
     );
 
-    return(
+    return (
         <div>
             <div className="course-header">
                 <PageHeader
                     className="site-page-header-responsive"
                     onBack={() => window.history.back()}
-                    title={ course.tittle }
-                    subTitle={ course.subTittle }
+                    title={company.tittle}
+                    subTitle={company.subTittle}
                     extra={[
-                    // <Button key="3">Operation</Button>,
-                    // <Button key="2">Operation</Button>,
-                    <Button key="1" style={{ backgroundColor: "green", color: "white" }} >
-                        <Award /> Top Grossing
-                    </Button>,
+                        // <Button key="3">Operation</Button>,
+                        // <Button key="2">Operation</Button>,
+                        <Button key="1" style={{ backgroundColor: "green", color: "white" }} >
+                            <CheckCircleFill />&nbsp; Verified
+                        </Button>,
                     ]}
                     footer={
-                    <Tabs defaultActiveKey="1" activeKey={activeTab} onChange={handleTabChange}>
-                        <TabPane tab="Details" key="1" />
-                        <TabPane tab="Road Map" key="2" />
-                        <TabPane tab="Video" key="3" />
-                        <TabPane tab="Features" key="4" />
-                        <TabPane tab="Forums" key="5" />
-                    </Tabs>
+                        <Tabs defaultActiveKey="1" activeKey={activeTab} onChange={handleTabChange}>
+                            <TabPane tab="Details" key="1" />
+                            <TabPane tab="Jobs" key="2" />
+                        </Tabs>
                     }
                 >
                     <Content extra={extraContent}>{renderContent()}</Content>
@@ -305,37 +292,82 @@ const CompanyDetail = () => {
             </div>
             <Container>
                 <Row hidden={detailsHidden}>
-                    <h4>Course Contents</h4>
+                    <h4>Company Description</h4>
                     <div className="course-contents">
-                        <CourseContents courseContents={course.courseContents} />
+                        <p>{company.description}</p>
                     </div>
                 </Row>
-                <div hidden={roadMapHidden}>
-                    <h4 className='side-headings'>Road Map</h4>
-                </div>
-                <div hidden={videoHidden} className="course-video">
-                    <h4 className='side-headings'>References Videos</h4>
-                    <Row>
-                        <Col sm={1}></Col>
-                        <Col sm={10}>
-                        <iframe  width="100%" height="700px" title="YouTube video player" frameborder="0" allow="picture-in-pictur; fullscreene" src={ course.youtubeUrl } allowFullScreen></iframe>
-                        </Col>
-                        <Col sm={1}></Col>
-                    </Row>
-                </div>
-                <div hidden={featuresHidden}>
-                    <h4>Features</h4>
-                    <CourseFeatures />
-                </div>
-                <div hidden={forumHidden}>
-                    <h4 className='side-headings'>Forums</h4>
-                    <Button className='btn btn-secondary' onClick={handleAddComment}>Add Comment</Button>
-                    {
-                        comments.map(comment => (
-                            <Comments key={comment.id} id={comment.id} comment={comment.comment} likesc={comment.likes} reportsc={comment.reports} commentedBy={comment.commentedBy} replies={comment.replies} />
-                        ))
-                    }
-                </div>
+                <Row hidden={roadMapHidden}>
+                    <h4>Jobs</h4>
+                    <div className="course-contents">
+                        <Container>
+                            <List
+                                itemLayout="vertical"
+                                size="large"
+                                pagination={{
+                                    onChange: (page) => {
+                                        console.log(page);
+                                    },
+                                    pageSize: 6,
+                                }}
+                                dataSource={(company.jobs != []) ? company.jobs : []}
+                                // footer={
+                                //   <div>
+                                //     <b>ant design</b> footer part
+                                //   </div>
+                                // }
+                                renderItem={(item) => (
+                                    <div
+                                        className="project-list-card"
+                                        onClick={() => {
+                                            navigate(`/job/${item.id}`);
+                                        }}
+                                    >
+                                        <List.Item
+                                            key={item.title}
+                                            actions={[
+                                                <IconText
+                                                    icon={EyeOutlined}
+                                                    text="156"
+                                                    key="list-vertical-star-o"
+                                                />,
+                                                <IconText
+                                                    icon={CalendarOutlined}
+                                                    text={item.noOfEmployees}
+                                                    key="list-vertical-like-o"
+                                                />,
+                                                <IconText
+                                                    icon={People}
+                                                    text={item.noOfEmployees}
+                                                    key="list-vertical-message"
+                                                />,
+                                            ]}
+                                            extra={
+                                                <img
+                                                    width={272}
+                                                    alt="logo"
+                                                    src={`${company.imageUrl}`}
+                                                />
+                                            }
+                                        >
+                                            <List.Item.Meta
+                                                avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+                                                title={
+                                                    <div>
+                                                        <NavLink to={`/job/${item.id}`}>{item.tittle}</NavLink>
+                                                        <p style={{ fontSize: "10px" }} >{item.jobType}</p>
+                                                    </div>
+                                                }
+                                                description={item.state}
+                                            />
+                                            {item.description}
+                                        </List.Item>
+                                    </div>
+                                )}
+                            />
+                        </Container>
+                    </div>
+                </Row>
             </Container>
         </div>
     );

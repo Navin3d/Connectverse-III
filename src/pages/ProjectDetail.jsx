@@ -97,9 +97,9 @@ const ProjectDetailPage = () => {
             projectId: pid
         };
         const headers = { Authorization: getToken() };
-        const response = await axios.post(`${baseUrl}/project/notice/add`, body ,{ headers });
+        const response = await axios.post(`${baseUrl}/project/notice/add`, body, { headers });
         setTimeout(() => {
-            if(response.status == 200) {
+            if (response.status == 200) {
                 message.success(response.data);
                 getAProject();
                 showNotice();
@@ -123,11 +123,11 @@ const ProjectDetailPage = () => {
 
         try {
             const request = await axios.get(`${baseUrl}/project/${project.id}/join/${getUserId()}`, { headers });
-            if(request.status == 200){ 
+            if (request.status == 200) {
                 message.success(request.data);
                 setScrollableModal(!scrollableModal);
             }
-        } catch(e) {
+        } catch (e) {
             console.log(e);
             message.error("Error Joining Proejct...")
         }
@@ -137,7 +137,7 @@ const ProjectDetailPage = () => {
 
     const handleAgreementCancel = () => {
         setScrollableModal(!scrollableModal);
-        message.error("You can't join project without accepting agrement....");
+        message.error("You can't join Job without accepting agrement....");
     }
 
     const handleProjectClose = () => {
@@ -156,22 +156,22 @@ const ProjectDetailPage = () => {
             const headers = { Authorization: getToken() };
             const response = await axios.get(`${baseUrl}/project/${pid}`, { headers });
             setProject(response.data);
-            if(response.status == 200) {
+            if (response.status == 200) {
                 console.log(response.data);
                 // message.success("Successfully initialized...");
 
                 const userId = getUserId();
 
                 console.log(response.data)
-            
-                if(response.data.projectAdminId == userId) {
+
+                if (response.data.projectAdminId == userId) {
                     setIsProjectAdmin(true);
                     setIsTeamMate(true);
                     console.log("isTeamMate " + isTeamMate + " isProjectAdmin " + isProjectAdmin);
                 }
                 response.data.team.map(member => {
                     console.log(member)
-                    if(member.id == userId) {
+                    if (member.id == userId) {
                         setIsTeamMate(true);
                         console.log("isTeamMate " + isTeamMate + " isProjectAdmin " + isProjectAdmin);
                     }
@@ -371,76 +371,27 @@ const ProjectDetailPage = () => {
                                     </MDBModalHeader>
                                     <MDBModalBody>
                                         <p>
-                                            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in,
-                                            egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+                                            Every employee who has reached the age of 18 but has not yet reached the age of 60 is eligible to work.
                                         </p>
+
+
                                         <p>
-                                            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel
-                                            augue laoreet rutrum faucibus dolor auctor.
+                                            It is provided that where the employment of any person in an establishment is terminated due to the closure of the establishment for any reason other than a weekly or other recognised holiday, the wages earned by him shall be paid before the expiry of the second day from the day on which his employment is so terminated.
                                         </p>
+
+
                                         <p>
-                                            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
-                                            consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+                                            Article 16(2) of the Indian Constitution states that an employee must not face discrimination in any situation while working.
                                         </p>
+
+
                                         <p>
-                                            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in,
-                                            egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+                                            According to the right to employment in India, an employer in India has all the rights and entitlements to hire the best employee for their company.
                                         </p>
+
+
                                         <p>
-                                            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel
-                                            augue laoreet rutrum faucibus dolor auctor.
-                                        </p>
-                                        <p>
-                                            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
-                                            consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
-                                        </p>
-                                        <p>
-                                            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in,
-                                            egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                                        </p>
-                                        <p>
-                                            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel
-                                            augue laoreet rutrum faucibus dolor auctor.
-                                        </p>
-                                        <p>
-                                            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
-                                            consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
-                                        </p>
-                                        <p>
-                                            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in,
-                                            egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                                        </p>
-                                        <p>
-                                            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel
-                                            augue laoreet rutrum faucibus dolor auctor.
-                                        </p>
-                                        <p>
-                                            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
-                                            consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
-                                        </p>
-                                        <p>
-                                            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in,
-                                            egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                                        </p>
-                                        <p>
-                                            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel
-                                            augue laoreet rutrum faucibus dolor auctor.
-                                        </p>
-                                        <p>
-                                            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
-                                            consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
-                                        </p>
-                                        <p>
-                                            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in,
-                                            egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                                        </p>
-                                        <p>
-                                            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel
-                                            augue laoreet rutrum faucibus dolor auctor.
-                                        </p>
-                                        <p>
-                                            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
-                                            consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+                                            The employee has the right to be heard in relation to the termination of his employment. He must be given the opportunity to explain his position and demonstrate why he should not be dismissed or discharged.
                                         </p>
                                     </MDBModalBody>
                                 </MDBModalContent>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from "axios";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, NavLink, useNavigate } from "react-router-dom";
 import { Container, Row, Col } from 'react-bootstrap';
 import { Button, Descriptions, PageHeader, Spin, Tabs, Modal, message } from 'antd';
 import {
@@ -17,11 +17,13 @@ import { Award } from "react-bootstrap-icons";
 
 import CourseCard from '../components/course/Card';
 import Notice from '../components/project/Notice';
+import { getUserId, getToken } from "../utils/auth";
 
 import Data from "../data";
 
 import "../styles/pages/project-detail.css";
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import JobList from './JobList';
 
 
 const INITIALSTATE = {
@@ -56,7 +58,8 @@ const INITIALSTATE = {
 
 const JobDetailPage = () => {
 
-    const { pid } = useParams();
+    const { jid } = useParams();
+    const navigate = useNavigate();
 
     const [activeTab, setActiveTab] = useState();
     const [detailsHidden, setDetailsHidden] = useState(false);
@@ -75,22 +78,14 @@ const JobDetailPage = () => {
     const [isTeamMate, setIsTeamMate] = useState(false);
     const [isProjectAdmin, setIsProjectAdmin] = useState(false);
 
-    const [project, setProject] = useState(INITIALSTATE);
+    const [job, setJob] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    const getAProject = async () => {
-        try {
-            setLoading(true);
-            const response = await axios.get(`${Data.AppSettings.baseUrl}/skill/${pid}`);
-            setProject(response.data);
-        } catch (e) {
-            console.error(e);
-        } finally {
-            setLoading(false);
-        }
-    }
+    const userId = getUserId();
+    const headers = { Authorization: getToken() };
 
-    const handleJoinProject = () => {
+    const handleApplyJob = () => {
+        console.log("applied");
         setScrollableModal(!scrollableModal);
     }
 
@@ -113,11 +108,16 @@ const JobDetailPage = () => {
         setTittle(e.target.value);
     }
 
-    const handleAgreementOk = () => {
-        setIsTeamMate(!isTeamMate);
-        setIsProjectAdmin(!isProjectAdmin);
-        setScrollableModal(!scrollableModal);
-        message.success("You are in project now...");
+    const handleAgreementOk = async () => {
+        const applied = job.employeesApplied.filter(employee => employee.id == getUserId());
+        if (applied[0] == null) {
+            setScrollableModal(!scrollableModal);
+            const baseUrl = Data.AppSettings.baseUrl;
+            const response = await axios.get(`${baseUrl}/job/${jid}/apply/${getUserId()}`, { headers });
+            message.success(response.data);
+        } else {
+            message.warn("Already Applied For this Job...");
+        }
     }
 
     const handleAgreementCancel = () => {
@@ -126,15 +126,33 @@ const JobDetailPage = () => {
     }
 
     const handleProjectClose = () => {
-        project.isCompleted = !project.isCompleted;
-        setProject(project);
-        console.log("Proj3ect: ", project);
+        job.isCompleted = !job.isCompleted;
+        setJob(job);
+        console.log("job: ", job);
         window.location.reload();
     }
 
+    const getOneJob = async () => {
+        try {
+            message.warn("Initializing...");
+            setLoading(true);
+            const baseUrl = Data.AppSettings.baseUrl;
+            const response = await axios.get(`${baseUrl}/job/${jid}`, { headers });
+            setJob(response.data);
+            if (response.data.employerId == userId) {
+                setIsProjectAdmin(true);
+            }
+        } catch (e) {
+            console.error(e);
+            message.error("Error Fetching Data...");
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
         // setProject(toSet);
-        // getAProject();
+        getOneJob();
     }, []);
 
 
@@ -190,19 +208,23 @@ const JobDetailPage = () => {
 
     const { TabPane } = Tabs;
 
-    const renderContent = (column = 2) => (
+    const renderContent = (column = 3) => (
         <Descriptions size="small" column={column}>
-            <Descriptions.Item label="Project Id">{project.id}</Descriptions.Item>
-            <Descriptions.Item label="Project Admin"><NavLink to={`/profile/${project.projectAdmin.id}`}>{project.projectAdmin.firstName}</NavLink></Descriptions.Item>
-            <Descriptions.Item label="Team Count">{project.totalMembers}</Descriptions.Item>
-            <Descriptions.Item label="Project Duration">
-                <a>{project.durationInMonths} Months</a>
+            <Descriptions.Item label="Job Id">{job.id}</Descriptions.Item>
+            <Descriptions.Item label="Title">{job.tittle}</Descriptions.Item>
+            <Descriptions.Item label="Workers Wanted">{job.requiredWorkers}</Descriptions.Item>
+            <Descriptions.Item label="Work Started">
+                <a>{(job.workStarted) ? "Yes" : "No"}</a>
             </Descriptions.Item>
-            <Descriptions.Item label="Project Type">
-                {project.projectType}
+            <Descriptions.Item label="Work Type">
+                {job.jobType}
             </Descriptions.Item>
-            <Descriptions.Item label="Started On">{project.startedAt}</Descriptions.Item>
-            <Descriptions.Item label="Description">{project.description}</Descriptions.Item>
+            <Descriptions.Item label="Working Hours Per Day">{job.workHoursPerDay} Hours</Descriptions.Item>
+            <Descriptions.Item label="Pay Per Hour">{job.payPerHour} £</Descriptions.Item>
+            {(!job.isTechnicalJob) && <Descriptions.Item label="No Of Working Days">{job.noOfDays}</Descriptions.Item>}
+            <Descriptions.Item label="Location">{`${job.location} - ${job.state}`}</Descriptions.Item>
+            <Descriptions.Item label="Technical Job">{(job.isTechnicalJob) ? "Yes" : "No"}</Descriptions.Item>
+            {(!job.isTechnicalJob) && <Descriptions.Item label="Vehicle Wanted">{(job.vehicleWanted) ? "Yes" : "No"}</Descriptions.Item>}
         </Descriptions>
     );
 
@@ -238,20 +260,22 @@ const JobDetailPage = () => {
                 <PageHeader
                     className="site-page-header-responsive"
                     onBack={() => window.history.back()}
-                    title={project.tittle}
-                    subTitle={project.subTittle}
+                    title={job.tittle}
+                    subTitle={job.subTittle}
                     extra={[
-                        <Button hidden={!isProjectAdmin & !project.isCompleted} onClick={handleProjectClose} className="btn btn-outline-danger" key="3">Close Project</Button>,
-                        <Button hidden={!isTeamMate | project.isCompleted} key="2" onClick={() => { setAddNoticeHidden(!addNoticeHidden) }} className='btn btn-warning'>Add Notice</Button>,
-                        <Button hidden={isTeamMate | project.isCompleted} key="1" onClick={handleJoinProject} style={{ backgroundColor: "green", color: "white" }} >
-                            <Award /> Easy Apply
+                        <Button hidden={!isProjectAdmin & !job.isCompleted} onClick={handleProjectClose} className="btn btn-outline-danger" key="3">Hide Job</Button>,
+                        <Button hidden={!isProjectAdmin & !job.isCompleted} onClick={() => { navigate(`/job/${job.id}/join`) }} className="btn btn-outline-info" key="3">Joining requests</Button>,
+                        <Button hidden={isProjectAdmin | job.isCompleted} key="1" onClick={handleApplyJob} style={{ backgroundColor: "green", color: "white" }} >
+                            <Award /> {(job.employeesApplied != null && job.employeesApplied.filter(employee => employee.id == getUserId())[0] != null) ? "Applied" : "Easy Apply"}
                         </Button>,
                     ]}
                     footer={
                         <Tabs defaultActiveKey="1" activeKey={activeTab} onChange={handleTabChange}>
                             <TabPane tab="Details" key="1" />
-                            <TabPane tab="Required Skills" key="2" />
 
+                            {
+                                (job.isTechnicalJob) ? (<TabPane tab="Required Skills" key="2" />) : ""
+                            }
                             {
                                 (isTeamMate) ? (<TabPane tab="Notices" key="3" />) : ""
                             }
@@ -269,19 +293,20 @@ const JobDetailPage = () => {
             <Container>
                 <Row hidden={detailsHidden}>
                     <h4>Project Details</h4>
-                    <p className="project-content">{project.detailedDescription}</p>
+                    <p className="project-content">{job.description}</p>
                 </Row>
                 <div hidden={skillsHidden} className="course-video">
                     <h4 className='side-headings'>Skills</h4>
                     <Container>
                         <Row>
                             {
-                                (project.skills.length != 0 & !loading) ?
-                                    project.skills.map(skill => (
+                                (job.skills != null || job.isTechnicalJob) ?
+                                    job.skills.map(skill => (
                                         <Col className="course-card">
                                             <CourseCard id={skill.id} imageUrl={skill.imageUrl} name={skill.tittle} jobsCanBeApplied={skill.jobsCanBeApplied} />
                                         </Col>
-                                    )) : <div className="text-center">
+                                    )) :
+                                    <div className="text-center">
                                         <Spin size="large" />
                                         <h1>Fetching Required Skills...</h1>
                                     </div>
@@ -289,128 +314,51 @@ const JobDetailPage = () => {
                         </Row>
                     </Container>
                 </div>
-                <div hidden={noticesHidden}>
-                    <h4>Notice</h4>
-                    {
-                        project.notices.map(notice => (
-                            <Notice key={notice.id} id={notice.id} title={notice.title} postedBy={notice.postedBy} />
-                        ))
-                    }
-
-
-                    <div className='agreement'>
-                        {/* <MDBBtn onClick={() => setScrollableModal(!scrollableModal)}>LAUNCH DEMO MODAL</MDBBtn> */}
-
-                        <Modal
-                            onOk={handleAgreementOk}
-                            onCancel={handleAgreementCancel}
-                            visible={scrollableModal}>
-                            <MDBModalDialog scrollable>
-                                <MDBModalContent>
-                                    <MDBModalHeader>
-                                        <MDBModalTitle>Connectverse Project Agreement</MDBModalTitle>
-                                        <MDBBtn
-                                            className='btn-close'
-                                            color='none'
-                                            onClick={() => setScrollableModal(!scrollableModal)}
-                                        ></MDBBtn>
-                                    </MDBModalHeader>
-                                    <MDBModalBody>
-                                        <p>
-                                            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in,
-                                            egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                                        </p>
-                                        <p>
-                                            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel
-                                            augue laoreet rutrum faucibus dolor auctor.
-                                        </p>
-                                        <p>
-                                            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
-                                            consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
-                                        </p>
-                                        <p>
-                                            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in,
-                                            egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                                        </p>
-                                        <p>
-                                            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel
-                                            augue laoreet rutrum faucibus dolor auctor.
-                                        </p>
-                                        <p>
-                                            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
-                                            consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
-                                        </p>
-                                        <p>
-                                            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in,
-                                            egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                                        </p>
-                                        <p>
-                                            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel
-                                            augue laoreet rutrum faucibus dolor auctor.
-                                        </p>
-                                        <p>
-                                            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
-                                            consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
-                                        </p>
-                                        <p>
-                                            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in,
-                                            egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                                        </p>
-                                        <p>
-                                            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel
-                                            augue laoreet rutrum faucibus dolor auctor.
-                                        </p>
-                                        <p>
-                                            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
-                                            consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
-                                        </p>
-                                        <p>
-                                            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in,
-                                            egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                                        </p>
-                                        <p>
-                                            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel
-                                            augue laoreet rutrum faucibus dolor auctor.
-                                        </p>
-                                        <p>
-                                            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
-                                            consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
-                                        </p>
-                                        <p>
-                                            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in,
-                                            egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                                        </p>
-                                        <p>
-                                            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel
-                                            augue laoreet rutrum faucibus dolor auctor.
-                                        </p>
-                                        <p>
-                                            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
-                                            consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
-                                        </p>
-                                    </MDBModalBody>
-                                </MDBModalContent>
-                            </MDBModalDialog>
-                        </Modal>
-                    </div>
+                <div className='agreement'>
+                    {/* <MDBBtn onClick={() => setScrollableModal(!scrollableModal)}>LAUNCH DEMO MODAL</MDBBtn> */}
 
                     <Modal
-                        title="Type Notice Here..."
-                        visible={addNoticeHidden}
-                        onOk={handleOk}
-                        confirmLoading={confirmLoading}
-                        onCancel={handleCancel}
-                    >
-                        <input className='form-control' name='title' value={title} onChange={handleChange} required />
+                        onOk={handleAgreementOk}
+                        onCancel={handleAgreementCancel}
+                        visible={scrollableModal}>
+                        <MDBModalDialog scrollable>
+                            <MDBModalContent>
+                                <MDBModalHeader>
+                                    <MDBModalTitle>Connectverse Job Agreement</MDBModalTitle>
+                                    <MDBBtn
+                                        className='btn-close'
+                                        color='none'
+                                        onClick={() => setScrollableModal(!scrollableModal)}
+                                    ></MDBBtn>
+                                </MDBModalHeader>
+                                <MDBModalBody>
+                                    <p>
+                                        Every employee who has reached the age of 18 but has not yet reached the age of 60 is eligible to work.
+                                    </p>
+
+
+                                    <p>
+                                        It is provided that where the employment of any person in an establishment is terminated due to the closure of the establishment for any reason other than a weekly or other recognised holiday, the wages earned by him shall be paid before the expiry of the second day from the day on which his employment is so terminated.
+                                    </p>
+                            
+                            
+                                    <p>
+                                        Article 16(2) of the Indian Constitution states that an employee must not face discrimination in any situation while working.
+                                    </p>
+
+
+                                    <p>
+                                        According to the right to employment in India, an employer in India has all the rights and entitlements to hire the best employee for their company.
+                                    </p>
+
+
+                                    <p>
+                                        The employee has the right to be heard in relation to the termination of his employment. He must be given the opportunity to explain his position and demonstrate why he should not be dismissed or discharged.
+                                    </p>
+                                </MDBModalBody>
+                            </MDBModalContent>
+                        </MDBModalDialog>
                     </Modal>
-                </div>
-                <div hidden={chatHidden}>
-                    <h4 className='side-headings'>Chat Here Privately...</h4>
-                    {/* {
-                        comments.map(comment => (
-                            <Comments key={comment.id} id={comment.id} comment={comment.comment} likesc={comment.likes} reportsc={comment.reports} commentedBy={comment.commentedBy} replies={comment.replies} />
-                        ))
-                    } */}
                 </div>
             </Container>
         </div>

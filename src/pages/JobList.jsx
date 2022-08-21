@@ -1,9 +1,10 @@
-import React from 'react';
+import { useEffect, useState, createElement } from 'react';
+import axios from "axios";
 import { useNavigate, NavLink } from 'react-router-dom';
 import { Container } from "react-bootstrap";
 import { People } from 'react-bootstrap-icons';
 import { LikeOutlined, EyeOutlined } from '@ant-design/icons';
-import { Avatar, List, Space } from 'antd';
+import { Avatar, List, Space, message } from 'antd';
 
 import Data from "../data";
 
@@ -27,7 +28,7 @@ const data = Array.from({
 
 const IconText = ({ icon, text }) => (
     <Space>
-        {React.createElement(icon)}
+        {createElement(icon)}
         {text}
     </Space>
 );
@@ -35,6 +36,24 @@ const IconText = ({ icon, text }) => (
 const JobList = () => {
 
     const navigate = useNavigate();
+
+    const [jobs, setJobs] = useState([]);
+
+    const initializeJobs = async () => {
+        try {
+            message.warn("initialized...");
+            const baseUrl = Data.AppSettings.baseUrl;
+            const response = await axios.get(`${baseUrl}/job`);
+            setJobs(response.data);
+        } catch(e) {
+            console.log(e);
+            message.error("Error initializing...");
+        }
+    };
+
+    useEffect(() => {
+        initializeJobs();
+    }, []);
 
     return (
         <Container>
@@ -47,7 +66,7 @@ const JobList = () => {
                     },
                     pageSize: 6,
                 }}
-                dataSource={data}
+                dataSource={jobs}
                 // footer={
                 //   <div>
                 //     <b>ant design</b> footer part
@@ -56,26 +75,26 @@ const JobList = () => {
                 renderItem={(item) => (
                     <div className='project-list-card' onClick={() => { navigate(`/job/${item.id}`) }}>
                         <List.Item
-                            key={item.title}
+                            key={item.id}
                             actions={[
                                 <IconText icon={EyeOutlined} text="156" key="list-vertical-star-o" />,
                                 <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
-                                <IconText icon={People} text={item.totalMembers} key="list-vertical-message" />,
+                                <IconText icon={People} text={item.requiredWorkers} key="list-vertical-message" />,
                             ]}
                             extra={
                                 <img
                                     width={272}
                                     alt="logo"
-                                    src={ (item.skills[0].imageUrl) ? `${item.skills[0].imageUrl}` : "https://www.betterteam.com/images/betterteam-free-job-posting-sites-5877x3918-20210222.jpg?crop=40:21,smart&width=1200&dpr=2"}
+                                    src={ (item.company.imageUrl) ? `${item.company.imageUrl}` : "https://www.betterteam.com/images/betterteam-free-job-posting-sites-5877x3918-20210222.jpg?crop=40:21,smart&width=1200&dpr=2"}
                                 />
                             }
                         >
                             <List.Item.Meta
                                 avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-                                title={<NavLink to={`/project/${item.id}`}>{item.title}</NavLink>}
-                                description={item.description}
+                                title={<NavLink to={`/project/${item.id}`}>{item.tittle}</NavLink>}
+                                description={`${item.location} - ${item.state}`}
                             />
-                            {item.content}
+                            {item.description}
                         </List.Item>
                     </div>
                 )}

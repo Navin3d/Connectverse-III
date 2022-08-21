@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import axios from "axios";
+import { useParams, useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-bootstrap';
-import { Avatar, Button, List, Skeleton } from 'antd';
+import { Avatar, Button, List, Skeleton, message } from 'antd';
 import { Container } from "react-bootstrap";
+
+import { getToken, getUserId } from '../utils/auth';
+
+import Data from "../data";
 
 import "../styles/pages/project-joining.css";
 
@@ -15,7 +21,10 @@ const INITIALDATA = [
     }
 ];
 
-const JobJoining = () => {
+const JobJoiningPage = () => {
+
+    const { jid } = useParams();
+    const navigate = useNavigate();
 
     const [initLoading, setInitLoading] = useState(true);
     const [loading, setLoading] = useState(false);
@@ -23,22 +32,56 @@ const JobJoining = () => {
     const [list, setList] = useState([]);
 
 
-    const handleAccept = () => {
-
+    const handleAccept = async (eid) => {
+        const baseUrl = Data.AppSettings.baseUrl;
+        const headers = { Authorization: getToken() };
+        const res = await axios.get(`${baseUrl}/job/${jid}/accept/${eid}`, { headers });
+        if(res.status == 200) {
+            message.success(res.data);
+            window.location.reload();
+        }
     }
 
-    const handleReject = () => {
+    const handleReject = async (eid) => {
+        const baseUrl = Data.AppSettings.baseUrl;
+        const headers = { Authorization: getToken() };
+        const res = await axios.get(`${baseUrl}/job/${jid}/reject/${eid}`, { headers });
+        if(res.status == 200) {
+            message.success(res.data);
+            window.location.reload();
+        }
+    }
 
+    const initData = async () => {
+        const baseUrl = Data.AppSettings.baseUrl;
+        const headers = { Authorization: getToken() };
+
+        try {
+            const request = await axios.get(`${baseUrl}/job/${jid}`, { headers });
+            const userId = getUserId();
+            if(request.data.employerId != userId) {
+                navigate(`/jobs`)
+            }
+            if(request.status == 200) {
+                setData(request.data.employeesApplied);
+                message.success("Data Feched...")
+                console.log(request.data.employeesApplied);
+            }
+        } catch (e) {
+            message.error("Error fetching Data.")
+        }
+        
     }
 
     useEffect(() => {
-        fetch(fakeDataUrl)
-            .then((res) => res.json())
-            .then((res) => {
-                setInitLoading(false);
-                setData(res.results);
-                setList(res.results);
-            });
+        // fetch(fakeDataUrl)
+        //     .then((res) => res.json())
+        //     .then((res) => {
+        //         setInitLoading(false);
+        //         setData(res.results);
+        //         setList(res.results);
+        //     });
+        initData();
     }, []);
 
     const onLoadMore = () => {
@@ -83,19 +126,19 @@ const JobJoining = () => {
         <Container>
             <List
                 className="demo-loadmore-list"
-                loading={initLoading}
+                loading={false}
                 itemLayout="horizontal"
                 // loadMore={loadMore}
-                dataSource={list}
+                dataSource={data}
                 renderItem={(item) => (
                     <List.Item className='project-joining-card'
-                        actions={[<NavLink key="list-loadmore-edit" onClick={handleAccept}>Accept</NavLink>, <NavLink key="list-loadmore-more" onClick={handleReject}>Reject</NavLink>]}
+                        actions={[<Button key="list-loadmore-edit" className='btn btn-outline-success' onClick={() => { handleAccept(item.id) }}>Accept</Button>, <Button key="list-loadmore-more" className='btn btn-outline-warning' onClick={() => { handleReject(item.id) }}>Reject</Button>]}
                     >
                         <Skeleton avatar title={false} loading={item.loading} active>
                             <List.Item.Meta
-                                avatar={<Avatar src={item.picture.large} />}
-                                title={<NavLink href="https://ant.design">{item.name?.last}</NavLink>}
-                                description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                                avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+                                title={<NavLink href={`/profile/${item.id}`}>{item.firstName}</NavLink>}
+                                description={`Hi! My name is ${item.firstName} i wish to join your Job...`}
                             />
                             {/* <div>content</div> */}
                         </Skeleton>
@@ -106,4 +149,4 @@ const JobJoining = () => {
     );
 };
 
-export default JobJoining;
+export default JobJoiningPage;

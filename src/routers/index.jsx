@@ -9,6 +9,8 @@ import ProjectDetail from "../pages/ProjectDetail";
 import ProjectJoining from "../pages/ProjectJoiningPage";
 import JobList from "../pages/JobList";
 import JobDetail from "../pages/JobDetail";
+import CompanyList from "../pages/CompanyList";
+import CompanyDetail from "../pages/CompanyDetail";
 import JobJoining from "../pages/JobJoining";
 import Profile from "../pages/ProfilePage";
 import PageNotFound from "../pages/404Page";
@@ -28,8 +30,8 @@ const AppRouter = () => (
       <Route path="/projects" element={<ProjectList />} />
       <Route path="/project/:pid" element={<ProjectDetail />} />
       <Route path="/project/:pid/join" element={<ProjectJoining />} />
-      <Route path="/companies" element={<CourseList />} />
-      <Route path="/company/:cid" element={<CourseDetail />} />
+      <Route path="/companies" element={<CompanyList />} />
+      <Route path="/company/:cid" element={<CompanyDetail />} />
       <Route path="/jobs" element={<JobList />} />
       <Route path="/job/:jid" element={<JobDetail />} />
       <Route path="/job/:jid/join" element={<JobJoining />} />
