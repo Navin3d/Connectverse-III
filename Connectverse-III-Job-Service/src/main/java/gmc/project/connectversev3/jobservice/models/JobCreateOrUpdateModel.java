@@ -23,6 +23,8 @@ public class JobCreateOrUpdateModel implements Serializable {
 	
 	private Integer payPerHour;
 	
+	private String address;
+	
 	private String location;
 	
 	private State state;

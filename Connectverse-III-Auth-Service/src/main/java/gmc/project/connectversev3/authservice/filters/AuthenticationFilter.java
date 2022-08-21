@@ -82,8 +82,8 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 					.setSubject(userName)
 					.signWith(hmacKey)
 					.compact();
-			response.setHeader("Authorization", "GMC-"+token);
-			response.setHeader("Refresh_Token", "GMC-"+refreshToken);
+			response.setHeader("Authorization", "GMC "+token);
+			response.setHeader("Refresh_Token", "GMC "+refreshToken);
 			response.setHeader("Employee_Id", foundUser.getId());
 		} catch(UsernameNotFoundException e) {
 			EmployerEntity foundUser = authService.findEmployerByUserName(userName);

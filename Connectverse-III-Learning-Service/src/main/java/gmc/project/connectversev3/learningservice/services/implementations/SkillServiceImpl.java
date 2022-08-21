@@ -21,6 +21,7 @@ import gmc.project.connectversev3.learningservice.exceptions.SkillNotFoundExcept
 import gmc.project.connectversev3.learningservice.exceptions.UserNotFoundException;
 import gmc.project.connectversev3.learningservice.models.CommentModel;
 import gmc.project.connectversev3.learningservice.models.ReplyModel;
+import gmc.project.connectversev3.learningservice.models.SkillListModel;
 import gmc.project.connectversev3.learningservice.models.SkillModel;
 import gmc.project.connectversev3.learningservice.services.SkillService;
 
@@ -185,6 +186,20 @@ public class SkillServiceImpl implements SkillService {
 		foundReply.setReports(foundReply.getReports()+1);
 		foundComment.getReplies().add(foundReply);
 		commentDao.save(foundComment);
+	}
+
+	@Override
+	public List<SkillListModel> findAllSkillsList() {
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		List<SkillListModel> returnValue = new ArrayList<>();
+		skillDao.findAll().stream().iterator().forEachRemaining(skill -> {
+			SkillListModel skillListModel = new SkillListModel();
+			skillListModel.setId(skill.getId());
+			skillListModel.setName(skill.getTittle());
+			returnValue.add(skillListModel);
+		});
+		return returnValue;
 	}
 
 }

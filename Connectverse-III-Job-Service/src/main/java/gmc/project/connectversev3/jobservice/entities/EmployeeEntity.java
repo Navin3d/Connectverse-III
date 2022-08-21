@@ -69,6 +69,9 @@ public class EmployeeEntity implements Serializable {
 	@Column(name = "email")
 	private String email;
 	
+	@Column(name = "batch_no")
+	private Integer batchNo;
+	
 	@Column(name = "mobile_number")
 	private Long mobileNumber;
 		
@@ -111,6 +114,24 @@ public class EmployeeEntity implements Serializable {
 	@Column(name = "mental_health_points")
 	private Integer mentalHealthPoints;
 	
+	@Column(name = "waiting_for_job_time")
+	private Integer waitingForJobTime;
+	
+	@Column(name = "inactive_time")
+	private Integer inactiveJobSeekTime;
+	
+	@Column(name = "job_reports")
+	private Integer jobReports;
+	
+	@Column(name = "can_operate_mobile")
+	private Boolean knowsToOperateMobile;
+	
+	@Column(name = "can_read_and_write")
+	private Boolean knowsToReadAndWrite;
+	
+	@Column(name = "credit_points")
+	private Integer creditPoints;
+	
 	@ManyToOne(optional = true)
 	private HamletEntity hamlet;
 	
@@ -118,9 +139,9 @@ public class EmployeeEntity implements Serializable {
 	private ProjectEntity adminOfProject;
 	
 	@ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
+          CascadeType.PERSIST,
+          CascadeType.MERGE
+  })
 	@JoinTable(name = "employees_projects_requests", 
 		joinColumns = @JoinColumn(name = "user_id"),
 		inverseJoinColumns = @JoinColumn(name = "project_id")
@@ -128,9 +149,9 @@ public class EmployeeEntity implements Serializable {
 	private Set<ProjectEntity> requestedProjects;
 	
 	@ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
+          CascadeType.PERSIST,
+          CascadeType.MERGE
+  })
 	@JoinTable(name = "employees_projects", 
 		joinColumns = @JoinColumn(name = "user_id"),
 		inverseJoinColumns = @JoinColumn(name = "project_id")

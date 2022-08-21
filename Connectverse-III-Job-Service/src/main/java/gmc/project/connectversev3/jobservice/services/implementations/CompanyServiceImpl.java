@@ -51,6 +51,7 @@ public class CompanyServiceImpl implements CompanyService {
 			if(detached == null)
 				throw new CompanyNotFoundException("GST Num: " + companyModel.getGstNumber());
 			if(detached.getGstNumber().equals(companyModel.getGstNumber())) {
+				detached.setIsEnabled(true);
 				CompanyEntity savedCompany = companyDao.save(detached);
 				if(companyModel.getEmployerId() != null) {
 					EmployerEntity employer = employerDao.findById(companyModel.getEmployerId()).orElse(null);

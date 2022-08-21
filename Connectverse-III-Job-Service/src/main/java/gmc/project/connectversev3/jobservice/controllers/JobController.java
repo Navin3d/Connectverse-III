@@ -37,9 +37,15 @@ public class JobController {
 	}
 	
 	@GetMapping(path = "/{jobId}/apply/{employeeId}")
-	private ResponseEntity<String> applyForJob(@PathVariable String jobId, @PathVariable String employeeId) {
+	public ResponseEntity<String> applyForJob(@PathVariable String jobId, @PathVariable String employeeId) {
 		jobService.applyForJob(Long.valueOf(jobId), employeeId);
 		return ResponseEntity.status(HttpStatus.OK).body("Your Profile has been sent to the Employer...");
+	}
+	
+	@GetMapping(path = "/{jobId}/apply-from-mobile/{employeeId}")
+	private ResponseEntity<String> applyForJobThroughMobile(@PathVariable String jobId, @PathVariable String employeeId) {
+		jobService.applyJobThroughSMS(Long.valueOf(jobId), employeeId);
+		return ResponseEntity.status(HttpStatus.OK).body("JobApplied...");
 	}
 	
 	@GetMapping(path = "/{jobId}/accept/{employeeId}")
@@ -50,6 +56,12 @@ public class JobController {
 	
 	@GetMapping(path = "/{jobId}/reject/{employeeId}")
 	private ResponseEntity<String> rejectJoiningRequest(@PathVariable String jobId, @PathVariable String employeeId) {
+		jobService.rejectJoiningRequest(Long.valueOf(jobId), employeeId);
+		return ResponseEntity.status(HttpStatus.OK).body("Profile declined...");
+	}
+	
+	@GetMapping(path = "/{jobId}/{employeeId}/{employerId}/jobReport")
+	private ResponseEntity<String> jobReport(@PathVariable String jobId, @PathVariable String employeeId) {
 		jobService.rejectJoiningRequest(Long.valueOf(jobId), employeeId);
 		return ResponseEntity.status(HttpStatus.OK).body("Profile declined...");
 	}

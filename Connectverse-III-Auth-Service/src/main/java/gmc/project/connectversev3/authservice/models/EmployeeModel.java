@@ -31,10 +31,14 @@ public class EmployeeModel implements Serializable {
 	
 	private String location;
 	
+	private State state;
+	
 	private Integer expectedWagePerHour;
 	
 	private Integer expectedWorkingHoursPerWeek;
 	
-	private Boolean isTechnicalWorker = false;
+	private Boolean isTechnicalWorker;
+	
+	private Boolean readyToRelocate;
 
 }

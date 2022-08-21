@@ -17,6 +17,7 @@ import gmc.project.connectversev3.userservice.entities.EmployeeEntity;
 import gmc.project.connectversev3.userservice.entities.EmployerEntity;
 import gmc.project.connectversev3.userservice.models.EmployeeModel;
 import gmc.project.connectversev3.userservice.models.EmployerModel;
+import gmc.project.connectversev3.userservice.models.UserModel;
 import gmc.project.connectversev3.userservice.services.UserService;
 
 
@@ -37,6 +38,12 @@ public class UsersController {
 	private ResponseEntity<String> fetchDataFromEshram() {
 		userService.fetchFromEshram();
 		return ResponseEntity.status(HttpStatus.OK).body("Data Migrated Successfully...");
+	}
+	
+	@GetMapping(path = "/{userId}")
+	private ResponseEntity<UserModel> getProfile(@PathVariable String userId) {
+		UserModel returnValue = userService.getProfile(userId);
+		return ResponseEntity.status(HttpStatus.OK).body(returnValue);
 	}
 	
 	@GetMapping(path = "/employee/{employeeId}")

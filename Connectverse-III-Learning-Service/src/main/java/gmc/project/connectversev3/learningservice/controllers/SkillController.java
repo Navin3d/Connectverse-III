@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import gmc.project.connectversev3.learningservice.models.CommentModel;
 import gmc.project.connectversev3.learningservice.models.ReplyModel;
+import gmc.project.connectversev3.learningservice.models.SkillListModel;
 import gmc.project.connectversev3.learningservice.models.SkillModel;
 import gmc.project.connectversev3.learningservice.services.SkillService;
 
@@ -24,6 +25,12 @@ public class SkillController {
 	
 	@Autowired
 	private SkillService skillService;
+	
+	@GetMapping(path = "/list")
+	private ResponseEntity<List<SkillListModel>> getAllSkillsList() {
+		List<SkillListModel> returnValue = skillService.findAllSkillsList();
+		return ResponseEntity.status(HttpStatus.OK).body(returnValue);
+	}
 	
 	@GetMapping
 	private ResponseEntity<List<SkillModel>> getAllSkills() {

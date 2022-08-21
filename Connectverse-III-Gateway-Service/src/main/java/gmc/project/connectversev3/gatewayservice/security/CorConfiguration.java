@@ -18,7 +18,7 @@ public class CorConfiguration {
 		corsConfig.setAllowedOrigins(Arrays.asList("https://projectistic.herokuapp.com/", "http://localhost:3000"));
         corsConfig.setAllowedMethods(Arrays.asList("GET", "POST"));
         corsConfig.addAllowedHeader("*");
-        corsConfig.setExposedHeaders(Arrays.asList("Authorization", "Role", "UserId"));
+        corsConfig.setExposedHeaders(Arrays.asList("Authorization", "Refresh_Token", "Employer_Id", "Employee_Id"));
         
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfig);

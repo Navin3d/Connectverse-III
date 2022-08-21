@@ -5,11 +5,13 @@ import java.util.List;
 import gmc.project.connectversev3.learningservice.entities.SkillEntity;
 import gmc.project.connectversev3.learningservice.models.CommentModel;
 import gmc.project.connectversev3.learningservice.models.ReplyModel;
+import gmc.project.connectversev3.learningservice.models.SkillListModel;
 import gmc.project.connectversev3.learningservice.models.SkillModel;
 
 public interface SkillService {
 	public SkillEntity findById(String id);
 	public List<SkillModel> findAllSkills();
+	public List<SkillListModel> findAllSkillsList();
 	public SkillModel findASkill(String id);
 	public void saveSkill(SkillModel skillModel);
 	public void saveManySkills(List<SkillModel> skills);

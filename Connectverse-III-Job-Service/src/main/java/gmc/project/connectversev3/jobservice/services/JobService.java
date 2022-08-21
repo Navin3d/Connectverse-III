@@ -12,6 +12,7 @@ public interface JobService {
 	public List<ListJobModel> getAllJobs();
 	public JobModel getAJob(Long jobId);
 	public void applyForJob(Long jobId, String employeeId);
+	public void applyJobThroughSMS(Long jobId, String employeeId);
 	public void acceptJoiningRequest(Long jobId, String employeeId);
 	public void rejectJoiningRequest(Long jobId, String employeeId);
 	public void createOrUpdateJob(JobCreateOrUpdateModel jobCreateOrUpdateModel);

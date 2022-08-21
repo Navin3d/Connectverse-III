@@ -25,6 +25,7 @@ import gmc.project.connectversev3.userservice.entities.SiteSettingsEntity;
 import gmc.project.connectversev3.userservice.exceptions.UserNotFoundException;
 import gmc.project.connectversev3.userservice.models.EmployeeModel;
 import gmc.project.connectversev3.userservice.models.EmployerModel;
+import gmc.project.connectversev3.userservice.models.UserModel;
 import gmc.project.connectversev3.userservice.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -167,11 +168,40 @@ public class UserServiceImpl implements UserService {
 			} else {
 				employee.setExpectedWorkingHoursPerWeek(40);
 			}
+			employee.setIsBlocked(false);
+			employee.setIsOccupied(false);
+			employee.setIsTechnicalWorker(false);
+			employee.setWaitingForJobTime(-10);
+			employee.setInactiveJobSeekTime(0);
+			employee.setJobReports(0);
+			employee.setCreditPoints(0);
 			employees.add(employee);
 		}
 		List<EmployeeEntity> savedEmployees = createManyEmployees(employees);
 		restTemplate.delete(eShramUrl);
 		return savedEmployees;
+	}
+
+	@Override
+	public UserModel getProfile(String userId) {
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		
+		UserModel returnValue = new UserModel();
+		
+		EmployeeEntity employee = employeeDao.findById(userId).orElse(null);
+		if(employee != null) {
+			modelMapper.map(employee, returnValue);
+			returnValue.setIsEmployer(false);
+		} else {
+			EmployerEntity employer = employerDao.findById(userId).orElse(null);
+			if(employer == null)
+				throw new UserNotFoundException(userId);
+			modelMapper.map(employer, returnValue);
+			returnValue.setIsEmployer(true);
+		}
+		
+		return returnValue;
 	}
 
 }

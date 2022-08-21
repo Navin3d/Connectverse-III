@@ -111,6 +111,24 @@ public class EmployeeEntity implements Serializable {
 	@Column(name = "mental_health_points")
 	private Integer mentalHealthPoints;
 	
+	@Column(name = "waiting_for_job_time")
+	private Integer waitingForJobTime;
+	
+	@Column(name = "inactive_time")
+	private Integer inactiveJobSeekTime;
+	
+	@Column(name = "job_reports")
+	private Integer jobReports;
+	
+	@Column(name = "can_operate_mobile")
+	private Boolean knowsToOperateMobile;
+	
+	@Column(name = "can_read_and_write")
+	private Boolean knowsToReadAndWrite;
+	
+	@Column(name = "credit_points")
+	private Integer creditPoints;
+	
 	@ManyToOne(optional = true)
 	private HamletEntity hamlet;
 	

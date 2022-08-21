@@ -1,16 +1,19 @@
 package gmc.project.connectversev3.userservice.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import gmc.project.connectversev3.userservice.entities.HamletEntity;
 import lombok.Data;
 
 @Data
-public class EmployeeModel implements Serializable {
+public class UserModel implements Serializable {
 
-	private static final long serialVersionUID = 8536826878930515827L;
+	private static final long serialVersionUID = -36337820892021186L;
 	
 	private String id;
-	
+
 	private String firstName;
 	
 	private String lastName;
@@ -20,12 +23,14 @@ public class EmployeeModel implements Serializable {
 	private Gender gender;
 	
 	private WorkType prefferedWorkType;
-	
+
 	private String cvUrl;
 	
 	private String aadharId;
 
 	private String email;
+	
+	private Integer batchNo;
 	
 	private Long mobileNumber;
 		
@@ -65,6 +70,26 @@ public class EmployeeModel implements Serializable {
 	
 	private Boolean knowsToReadAndWrite;
 	
+	private Boolean isEmployer;
+	
 	private Integer creditPoints;
+	
+	private HamletEntity hamlet;
+	
+	private ProjectModel adminOfProject;
+
+	private List<ProjectModel> projects;
+	
+	private List<JobModel> jobsApplied;
+	
+	private JobModel job;
+	
+	public UserModel() {
+		super();
+		this.projects = new ArrayList<>();
+		this.jobsApplied = new ArrayList<>();
+	}
+	
+	private CompanyModel company;
 
 }
