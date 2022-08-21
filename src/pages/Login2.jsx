@@ -1,9 +1,66 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+import { message } from "antd";
+
+import { getUserId, handleLogin } from "../utils/auth";
+
+import Data from "../data";
+import loginimg from "../assets/images/login-img.jpg";
 import "../styles/pages/Login2.css";
 
-import loginimg from "../assets/images/login-img.jpg";
+
+const INITIAL_USER = {
+  userName: "",
+  password: ""
+};
 
 const Login2 = () => {
+
+  const navigate = useNavigate();
+  const [requestBody, setRequestBody] = useState(INITIAL_USER);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    (getUserId()) && navigate("/");
+    document.title = "Connectverse-Login";
+  }, [requestBody]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setRequestBody(prev => ({ ...prev, [name]: value }));
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Submitted...");
+
+    const baseUrl = Data.AppSettings.baseUrl;
+
+    try {
+      setLoading(true);
+      setError("");
+
+      const url = `${baseUrl}/auth/login`;
+
+      console.log(requestBody);
+
+      const response = await axios.post(url, requestBody);
+      if (response.status == 200) {
+        handleLogin(response.headers);
+        navigate("/");
+      }
+
+    } catch (e) {
+      setError(e);
+      console.log(e);
+      message.error("Unable To Login at this Moment...");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <div>
       <main>
@@ -16,16 +73,16 @@ const Login2 = () => {
             <p className="desc">Welcome to Connectverse </p>
           </header>
           <div className="form_wrap">
-            <form className="input">
+            <form className="input" onSubmit={handleSubmit}>
               <label for="email">Users name or Email</label>
-              <input type="text" />
+              <input type="text" name="userName" value={requestBody.userName} onChange={handleChange} required/>
 
               <label for="password">Password</label>
-              <input type="text" />
+              <input type="password" name="password" value={requestBody.password} onChange={handleChange} required/>
               <a href="/" className="forgot">
                 Forgot password?
               </a>
-              <button className="form_submit">Sign in</button>
+              <button className="form_submit" type="submit">Sign in</button>
             </form>
           </div>
           <div className="or">
@@ -62,8 +119,8 @@ const Login2 = () => {
               </button>
             </div>
             <div className="signup">
-              <a href="/">New to Connectverse?</a>
-              <a href="/">Create account</a>
+              <a href="/signup">New to Connectverse?</a>
+              <a href="/signup">Create account</a>
             </div>
           </div>
         </section>

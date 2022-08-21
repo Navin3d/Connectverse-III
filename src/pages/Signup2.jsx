@@ -1,6 +1,7 @@
-import React from "react";
-import "../styles/pages/Signup2.css";
-import Signupimg from "../assets/images/Signup.jpg";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+import { message } from "antd";
 import {
   Grid,
   Container,
@@ -13,27 +14,73 @@ import {
   FormLabel,
 } from "@mui/material";
 
+import { getUserId } from "../utils/auth";
+
+import Data from "../data";
+import Signupimg from "../assets/images/Signup.jpg";
+import "../styles/pages/Signup2.css";
+
+
+const INITIAL_USER = {
+  "firstName": "",
+  "lastName": "",
+  "age": 18,
+  "gender": "",
+  "cvUrl": "",
+  "aadharId": "",
+  "email": "",
+  "mobileNumber": "",
+  "address": "",
+  "location": "",
+  "state": "",
+  "readyToRelocate": false
+};
+
 const Signup2 = () => {
-  const [value1, setValue1] = React.useState("No");
 
-  const handleChange1 = (event) => {
-    setValue1(event.target.value);
-  };
-  const [value2, setValue2] = React.useState("No");
+  const navigate = useNavigate();
+  const [requestBody, setRequestBody] = useState(INITIAL_USER);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleChange2 = (event) => {
-    setValue2(event.target.value);
-  };
-  const [value3, setValue3] = React.useState("No");
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setRequestBody(prev => ({ ...prev, [name]: value }));
+  }
 
-  const handleChange3 = (event) => {
-    setValue3(event.target.value);
-  };
-  const [value4, setValue4] = React.useState("No");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Submitted...");
 
-  const handleChange4 = (event) => {
-    setValue4(event.target.value);
-  };
+    const baseUrl = Data.AppSettings.baseUrl;
+
+    try {
+      setLoading(true);
+      setError("");
+
+      const url = `${baseUrl}/auth/register/employee`;
+
+      console.log(requestBody);
+
+      const response = await axios.post(url, requestBody);
+      if (response.status == 201) {
+        navigate("/login");
+      }
+
+    } catch (e) {
+      setError(e);
+      console.log(e);
+      message.error("Unable To Login at this Moment...");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    (getUserId()) && navigate("/");
+    document.title = "Connectverse-SignUp";
+  }, [requestBody]);
+
   return (
     <>
       <Container maxWidth="lg" sx={{ marginTop: "100px" }}>
@@ -45,13 +92,16 @@ const Signup2 = () => {
             <div className="form-center">
               <h1 className="logo">ConnectVerse</h1>
               <p className="desc">Welcome to Connectverse </p>
-              <div className="form-scrollable">
+              <form className="form-scrollable" onSubmit={handleSubmit}>
                 <Stack spacing={4}>
                   <div className="input-firstname">
                     <TextField
                       id="standard-basic"
                       label="FirstName"
                       variant="standard"
+                      name="firstName"
+                      value={requestBody.firstName}
+                      onChange={handleChange}
                     />
                   </div>
                   <div className="input-firstname">
@@ -59,6 +109,9 @@ const Signup2 = () => {
                       id="standard-basic"
                       label="LastName"
                       variant="standard"
+                      name="lastName"
+                      value={requestBody.lastName}
+                      onChange={handleChange}
                     />
                   </div>
                   <div className="input-firstname">
@@ -66,6 +119,9 @@ const Signup2 = () => {
                       id="standard-basic"
                       label="Age"
                       variant="standard"
+                      name="age"
+                      value={requestBody.age}
+                      onChange={handleChange}
                     />
                   </div>
                   <div className="input-firstname">
@@ -73,35 +129,32 @@ const Signup2 = () => {
                       <FormLabel>Gender</FormLabel>
                       <RadioGroup
                         aria-labelledby="demo-controlled-radio-buttons-group"
-                        name="controlled-radio-buttons-group"
-                        value={value4}
-                        onChange={handleChange4}
+                        name="gender"
+                        value={requestBody.gender}
+                        onChange={handleChange}
                       >
                         <FormControlLabel
-                          value="female"
+                          value="FEMALE"
                           control={<Radio />}
                           label="Female"
                         />
                         <FormControlLabel
-                          value="male"
+                          value="MALE"
                           control={<Radio />}
                           label="Male"
                         />
                       </RadioGroup>
                     </FormGroup>
                   </div>
-                  <div className="input-firstname">
-                    <TextField
-                      id="standard-basic"
-                      label="Work-Type"
-                      variant="standard"
-                    />
-                  </div>
+
                   <div className="input-firstname">
                     <TextField
                       id="standard-basic"
                       label="CV-url"
                       variant="standard"
+                      name="cvUrl"
+                      value={requestBody.cvUrl}
+                      onChange={handleChange}
                     />
                   </div>
                   <div className="input-firstname">
@@ -109,6 +162,9 @@ const Signup2 = () => {
                       id="standard-basic"
                       label="Aadhaar-id"
                       variant="standard"
+                      name="aadharId"
+                      value={requestBody.aadharId}
+                      onChange={handleChange}
                     />
                   </div>
                   <div className="input-firstname">
@@ -116,6 +172,9 @@ const Signup2 = () => {
                       id="standard-basic"
                       label="Email"
                       variant="standard"
+                      name="email"
+                      value={requestBody.email}
+                      onChange={handleChange}
                     />
                   </div>
                   <div className="input-firstname">
@@ -123,6 +182,9 @@ const Signup2 = () => {
                       id="standard-basic"
                       label="MobileNumber"
                       variant="standard"
+                      name="mobileNumber"
+                      value={requestBody.mobileNumber}
+                      onChange={handleChange}
                     />
                   </div>
                   <div className="input-firstname">
@@ -130,6 +192,9 @@ const Signup2 = () => {
                       id="standard-basic"
                       label="Address"
                       variant="standard"
+                      name="address"
+                      value={requestBody.address}
+                      onChange={handleChange}
                     />
                   </div>
                   <div className="input-firstname">
@@ -137,6 +202,9 @@ const Signup2 = () => {
                       id="standard-basic"
                       label="Location"
                       variant="standard"
+                      name="location"
+                      value={requestBody.location}
+                      onChange={handleChange}
                     />
                   </div>
                   <div className="input-firstname">
@@ -144,6 +212,9 @@ const Signup2 = () => {
                       id="standard-basic"
                       label="State"
                       variant="standard"
+                      name="state"
+                      value={requestBody.state}
+                      onChange={handleChange}
                     />
                   </div>
                   <div className="input-firstname">
@@ -151,24 +222,24 @@ const Signup2 = () => {
                       <FormLabel>Ready to Relocate </FormLabel>
                       <RadioGroup
                         aria-labelledby="demo-controlled-radio-buttons-group"
-                        name="controlled-radio-buttons-group"
-                        value={value1}
-                        onChange={handleChange1}
+                        name="readyToRelocate"
+                        value={requestBody.readyToRelocate}
+                        onChange={handleChange}
                       >
                         <FormControlLabel
-                          value="Yes"
+                          value={true}
                           control={<Radio />}
                           label="Yes"
                         />
                         <FormControlLabel
-                          value="No"
+                          value={false}
                           control={<Radio />}
                           label="No"
                         />
                       </RadioGroup>
                     </FormGroup>
                   </div>
-                  <div className="input-firstname">
+                  {/* <div className="input-firstname">
                     <FormGroup>
                       <FormLabel>Do yo have Driving Licence </FormLabel>
                       <RadioGroup
@@ -218,7 +289,7 @@ const Signup2 = () => {
                       label="Physical Health Points"
                       variant="standard"
                     />
-                  </div>
+                  </div> */}
                 </Stack>
                 <button className="signup-btn">Register</button>
                 <div className="signin">
@@ -226,7 +297,7 @@ const Signup2 = () => {
                     Already have an account?
                   </a>
                 </div>
-              </div>
+              </form>
             </div>
           </Grid>
         </Grid>
