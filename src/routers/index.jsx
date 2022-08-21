@@ -15,7 +15,7 @@ import CompanyDetail from "../pages/CompanyDetail";
 import JobJoining from "../pages/JobJoining";
 import Profile from "../pages/ProfilePage";
 import PageNotFound from "../pages/404Page";
-
+import Login2 from "../pages/Login2";
 import AddPage1 from "../pages/AddPage1";
 import AddPage2 from "../pages/AddPage2";
 import NavBar from "../components/base/NavBar";
@@ -27,7 +27,8 @@ import { JobCreation } from "../pages/JobCreation";
 import Formpage from "../pages/Formpage";
 
 import Footer from "../components/base/Footer";
-
+import Signup2 from "../pages/Signup2";
+import Profile2 from "../pages/Profile2";
 const AppRouter = () => (
   <BrowserRouter>
     <Routes>
@@ -36,6 +37,10 @@ const AppRouter = () => (
       <Route path="/employerreg" element={<EmployerReg />} />
       <Route path="/jobcreation" element={<JobCreation />} />
       <Route path="/nav" element={<NavBar />} />
+      <Route path="/login2" element={<Login2 />} />
+      <Route path="/signup2" element={<Signup2 />} />
+      <Route path="/profile2" element={<Profile2 />} />
+
       <Route path="/course/:cid" element={<CourseDetail />} />
       <Route path="/projects" element={<ProjectList />} />
       <Route path="/project/:pid" element={<ProjectDetail />} />
