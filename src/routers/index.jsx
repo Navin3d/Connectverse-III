@@ -15,7 +15,7 @@ import CompanyDetail from "../pages/CompanyDetail";
 import JobJoining from "../pages/JobJoining";
 import PageNotFound from "../pages/404Page";
 import Login2 from "../pages/Login2";
-import NavBar2 from "../components/base/NavBar2";
+import Navbar from "../components/base/NavBar";
 import Chat from "../components/chat/Chat";
 import JobCreation from "../pages/JobCreation";
 import Footer from "../components/base/Footer";
@@ -23,9 +23,10 @@ import Signup2 from "../pages/Signup2";
 import Profile2 from "../pages/Profile2";
 import ProjectCreation from "../pages/ProjectCreation";
 import Homepage2 from "../pages/Homepage2";
+
 const AppRouter = () => (
   <BrowserRouter>
-    <NavBar2 />
+    <Navbar />
     <Routes>
       <Route path="/" element={<Homepage2 />} exact={true} />
       <Route path="/courses" element={<CourseList />} />

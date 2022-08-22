@@ -17,7 +17,7 @@ import { Award } from "react-bootstrap-icons";
 
 import CourseCard from '../components/course/Card';
 import Notice from '../components/project/Notice';
-import { getUserId, getToken } from "../utils/auth";
+import { getToken, getUserId } from "../utils/auth";
 
 import Data from "../data";
 
@@ -152,6 +152,7 @@ const JobDetailPage = () => {
 
     useEffect(() => {
         // setProject(toSet);
+        (!getUserId()) && navigate("/login");
         getOneJob();
     }, []);
 

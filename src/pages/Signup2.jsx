@@ -78,7 +78,6 @@ const Signup2 = () => {
 
   useEffect(() => {
     (getUserId()) && navigate("/");
-    document.title = "Connectverse-SignUp";
   }, [requestBody]);
 
   return (

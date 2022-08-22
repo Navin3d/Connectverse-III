@@ -107,7 +107,6 @@ export default function EmployerReg() {
 
   useEffect(() => {
     (getUserId()) && navigate("/");
-    document.title = "Connectverse-SignUp";
   }, [requestBody]);
 
   return (

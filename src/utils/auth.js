@@ -42,6 +42,7 @@ export const handleLogin = (headers) => {
     localStorage.setItem("Refresh_Token", refresh_token);
     localStorage.setItem("Employee_Id", employee_id);
     localStorage.setItem("Employer_Id", employer_id);
+    // window.location.reload();
 };
 
 export const handleLogout = () => {

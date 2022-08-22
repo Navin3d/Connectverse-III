@@ -23,8 +23,7 @@ const Login2 = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    (!getUserId()) && navigate("/");
-    document.title = "Connectverse-Login";
+    (getUserId()) && navigate("/");
   }, [requestBody]);
 
   const handleChange = (e) => {

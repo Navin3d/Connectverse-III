@@ -9,7 +9,7 @@ import { Avatar, List, Space, message } from "antd";
 import { People } from "react-bootstrap-icons";
 
 import { CheckCircleFill } from "react-bootstrap-icons";
-import { getToken } from "../utils/auth";
+import { getToken, getUserId } from "../utils/auth";
 
 // import CourseHeader from "../components/course/CourseHeader";
 import CourseContents from "../components/course/CourseContents";
@@ -200,6 +200,7 @@ const CompanyDetail = () => {
 
         // const toSet = (fetchedCourse.length === 0) ? INITIALSTATE : fetchedCourse;
         // setCourse(toSet);
+        (!getUserId()) && navigate("/login");
         getACompany();
     }, []);
 

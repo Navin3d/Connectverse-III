@@ -4,21 +4,21 @@
   },
   "Header": {
     "title": "Connectverse",
-    "paragraph": "Communication - The Human Connection is the Key to personal and carrier success..."
+    "paragraph": ""
   },
   "About": {
-    "paragraph": "Connectverse is a platform that allows the user to create a project and join other great minds inside their project.Also the user who wants to do a project but don't know how to start...Well this is a goto website",
+    "paragraph": "",
     "Why": [
-      "Lorem ipsum dolor",
-      "Tempor incididunt",
-      "Lorem ipsum dolor",
-      "Incididunt ut labore"
+      "we provide more jobs",
+      "we have good exposure with reputated companies",
+      "we treat workers fairly for their work",
+      "together we grow the nation's econamy"
     ],
     "Why2": [
-      "Aliquip ex ea commodo",
-      "Lorem ipsum dolor",
-      "Exercitation ullamco",
-      "Lorem ipsum dolor"
+      "Availability of jobs for any person",
+      "",
+      "",
+      ""
     ]
   },
   "Gallery": [
@@ -72,12 +72,12 @@
     {
       "icon": "fa fa-shield",
       "name": "Security",
-      "text": "We keep Connectverse safe, secure, and free of spam and abuse so that this can be the platform where developers come together to create."
+      "text": "We keep Connectverse safe, secure, and free of spam and abuse."
     },
     {
       "icon": "fa fa-cart-arrow-down",
-      "name": "Purchase",
-      "text": "Buy the exclusive membership and learning content taught by worldwide experts"
+      "name": "Education",
+      "text": "we provide quality education for those who want to learn"
     },
     {
       "icon": "fa fa-cloud-download",
@@ -85,53 +85,22 @@
       "text": "Subscribe to notifications for new software or download the latest version"
     },
     {
-      "icon": "fa fa-handshake-o",
-      "name": "Support",
-      "text": "SLA in place to ensure a response within 30 minutes for urgent requests with our Premium Support experience."
+      "icon": "fa fa-headset",
+      "name": "support",
+      "text": "We provide a helpline for the workers to clarify their queries."
     },
     {
       "icon": "fa fa-plane",
       "name": "exposure",
-      "text": "Have revolutionary ideas? Join here to travel around the world and publish thoughts "
+      "text": "press here to look for companies we recenty tied up with."
     },
     {
       "icon": "fa fa-pie-chart",
-      "name": "Statistics",
-      "text": "Press here to know more about yourself and see how much progress you made"
+      "name": "consolidate",
+      "text": "We made this wesite so generic so it suits both technical and non-technical workers..."
     }
   ],
-  "Testimonials": [
-    {
-      "img": "./images/testimonials/Loga.jpeg",
-      "text": "\"Hi I am loga siva from Panimalar Engineering college, this is a great website that allows me to connect with other college students to do various projects\"",
-      "name": "Siva"
-    },
-    {
-      "img": "./images/testimonials/Kaushik.jpeg",
-      "text": "\"Hello there this is a fantastic website and the features are also amazing.Keep up the Good work\"",
-      "name": "Kaushik"
-    },
-    {
-      "img": "./images/testimonials/Krishna.jpeg",
-      "text": "\"one of the best goto website for beginners. the concept of this website is good\"",
-      "name": "Krishna"
-    },
-    {
-      "img": "./images/testimonials/Lakshman_Mahadevan.jpeg",
-      "text": "\"Amazing website....it's like a full fledged workplace and also very user-friendly website\"",
-      "name": "Lacks"
-    },
-    {
-      "img": "./images/testimonials/Parithraan.jpg",
-      "text": "\"Great work...! I have visited this website in both laptop and mobile the features are easy to understand and easy to use, its really excellent work. \"",
-      "name": "Parithraan"
-    },
-    {
-      "img": "./images/Kishore_dp.jpg",
-      "text": "\"A really good place to search for project and to get involved with superb project, will soon become a premium member\"",
-      "name": "Kishore"
-    }
-  ],
+ 
   "Team": [
     {
       "img": "./images/Navin.jpg",
@@ -165,23 +134,23 @@
   "Features": [
     {
       "icon": "fa fa-comments-o",
-      "title": "COMMUNICATE",
-      "text": "Communicate with other great minds to join them and thrive for success"
+      "title": "Technical",
+      "text": "Our website allows the people to learn advanced technical skills to get better job by using various courses provided by us."
     },
     {
       "icon": "fa fa-bullhorn",
-      "title": "Announcement",
-      "text": "Welcome to our website as you can see stil some of the pages are still in process ,but visit our website frequently for more content and activites "
+      "title": "Non-Technical",
+      "text": "This website provides a way for unemployed workers to find jobs. We work with a number of company to provide them the manpower they need."
     },
     {
       "icon": "fa fa-group",
-      "title": "Community",
-      "text": "Post questions and get answers from other users and connectverse experts"
+      "title": "Jobs",
+      "text": "Our job mainly provides information  about the jobs in various industries and different jobs."
     },
     {
       "icon": "fa fa-graduation-cap",
       "title": "Learning",
-      "text": "Need to improve your? We provide with good learning "
+      "text": "Utilize the learning resources to upskill yourself for the next job or industry you are interested in! We provide valuable resources about the best jobs in the industry and skills you needto succeed at your desired career."
     }
   ],
   "Courses": [

@@ -2,12 +2,20 @@ import React from "react";
 import "../styles/pages/Stats.css";
 import { Grid, Container } from "@mui/material";
 
-const Stats = () => {
+const Stats = ({ stats }) => {
   return (
     <div className="stats-container">
       <Container>
         <Grid container spacing={3} padding={3}>
-          <Grid xs={6} padding={1}>
+          {
+            stats.map(stat => (
+              <Grid xs={6} padding={1}>
+                <h3 className="stats-no">{ stat.value }</h3>
+                <p className="stats-content">{ stat.tittle }</p>
+              </Grid>
+            ))
+          }
+          {/* <Grid xs={6} padding={1}>
             <h3 className="stats-no">640K</h3>
             <p className="stats-content">Villages in India</p>
           </Grid>
@@ -22,7 +30,7 @@ const Stats = () => {
           <Grid xs={6} padding={1}>
             <h3 className="stats-no">111.2M</h3>
             <p className="stats-content">Unemployed people</p>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
     </div>

@@ -7,7 +7,7 @@ const initialState = {
   message: '',
 }
 
-const Contact = () => {
+const Contact = ({ contact }) => {
   const [{ name, email, message }, setState] = useState(initialState)
 
   const handleChange = (e) => {
@@ -41,10 +41,9 @@ const Contact = () => {
           <div className='col-md-8'>
             <div className='row'>
               <div className='section-title'>
-                <h2>Get In Touch</h2>
+                <h2>{ contact.tittle }</h2>
                 <p style={{ color: "white" }}>
-                  Please fill out the form below to send us an email and we will
-                  get back to you as soon as possible.
+                  { contact.subTittle }
                 </p>
               </div>
               <form name='sentMessage' validate onSubmit={handleSubmit}>
@@ -92,7 +91,7 @@ const Contact = () => {
                 </div>
                 <div id='success'></div>
                 <button type='submit' className='btn btn-custom btn-lg'>
-                  Send Message
+                  { contact.button }
                 </button>
               </form>
             </div>

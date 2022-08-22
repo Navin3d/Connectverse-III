@@ -1,11 +1,20 @@
 import React from "react";
-import "./Button.css";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-export function Button() {
+import { getUserId, handleLogout } from "../../utils/auth";
+
+import "./Button.css";
+
+export function Button({ Login, Logout }) {
   return (
-    <Link to="sign-up">
-      <button className="btn">Sign Up</button>
-    </Link>
+    <div>
+      {
+        (getUserId() == null) ?
+          <NavLink to="/login">
+            <button className="btn">{ Login }</button>
+          </NavLink> :
+          <button className="btn" onClick={() => {handleLogout()}}>{ Logout }</button>
+      }
+    </div>
   );
 }

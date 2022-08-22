@@ -187,6 +187,7 @@ const ProjectDetailPage = () => {
 
     useEffect(() => {
         // setProject(toSet);
+        (!getUserId()) && navigate("/login");
         getAProject();
     }, []);
 
