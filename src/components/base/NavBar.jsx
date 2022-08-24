@@ -27,6 +27,12 @@ const Navbar = () => {
     "Kanada"
   ];
 
+  const languageNav = [
+    "हिन्दी",
+    "ಕೆನಡಾ",
+    "English"
+  ];
+
   const changeLang = () => {
     (langOpt == 2) ? setLanguageOpt(0) : setLanguageOpt(langOpt + 1)
     console.log(languageOptions[langOpt]);
@@ -58,7 +64,7 @@ const Navbar = () => {
         </div>
         <ul className={click ? "nav-menu active" : "nav-menu"}>
           <li className="nav-item">
-            <button className="nav-links" onClick={changeLang}>{languageOptions[langOpt]}</button>
+            <button className="nav-links" onClick={changeLang}>{languageNav[langOpt]}</button>
           </li>
           <li className="nav-item">
             <NavLink to="/" className="nav-links" onClick={closeMobileMenu}>
