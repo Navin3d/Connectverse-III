@@ -39,4 +39,5 @@ public class ListJobModel implements Serializable {
 	
 	private String employerId;
 
+	private Integer smsHandler;
 }

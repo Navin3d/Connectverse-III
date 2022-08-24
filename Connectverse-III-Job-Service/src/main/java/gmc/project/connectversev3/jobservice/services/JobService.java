@@ -14,6 +14,8 @@ public interface JobService {
 	public void applyForJob(Long jobId, String employeeId);
 	public void applyJobThroughSMS(Long jobId, String employeeId);
 	public void acceptJoiningRequest(Long jobId, String employeeId);
-	public void rejectJoiningRequest(Long jobId, String employeeId);
+	public void rejectJoiningRequest(Long jobId, String employeeId, String reason);
+	public void reportJob(Long jobId, String employeeId, String employerId, String points);
 	public void createOrUpdateJob(JobCreateOrUpdateModel jobCreateOrUpdateModel);
+	public void sendTenJobSuggestions();
 }

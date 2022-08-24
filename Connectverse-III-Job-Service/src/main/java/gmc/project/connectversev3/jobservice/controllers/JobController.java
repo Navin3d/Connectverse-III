@@ -54,16 +54,16 @@ public class JobController {
 		return ResponseEntity.status(HttpStatus.OK).body("Profile has been selected for further Steps...");
 	}
 	
-	@GetMapping(path = "/{jobId}/reject/{employeeId}")
-	private ResponseEntity<String> rejectJoiningRequest(@PathVariable String jobId, @PathVariable String employeeId) {
-		jobService.rejectJoiningRequest(Long.valueOf(jobId), employeeId);
+	@GetMapping(path = "/{jobId}/reject/{employeeId}/{reason}")
+	private ResponseEntity<String> rejectJoiningRequest(@PathVariable String jobId, @PathVariable String employeeId, @PathVariable String reason) {
+		jobService.rejectJoiningRequest(Long.valueOf(jobId), employeeId, reason);
 		return ResponseEntity.status(HttpStatus.OK).body("Profile declined...");
 	}
 	
-	@GetMapping(path = "/{jobId}/{employeeId}/{employerId}/jobReport")
-	private ResponseEntity<String> jobReport(@PathVariable String jobId, @PathVariable String employeeId) {
-		jobService.rejectJoiningRequest(Long.valueOf(jobId), employeeId);
-		return ResponseEntity.status(HttpStatus.OK).body("Profile declined...");
+	@GetMapping(path = "/{jobId}/{employeeId}/{employerId}/jobReport/{points}")
+	private ResponseEntity<String> jobReport(@PathVariable String jobId, @PathVariable String employeeId, @PathVariable String employerId, @PathVariable String points) {
+		jobService.reportJob(Long.valueOf(jobId), employeeId, employerId, points);
+		return ResponseEntity.status(HttpStatus.OK).body("Employer Reported...");
 	}
 	
 	@PostMapping

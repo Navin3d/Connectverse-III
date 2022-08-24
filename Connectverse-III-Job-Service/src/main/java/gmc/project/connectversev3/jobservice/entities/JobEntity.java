@@ -44,8 +44,8 @@ public class JobEntity implements Serializable {
 	@Column(name = "no_of_days")
 	private Integer noOfDays = 10;
 	
-	@Column(name = "working_hours_per_day")
-	private Integer workHoursPerDay = 8;
+	@Column(name = "working_hours_per_week")
+	private Integer workHoursPerWeek = 8;
 	
 	@Column(name = "pay_per_hour")
 	private Integer payPerHour = 100;

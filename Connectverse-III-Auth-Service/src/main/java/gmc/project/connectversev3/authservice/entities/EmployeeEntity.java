@@ -120,6 +120,9 @@ public class EmployeeEntity implements Serializable {
 	@Column(name = "job_reports")
 	private Integer jobReports;
 	
+	@Column(name = "report_reports")
+	private Integer reportPoints;
+	
 	@Column(name = "can_operate_mobile")
 	private Boolean knowsToOperateMobile;
 	

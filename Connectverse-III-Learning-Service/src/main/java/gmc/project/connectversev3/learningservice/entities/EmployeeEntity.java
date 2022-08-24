@@ -129,6 +129,9 @@ public class EmployeeEntity implements Serializable {
 	@Column(name = "credit_points")
 	private Integer creditPoints;
 	
+	@Column(name = "report_reports")
+	private Integer reportPoints;
+	
 	@ManyToOne(optional = true)
 	private HamletEntity hamlet;
 	
