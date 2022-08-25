@@ -3,8 +3,8 @@ import { Container, Grid, Stack } from "@mui/material";
 
 import Independence_day from "../assets/images/Independence_day.webp";
 import EShram from "../assets/images/EShram.jpeg";
-import Ministry from "../assets/images/Ministry.jpeg"
-import MinistryOfLabour from "../assets/images/MinistryOfLabour.png"
+import Ministry from "../assets/images/Ministry.jpeg";
+import MinistryOfLabour from "../assets/images/MinistryOfLabour.png";
 import mainimg from "../assets/images/home-mainimg.jpg";
 import aboutimg from "../assets/images/About.jpg";
 import Features from "../components/home/Features";
@@ -20,19 +20,30 @@ import "../styles/pages/Homepage2.css";
 import "../styles/pages/home.css";
 
 const HomePage = () => {
-
   const [language, setLanguageSetting] = useState("English");
   const [data, setData] = useState(JsonData.Hindi);
 
   useEffect(() => {
-    getLanguage() == "Hindi" ? setData(JsonData.Hindi) : (getLanguage() == "Kanada") ? setData(JsonData.Kanada) : setData(JsonData.English);
+    getLanguage() == "Hindi"
+      ? setData(JsonData.Hindi)
+      : getLanguage() == "Kanada"
+      ? setData(JsonData.Kanada)
+      : setData(JsonData.English);
   }, []);
 
   return (
     <div className="homepage">
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <div
+        id="carouselExampleIndicators"
+        class="carousel slide"
+        data-ride="carousel"
+      >
         <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li
+            data-target="#carouselExampleIndicators"
+            data-slide-to="0"
+            class="active"
+          ></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
@@ -40,18 +51,32 @@ const HomePage = () => {
           <div class="carousel-item active">
             <img class="d-block w-100" src={Ministry} alt="First slide" />
           </div>
-          {/* <div class="carousel-item">
-            <img class="d-block w-100" src={MinistryOfLabour} alt="Second slide" />
+          <div class="carousel-item">
+            <img
+              class="d-block w-100"
+              src={MinistryOfLabour}
+              alt="Second slide"
+            />
           </div>
           <div class="carousel-item">
             <img class="d-block w-100" src={EShram} alt="Third slide" />
-          </div> */}
+          </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <a
+          class="carousel-control-prev"
+          href="#carouselExampleIndicators"
+          role="button"
+          data-slide="prev"
+        >
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
         </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <a
+          class="carousel-control-next"
+          href="#carouselExampleIndicators"
+          role="button"
+          data-slide="next"
+        >
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
         </a>
@@ -81,15 +106,13 @@ const HomePage = () => {
           <Grid container spacing={3}>
             <Grid md={6} sm={12}>
               <div className="mission-container">
-                <h2 className="mission-sub-heading">{data.OUR_MISSION.tittle}</h2>
+                <h2 className="mission-sub-heading">
+                  {data.OUR_MISSION.tittle}
+                </h2>
                 <Stack spacing={3} marginLeft={2} sx={{ width: "350px" }}>
-                  {
-                    data.OUR_MISSION.subTittles.map(title => (
-                      <p className="mission-desc">
-                        {title}
-                      </p>
-                    ))
-                  }
+                  {data.OUR_MISSION.subTittles.map((title) => (
+                    <p className="mission-desc">{title}</p>
+                  ))}
                 </Stack>
               </div>
             </Grid>
@@ -97,13 +120,9 @@ const HomePage = () => {
               <div className="vision-container">
                 <h2 className="vision-sub-heading">{data.OUR_VISION.tittle}</h2>
                 <Stack spacing={3} marginLeft={2} sx={{ width: "350px" }}>
-                  {
-                    data.OUR_VISION.subTittles.map(title => (
-                      <p className="mission-desc">
-                        {title}
-                      </p>
-                    ))
-                  }
+                  {data.OUR_VISION.subTittles.map((title) => (
+                    <p className="mission-desc">{title}</p>
+                  ))}
                 </Stack>
               </div>
             </Grid>
@@ -120,13 +139,9 @@ const HomePage = () => {
               <div className="about-container">
                 <h3 className="sub-heading2">{data.About_Us.tittle}</h3>
                 <Stack spacing={3} marginLeft={2} sx={{ width: "350px" }}>
-                  {
-                    data.About_Us.subTittles.map(title => (
-                      <p className="aboutus-desc">
-                        {title}
-                      </p>
-                    ))
-                  }
+                  {data.About_Us.subTittles.map((title) => (
+                    <p className="aboutus-desc">{title}</p>
+                  ))}
                 </Stack>
               </div>
             </Grid>
