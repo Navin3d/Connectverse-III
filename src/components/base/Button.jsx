@@ -11,9 +11,9 @@ export function Button({ Login, Logout }) {
       {
         (getUserId() == null) ?
           <NavLink to="/login">
-            <button className="btn">{ Login }</button>
+            <button style={{ backgroundColor: "#050850" }} className="btn">{ Login }</button>
           </NavLink> :
-          <button className="btn" onClick={() => {handleLogout()}}>{ Logout }</button>
+          <button style={{ backgroundColor: "#050850" }} className="btn" onClick={() => {handleLogout()}}>{ Logout }</button>
       }
     </div>
   );
