@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Multiselect from 'multiselect-react-dropdown';
-import { message } from 'antd';
+import Multiselect from "multiselect-react-dropdown";
+import { message } from "antd";
 import {
   Typography,
   Container,
@@ -21,32 +21,31 @@ import { getEmployerId, getToken } from "../utils/auth";
 
 import Data from "../data";
 
-
 const INITIAL_JOB = {
-  "tittle": "",
-  "description": "",
-  "noOfDays": 0,
-  "workHoursPerDay": 8,
-  "payPerHour": 0,
-  "location": "",
-  "state": "",
-  "jobType": "",
-  "drivingLicenceRequired": false,
-  "vehicleWanted": false,
-  "requiredWorkers": 0,
-  "workStarted": false,
-  "isTechnicalJob": false,
-  "employerId": "",
+  tittle: "",
+  description: "",
+  noOfDays: 0,
+  workHoursPerDay: 8,
+  payPerHour: 0,
+  location: "",
+  state: "",
+  jobType: "",
+  drivingLicenceRequired: false,
+  vehicleWanted: false,
+  requiredWorkers: 0,
+  workStarted: false,
+  isTechnicalJob: false,
+  employerId: "",
   address: "",
-  "skillIds": []
+  skillIds: [],
 };
 
 const INITIAL_SKILLS = [
   {
     id: 0,
     tittle: "",
-    imageUrl: ""
-  }
+    imageUrl: "",
+  },
 ];
 
 const JobCreation = () => {
@@ -60,17 +59,17 @@ const JobCreation = () => {
   const handleSelect = (projectSkillsArg, selectedItem) => {
     console.log(projectSkillsArg);
     setJobSkills(projectSkillsArg);
-  }
+  };
 
   const handleRemove = (projectSkillsArg, removedItem) => {
     console.log(projectSkillsArg);
     setJobSkills(projectSkillsArg);
-  }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setRequestBody(prev => ({ ...prev, [name]: value }));
-  }
+    setRequestBody((prev) => ({ ...prev, [name]: value }));
+  };
 
   const initSkills = async () => {
     try {
@@ -82,7 +81,7 @@ const JobCreation = () => {
         console.log(response.data);
       }
     } catch (e) {
-      message.error("Uanble to Connect to Server!.")
+      message.error("Uanble to Connect to Server!.");
     } finally {
       setLoading(false);
     }
@@ -94,23 +93,25 @@ const JobCreation = () => {
       setLoading(true);
       const baseUrl = Data.AppSettings.baseUrl;
       const headers = { Authorization: getToken() };
-      jobSkills.map(skill => {
-        console.log("ID", skill.id)
+      jobSkills.map((skill) => {
+        console.log("ID", skill.id);
         requestBody.skillIds.push(skill.id);
         setRequestBody(requestBody);
       });
       requestBody.employerId = getEmployerId();
       console.log(requestBody);
-      const response = await axios.post(`${baseUrl}/job`, requestBody, { headers });
-      if(response.status == 200) {
+      const response = await axios.post(`${baseUrl}/job`, requestBody, {
+        headers,
+      });
+      if (response.status == 200) {
         navigate(`/profile/${getEmployerId()}`);
       }
-    } catch(e) {
+    } catch (e) {
       message.error("Unable to create Prpject at this moment...");
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
     (!getEmployerId()) && navigate("/login");
@@ -339,8 +340,9 @@ const JobCreation = () => {
                 <Multiselect
                   placeholder="Select the skills required to work in this project"
                   style={{
-                    width: '100%',
+                    width: "100%",
                   }}
+                  fullWidth
                   options={skills} // Options to display in the dropdown
                   selectedValues={jobSkills} // Preselected value to persist in dropdown
                   onSelect={handleSelect} // Function will trigger on select event
@@ -362,7 +364,9 @@ const JobCreation = () => {
               </Grid>
               <Grid container padding={2}>
                 <Grid item spacing={3}>
-                  <Button variant="contained" type="submit">Submit</Button>
+                  <Button variant="contained" type="submit">
+                    Submit
+                  </Button>
                 </Grid>
               </Grid>
             </Grid>
@@ -373,7 +377,6 @@ const JobCreation = () => {
   );
 };
 export default JobCreation;
-
 
 // address: "Thiruvannamalai"
 // description: "This is an job posted by ministry of labour and development for renovation and maintenace of government buildings."
