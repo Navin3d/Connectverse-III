@@ -36,6 +36,7 @@ const AppRouter = () => (
       <Route path="/login" element={<Login2 />} />
       <Route path="/signup" element={<Signup2 />} />
       <Route path="/profile/:uid" element={<Profile2 />} />
+      <Route path="/contractor/signup" element={<Signup2 />} />
 
       <Route path="/course/:cid" element={<CourseDetail />} />
       <Route path="/projects" element={<ProjectList />} />
