@@ -20,9 +20,12 @@ import Chat from "../components/chat/Chat";
 import JobCreation from "../pages/JobCreation";
 import Footer from "../components/base/Footer";
 import Signup2 from "../pages/Signup2";
+import ContratorSignUp from "../pages/ContractorSignUp";
 import Profile2 from "../pages/Profile2";
 import ProjectCreation from "../pages/ProjectCreation";
 import Homepage2 from "../pages/Homepage2";
+import ContractorPortal from "../pages/ContractorPortal";
+import ContractorEmployeesJob from "../pages/ContractorEmployeesJob";
 
 const AppRouter = () => (
   <BrowserRouter>
@@ -36,7 +39,9 @@ const AppRouter = () => (
       <Route path="/login" element={<Login2 />} />
       <Route path="/signup" element={<Signup2 />} />
       <Route path="/profile/:uid" element={<Profile2 />} />
-      <Route path="/contractor/signup" element={<Signup2 />} />
+      <Route path="/contractor/signup" element={<ContratorSignUp />} />
+      <Route path="/contractor" element={<ContractorPortal />} />
+      <Route path="/contractor/employee/:eid" element={<ContractorEmployeesJob />} />
 
       <Route path="/course/:cid" element={<CourseDetail />} />
       <Route path="/projects" element={<ProjectList />} />
