@@ -13,7 +13,7 @@
 .navbar-logo {
   color: #050850;
   justify-self: start;
-  margin-left: 20px;
+  /* margin-left: 20px; */
   cursor: pointer;
   text-decoration: none;
   font-size: 2rem;
