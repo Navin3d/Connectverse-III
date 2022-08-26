@@ -39,11 +39,15 @@
   padding-bottom: 1rem;
 }
 .cv-btn {
-  width: 100px;
+  width: 120px;
   padding: 4px 8px;
-  border-radius: 12px;
+  /* border-radius: 12px; */
   border: none;
   background-color: #050850;
+  color: white;
+}
+.cv-btn a {
+  text-decoration: none;
   color: white;
 }
 @media (max-width: 900px) {
@@ -54,4 +58,5 @@
     width: 20rem;
     text-align: center;
   }
+  
 }

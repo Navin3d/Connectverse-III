@@ -92,7 +92,7 @@ const HomePage = () => {
             </Grid>
             <Grid md={6} sm={12}>
               <div className="maindesc-wrap">
-                <h3 className="main-desc" style={{ textAlign: "center" }}>
+                <h3 className="main-desc" >
                   {data.Header.text}
                 </h3>
                 <Stats stats={data.Header.stats} />

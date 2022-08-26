@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { message } from "antd";
 
 import {
@@ -20,35 +20,33 @@ import {
 import { getUserId } from "../utils/auth";
 import Data from "../data";
 
-
 const INITIAL_EMPLOYER = {
-  "id": "",
-  "gstNumber": "",
-  "employerUpdated": {
-    "firstName": "",
-    "lastName": "",
-    "age": 0,
-    "aadharId": "",
-    "gender": "",
-    "email": "",
-    "mobileNumber": 0,
-    "address": "",
-    "location": ""
-  }
+  id: "",
+  gstNumber: "",
+  employerUpdated: {
+    firstName: "",
+    lastName: "",
+    age: 0,
+    aadharId: "",
+    gender: "",
+    email: "",
+    mobileNumber: 0,
+    address: "",
+    location: "",
+  },
 };
 
 const INITIAL_USER = {
-  "firstName": "",
-  "lastName": "",
-  "age": 0,
-  "aadharId": "",
-  "gender": "",
-  "email": "",
-  "mobileNumber": 0,
-  "address": "",
-  "location": ""
+  firstName: "",
+  lastName: "",
+  age: 0,
+  aadharId: "",
+  gender: "",
+  email: "",
+  mobileNumber: 0,
+  address: "",
+  location: "",
 };
-
 
 export default function EmployerReg() {
   const navigate = useNavigate();
@@ -66,12 +64,12 @@ export default function EmployerReg() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setRequestBody(prev => ({ ...prev, [name]: value }));
+    setRequestBody((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleChange1 = (e) => {
     const { name, value } = e.target;
-    setEmployer(prev => ({ ...prev, [name]: value }));
+    setEmployer((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -89,13 +87,12 @@ export default function EmployerReg() {
       console.log(requestBody);
 
       requestBody.employerUpdated = employer;
-      
+
       console.log(requestBody);
       const response = await axios.post(url, requestBody);
       if (response.status == 200) {
         navigate("/login");
       }
-
     } catch (e) {
       setError(e);
       console.log(e);
@@ -103,17 +100,19 @@ export default function EmployerReg() {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
-    (getUserId()) && navigate("/");
+    (getUserId() && navigate("/"));
   }, [requestBody]);
 
   return (
     <Stack alignItems="center">
-      <Box boxShadow={2} sx={{ width: 700 }}>
+      <Box boxShadow={2}>
         <Container>
-          <Typography variant="h4">Employer registeration form</Typography>
+          <Typography variant="h5" sx={{ marginTop: "10px" }}>
+            Employer registeration form
+          </Typography>
           <form onSubmit={handleSubmit}>
             <Grid container paddingTop={2}>
               <Grid xs={12} md={6} padding={1}>
@@ -251,7 +250,9 @@ export default function EmployerReg() {
             <Grid item paddingTop={2} m={1}>
               <Grid sm={10}></Grid>
               <Grid sm={2}>
-                <Button variant="contained" type="submit">Submit</Button>
+                <Button variant="contained" type="submit">
+                  Submit
+                </Button>
               </Grid>
             </Grid>
           </form>

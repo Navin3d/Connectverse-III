@@ -12,52 +12,52 @@ import Data from "../data";
 import "../styles/pages/Profile2.css";
 
 const INITIAL_STATE = {
-  "id": "",
-  "firstName": "",
-  "lastName": "",
-  "age": 0,
-  "gender": "",
-  "prefferedWorkType": "",
-  "cvUrl": "",
-  "email": "",
-  "batchNo": 0,
-  "mobileNumber": 0,
-  "address": "0",
-  "location": "0",
-  "state": null,
-  "readyToRelocate": null,
-  "hasDrivingLicence": null,
-  "hasVehicle": null,
-  "expectedWagePerHour": 0,
-  "expectedWorkingHoursPerWeek": 0,
-  "isTechnicalWorker": false,
-  "isOccupied": false,
-  "isBlocked": true,
-  "physicalHealthPoints": null,
-  "mentalHealthPoints": null,
-  "waitingForJobTime": null,
-  "inactiveJobSeekTime": null,
-  "jobReports": null,
-  "knowsToOperateMobile": null,
-  "knowsToReadAndWrite": null,
-  "isEmployer": false,
-  "creditPoints": null,
-  "hamlet": null,
-  "adminOfProject": {
-    "id": 0,
-    "tittle": "",
-    "subTittle": "Project Collaboration"
+  id: "",
+  firstName: "",
+  lastName: "",
+  age: 0,
+  gender: "",
+  prefferedWorkType: "",
+  cvUrl: "",
+  email: "",
+  batchNo: 0,
+  mobileNumber: 0,
+  address: "0",
+  location: "0",
+  state: null,
+  readyToRelocate: null,
+  hasDrivingLicence: null,
+  hasVehicle: null,
+  expectedWagePerHour: 0,
+  expectedWorkingHoursPerWeek: 0,
+  isTechnicalWorker: false,
+  isOccupied: false,
+  isBlocked: true,
+  physicalHealthPoints: null,
+  mentalHealthPoints: null,
+  waitingForJobTime: null,
+  inactiveJobSeekTime: null,
+  jobReports: null,
+  knowsToOperateMobile: null,
+  knowsToReadAndWrite: null,
+  isEmployer: false,
+  creditPoints: null,
+  hamlet: null,
+  adminOfProject: {
+    id: 0,
+    tittle: "",
+    subTittle: "Project Collaboration",
   },
-  "projects": [
+  projects: [
     {
-      "id": 0,
-      "tittle": "0",
-      "subTittle": "Project Collaboration"
-    }
+      id: 0,
+      tittle: "0",
+      subTittle: "Project Collaboration",
+    },
   ],
-  "jobsApplied": [],
-  "job": null,
-  "company": null
+  jobsApplied: [],
+  job: null,
+  company: null,
 };
 
 const Profile = () => {
@@ -83,7 +83,7 @@ const Profile = () => {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
     !getToken() && navigate("/login");
@@ -105,7 +105,7 @@ const Profile = () => {
         </div>
 
         <div className="personal-details">
-          <Grid container maxWidth="md" padding={3}>
+          <Grid container padding={3}>
             <Grid md={6} sm={12} xs={12}>
               <div className="details-left">
                 <Stack spacing={2}>
@@ -120,19 +120,21 @@ const Profile = () => {
                 </Stack>
               </div>
             </Grid>
-            <Grid md={6} sm={12}>
+            <Grid md={6} sm={12} xs={12}>
               <div className="details-right">
                 <Stack spacing={2}>
                   <p>Expected CTC/HR: {user.expectedWagePerHour}</p>
                   <p>WorkType: {user.prefferedWorkType}</p>
-                  <p>Ready to Relocate: {user.readyToRelocate ? "Yes" : "No"}</p>
-                  <p>Driving License: {user.hasDrivingLicence ? "Yes" : "No"}</p>
+                  <p>
+                    Ready to Relocate: {user.readyToRelocate ? "Yes" : "No"}
+                  </p>
+                  <p>
+                    Driving License: {user.hasDrivingLicence ? "Yes" : "No"}
+                  </p>
                   <p>Vehicle: {user.hasVehicle ? "Yes" : "No"}</p>
                   <p>Skilled Worker: {user.isTechnicalWorker ? "Yes" : "No"}</p>
                   <p>Already In a Job: {user.isOccupied ? "Yes" : "No"}</p>
-                  <p>
-                    District: {user.location}
-                  </p>
+                  <p>District: {user.location}</p>
                 </Stack>
               </div>
             </Grid>
@@ -141,9 +143,25 @@ const Profile = () => {
         <div className="other-details">
           <h3 className="other-desc">Other Details</h3>
           <Stack spacing={2}>
-            <p>Project Working on as Admin: <NavLink to={`/project/${user.adminOfProject.id}`}>{user.adminOfProject.tittle}</NavLink></p>
-            <p>Projects Done: {user.projects.map(project => <NavLink to={`/project/${project.id}`}>{project.tittle}</NavLink>)}</p>
-            <button className="cv-btn"><a href={user.cvUrl} target="_blank">Download Cv</a></button>
+            <p>
+              Project Working on as Admin:{" "}
+              <NavLink to={`/project/${user.adminOfProject.id}`}>
+                {user.adminOfProject.tittle}
+              </NavLink>
+            </p>
+            <p>
+              Projects Done:{" "}
+              {user.projects.map((project) => (
+                <NavLink to={`/project/${project.id}`}>
+                  {project.tittle}
+                </NavLink>
+              ))}
+            </p>
+            <button className="cv-btn">
+              <a href={user.cvUrl} target="_blank">
+                Download Cv
+              </a>
+            </button>
           </Stack>
         </div>
       </Container>

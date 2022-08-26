@@ -3,12 +3,12 @@
 ======================================================================================================*/
 
 /* Navigation */
-.navbar {
+/* .navbar {
   border: 2px solid rgb(168, 178, 253);
   /* box-shadow: 4px 4px 5px 0px rgb(148, 223, 255); */
-}
+/*} */
 
-#menu {
+/* #menu {
   padding: 15px;
   transition: all 0.8s;
 }
@@ -86,7 +86,7 @@
 
 .navbar-default .navbar-toggle:hover > .icon-bar {
   background-color: #608dfd;
-}
+} */
 
 .section-title {
   margin-bottom: 70px;
