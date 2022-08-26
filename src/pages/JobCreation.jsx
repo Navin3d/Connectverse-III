@@ -113,7 +113,7 @@ const JobCreation = () => {
   }
 
   useEffect(() => {
-    (getEmployerId()) && navigate("/login");
+    (!getEmployerId()) && navigate("/login");
     initSkills();
   }, [requestBody]);
 
@@ -354,7 +354,7 @@ const JobCreation = () => {
                   label="Address"
                   variant="outlined"
                   fullWidth
-                  name="ocation"
+                  name="address"
                   value={requestBody.address}
                   onChange={handleChange}
                   required
@@ -373,3 +373,22 @@ const JobCreation = () => {
   );
 };
 export default JobCreation;
+
+
+// address: "Thiruvannamalai"
+// description: "This is an job posted by ministry of labour and development for renovation and maintenace of government buildings."
+// drivingLicenceRequired: "false"
+// employerId: "5bc99a74-23c7-447f-9215-8bec2b35f495"
+// isTechnicalJob: false
+// jobType: "CONSTRUCTION"
+// location: "Cheyyar"
+// noOfDays: "50"
+// ocation: "h"
+// payPerHour: "40"
+// requiredWorkers: "10"
+// skillIds: []
+// state: "TamilNadu"
+// tittle: "Government Building Renovation"
+// vehicleWanted: false
+// workHoursPerDay: 8
+// workStarted: false

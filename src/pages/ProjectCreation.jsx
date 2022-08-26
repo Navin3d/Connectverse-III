@@ -112,7 +112,8 @@ const ProjectCreation = () => {
   }
 
   useEffect(() => {
-    (getEmployeeId()) && navigate("/login");
+    console.log("Emp Id", getEmployeeId());
+    (!getEmployeeId() &&  navigate("/login"));
     initSkills();
   }, [requestBody]);
 

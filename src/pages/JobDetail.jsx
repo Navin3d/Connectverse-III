@@ -37,6 +37,7 @@ const INITIALSTATE = {
     projectType: "INTERMEDIATE",
     skills: Data.Courses,
     startedAt: "01-01-2022",
+    workHoursPerWeek: "",
     isCompleted: false,
     projectAdmin: {
         id: 111,
@@ -78,11 +79,8 @@ const JobDetailPage = () => {
     const [isTeamMate, setIsTeamMate] = useState(false);
     const [isProjectAdmin, setIsProjectAdmin] = useState(false);
 
-    const [job, setJob] = useState([]);
+    const [job, setJob] = useState(INITIALSTATE);
     const [loading, setLoading] = useState(false);
-
-    const userId = getUserId();
-    const headers = { Authorization: getToken() };
 
     const handleApplyJob = () => {
         console.log("applied");
@@ -109,11 +107,13 @@ const JobDetailPage = () => {
     }
 
     const handleAgreementOk = async () => {
+        const userId = getUserId();
         const applied = job.employeesApplied.filter(employee => employee.id == getUserId());
         if (applied[0] == null) {
             setScrollableModal(!scrollableModal);
             const baseUrl = Data.AppSettings.baseUrl;
-            const response = await axios.get(`${baseUrl}/job/${jid}/apply/${getUserId()}`, { headers });
+            const headers = { Authorization: getToken() };
+            const response = await axios.get(`${baseUrl}/job/${jid}/apply/${userId}`, { headers });
             message.success(response.data);
         } else {
             message.warn("Already Applied For this Job...");
@@ -134,13 +134,23 @@ const JobDetailPage = () => {
 
     const getOneJob = async () => {
         try {
+            const userId = getUserId();
+            console.log(userId);
             message.warn("Initializing...");
             setLoading(true);
             const baseUrl = Data.AppSettings.baseUrl;
+            const headers = { Authorization: getToken() };
             const response = await axios.get(`${baseUrl}/job/${jid}`, { headers });
             setJob(response.data);
+            console.log(response.data);
             if (response.data.employerId == userId) {
+                console.log(response.data.employerId)
+                console.log(userId);
                 setIsProjectAdmin(true);
+            } else {
+                console.log(userId);
+                console.log(response.data.employerId);
+                console.log("doest not match...")
             }
         } catch (e) {
             console.error(e);
@@ -220,7 +230,7 @@ const JobDetailPage = () => {
             <Descriptions.Item label="Work Type">
                 {job.jobType}
             </Descriptions.Item>
-            <Descriptions.Item label="Working Hours Per Day">{job.workHoursPerDay} Hours</Descriptions.Item>
+            <Descriptions.Item label="Working Hours Per Week">{job.workHoursPerWeek} Hours</Descriptions.Item>
             <Descriptions.Item label="Pay Per Hour">{job.payPerHour} £</Descriptions.Item>
             {(!job.isTechnicalJob) && <Descriptions.Item label="No Of Working Days">{job.noOfDays}</Descriptions.Item>}
             <Descriptions.Item label="Location">{`${job.location} - ${job.state}`}</Descriptions.Item>
@@ -264,9 +274,9 @@ const JobDetailPage = () => {
                     title={job.tittle}
                     subTitle={job.subTittle}
                     extra={[
-                        <Button hidden={!isProjectAdmin & !job.isCompleted} onClick={handleProjectClose} className="btn btn-outline-danger" key="3">Hide Job</Button>,
-                        <Button hidden={!isProjectAdmin & !job.isCompleted} onClick={() => { navigate(`/job/${job.id}/join`) }} className="btn btn-outline-info" key="3">Joining requests</Button>,
-                        <Button hidden={isProjectAdmin | job.isCompleted} key="1" onClick={handleApplyJob} style={{ backgroundColor: "green", color: "white" }} >
+                        <Button hidden={!isProjectAdmin} onClick={handleProjectClose} className="btn btn-outline-danger" key="3">Hide Job</Button>,
+                        <Button hidden={!isProjectAdmin} onClick={() => { navigate(`/job/${job.id}/join`) }} className="btn btn-outline-info" key="3">Joining requests</Button>,
+                        <Button hidden={isProjectAdmin} key="1" onClick={handleApplyJob} style={{ backgroundColor: "green", color: "white" }} >
                             <Award /> {(job.employeesApplied != null && job.employeesApplied.filter(employee => employee.id == getUserId())[0] != null) ? "Applied" : "Easy Apply"}
                         </Button>,
                     ]}
@@ -301,7 +311,7 @@ const JobDetailPage = () => {
                     <Container>
                         <Row>
                             {
-                                (job.skills != null || job.isTechnicalJob) ?
+                                (job.skills != null && job.isTechnicalJob) ?
                                     job.skills.map(skill => (
                                         <Col className="course-card">
                                             <CourseCard id={skill.id} imageUrl={skill.imageUrl} name={skill.tittle} jobsCanBeApplied={skill.jobsCanBeApplied} />
