@@ -43,7 +43,7 @@
 }
 
 .nav-links {
-  color: 000;
+  color: #050850;
   text-decoration: none;
   padding: 0.5rem 1rem;
   margin-bottom: 0.5rem;
@@ -139,11 +139,15 @@
     transform: translate(-100%, 60%);
     font-size: 1.8rem;
     cursor: pointer;
+    color: #050850;
   }
 
   .fa-times {
-    color: #fff;
+    color: #050850;
     font-size: 2rem;
+  }
+  .fa-bars {
+    color: #050850;
   }
 
   .nav-links-mobile {
@@ -160,12 +164,12 @@
   }
 
   .nav-links-mobile:hover {
-    background: #fff;
+    background: #050850;
     color: linear-gradient(to right, #050850 0%, #474dc0 100%);
     transition: 250ms;
   }
 
-  button {
+  /* button {
     display: none;
-  }
+  } */
 }
