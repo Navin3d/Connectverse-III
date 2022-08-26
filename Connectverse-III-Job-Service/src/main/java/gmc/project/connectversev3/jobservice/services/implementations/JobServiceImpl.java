@@ -20,6 +20,7 @@ import gmc.project.connectversev3.jobservice.daos.EmployerDao;
 import gmc.project.connectversev3.jobservice.daos.JobDao;
 import gmc.project.connectversev3.jobservice.daos.JobDeclineDao;
 import gmc.project.connectversev3.jobservice.daos.ReportsDao;
+import gmc.project.connectversev3.jobservice.daos.SchemesDao;
 import gmc.project.connectversev3.jobservice.daos.SkillDao;
 import gmc.project.connectversev3.jobservice.entities.CompanyEntity;
 import gmc.project.connectversev3.jobservice.entities.EmployeeEntity;
@@ -33,13 +34,16 @@ import gmc.project.connectversev3.jobservice.exceptions.JobNotFoundException;
 import gmc.project.connectversev3.jobservice.exceptions.JobRulesViolationException;
 import gmc.project.connectversev3.jobservice.exceptions.SkillNotFoundException;
 import gmc.project.connectversev3.jobservice.exceptions.UserNotFoundException;
+import gmc.project.connectversev3.jobservice.models.CreateOrUpdateCompanyModel;
 import gmc.project.connectversev3.jobservice.models.JobCreateOrUpdateModel;
 import gmc.project.connectversev3.jobservice.models.JobModel;
 import gmc.project.connectversev3.jobservice.models.ListJobModel;
 import gmc.project.connectversev3.jobservice.services.JobService;
 import gmc.project.connectversev3.jobservice.services.ProphetServiceFeignClient;
+import gmc.project.connectversev3.jobservice.services.SchemesService;
 import gmc.project.connectversev3.jobservice.shared.MailingModel;
 import gmc.project.connectversev3.jobservice.entities.ReportEntity;
+import gmc.project.connectversev3.jobservice.entities.SchemesEntity;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -66,7 +70,13 @@ public class JobServiceImpl implements JobService {
 
 	@Autowired(required = false)
 	private ProphetServiceFeignClient prophetServiceFeignClient;
-
+	
+	@Autowired
+	private SchemesService schemeService;
+	@Autowired
+	private SchemesDao schemesDao;
+	
+	
 	@Override
 	public JobEntity findOne(Long jobId) {
 		JobEntity returnValue = jobDao.findById(jobId).orElse(null);
@@ -81,7 +91,13 @@ public class JobServiceImpl implements JobService {
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		List<ListJobModel> returnValue = new ArrayList<>();
 		jobDao.findByIsCompleted(false).forEach(job -> {
-			returnValue.add(modelMapper.map(job, ListJobModel.class));
+			ListJobModel jobModel = modelMapper.map(job, ListJobModel.class);
+			if(jobModel.getCompany() == null) {
+				CreateOrUpdateCompanyModel companyCreate = new CreateOrUpdateCompanyModel();
+				companyCreate.setImageUrl("https://www.betterteam.com/images/betterteam-free-job-posting-sites-5877x3918-20210222.jpg?crop=40:21,smart&width=1200&dpr=2");
+				jobModel.setCompany(companyCreate);
+			}
+			returnValue.add(jobModel);
 		});
 		return returnValue;
 	}
@@ -92,7 +108,7 @@ public class JobServiceImpl implements JobService {
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		JobEntity foundJob = findOne(jobId);
 		JobModel returnValue = modelMapper.map(foundJob, JobModel.class);
-		returnValue.setEmployerId(foundJob.getCompany().getEmployer().getId());
+//		returnValue.setEmployerId(foundJob.getCompany().getEmployer().getId());
 		return returnValue;
 	}
 
@@ -145,6 +161,7 @@ public class JobServiceImpl implements JobService {
 			EmployerEntity employer = employerDao.findById(jobCreateOrUpdateModel.getEmployerId()).orElse(null);
 			CompanyEntity company = employer.getCompany();
 			detached.setCompany(company);
+			detached.setEmployerId(jobCreateOrUpdateModel.getEmployerId());
 			JobEntity savedJob = jobDao.save(detached);
 			company.getJobs().add(savedJob);
 			companyDao.save(company);
@@ -184,8 +201,13 @@ public class JobServiceImpl implements JobService {
 		foundJob.getEmployeesApplied().remove(foundEmployee);
 		foundEmployee.setJob(foundJob);
 		foundJob.getEmployees().add(foundEmployee);
+		
+		SchemesEntity scheme = schemesDao.findByWorkType(foundJob.getJobType());
+		scheme.getAppliedEmployees().add(foundEmployee);
+		foundEmployee.getAppliedSchemes().add(scheme);
 		jobDao.save(foundJob);
-
+		schemesDao.save(scheme);
+		
 		MailingModel mail = new MailingModel();
 		mail.setTo(foundEmployee.getEmail());
 		mail.setSubject("Stage-1 Passed" + foundJob.getTittle());
@@ -198,8 +220,8 @@ public class JobServiceImpl implements JobService {
 			ReportEntity report = new ReportEntity();
 			report.setDescription(
 					"Failed to send Mail about resume stage 1 passed for user with user Id: " + employeeId);
-			report.setCause(e.getCause().toString());
-			report.setSystemLog(e.getMessage());
+			report.setCause("Prophet service Feigh client");
+			report.setSystemLog("Exception handled");
 			report.setSentFrom("Jobs Microservice - gmc/project/connectversev3/jobservice/services/JobServiceImpl");
 			report.setIsFixed(false);
 			report.setOccuredAt(LocalDateTime.now());
@@ -290,7 +312,7 @@ public class JobServiceImpl implements JobService {
 
 		employees.forEach(employee -> {
 			List<JobEntity> returnValue = new ArrayList<>();
-			String msgBody = "";
+			String msgBody = "Greetings!";
 
 			Integer count = 1;
 			for (JobEntity job : jobs) {
@@ -345,30 +367,110 @@ public class JobServiceImpl implements JobService {
 				if (response.getBody().equals("1")) {
 					count += 1;
 					returnValue.add(job);
-					msgBody.concat(job.getId().toString()).concat("-" + count).concat("-"+job.getTittle()).concat("-"+job.getPayPerHour()).concat(" ");
-
+					msgBody += job.getId() + "-" + count + "-" + job.getTittle() + "-"
+							+ job.getPayPerHour() + ".";
+					
+					log.error(msgBody);
 					if (returnValue.size() == jobs.size() || returnValue.size() == 9)
 						break;
 				}
-				
+
 			}
-			
 
 			try {
-				prophetServiceFeignClient.sendSMS(employee.getMobileNumber().toString(), msgBody);
-			} catch(Exception e) {
+				prophetServiceFeignClient.sendSMS("+91" + employee.getMobileNumber(), msgBody);
+			} catch (Exception e) {
+				e.printStackTrace();
 				ReportEntity report = new ReportEntity();
 				report.setDescription("Failed to send Message about job for user with user Id: " + employee.getId());
-				report.setCause(e.getCause().toString());
-				report.setSystemLog(e.getMessage());
-				report.setSentFrom("User Microservice - gmc/project/connectversev3/userservice/services/SchedulingService");
+				report.setCause("Poda poopkjjb");
+				report.setSystemLog("kjhgg");
+				report.setSentFrom(
+						"User Microservice - gmc/project/connectversev3/userservice/services/SchedulingService");
 				report.setIsFixed(false);
 				report.setOccuredAt(LocalDateTime.now());
 				ReportEntity savedReport = reportsDao.save(report);
 				log.error("Failed to send SMS Reported Reference: {}.", savedReport.getId());
 			}
 		});
-		
+
+	}
+
+	@Override
+	public List<ListJobModel> getTenJobForEmployee(String employeeId) {
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		List<JobEntity> jobs = jobDao.findByIsTechnicalJob(false);
+		EmployeeEntity employee = employeeDao.findById(employeeId).orElse(null);
+		if (employee == null)
+			throw new EmployeeNotFoundException("Employee Id: " + employeeId);
+		List<ListJobModel> returnValue = new ArrayList<>();
+
+		Integer count = 1;
+		for (JobEntity job : jobs) {
+			Integer payPerHour_input = job.getPayPerHour();
+			Integer workHoursPerWeekGreatethan21Hours_input = 0;
+			Integer hasDrivingLicense_input = 1;
+			Integer hasvehicle_input = 1;
+			Integer waitingTime_input = employee.getWaitingForJobTime();
+			Integer blokSameAsJob_input = 0;
+			Integer districtSameAsJob_input = 0;
+			Integer stateSameAsJob_input = 0;
+			Integer readyToRelocate_input = 0;
+
+			if (job.getWorkHoursPerWeek() > 21)
+				workHoursPerWeekGreatethan21Hours_input = 1;
+			if (job.getDrivingLicenceRequired())
+				if (!employee.getHasDrivingLicence()) {
+					hasDrivingLicense_input = 0;
+					hasvehicle_input = 0;
+				}
+			if (job.getLocation().equals(employee.getAddress())) {
+				blokSameAsJob_input = 1;
+				districtSameAsJob_input = 1;
+				stateSameAsJob_input = 1;
+			} else if (job.getLocation().equals(employee.getLocation())) {
+				blokSameAsJob_input = 0;
+				districtSameAsJob_input = 1;
+				stateSameAsJob_input = 1;
+			} else if (job.getLocation().equals(employee.getState().toString())) {
+				blokSameAsJob_input = 0;
+				districtSameAsJob_input = 0;
+				stateSameAsJob_input = 1;
+			} else {
+				log.error("False");
+			}
+
+			if (employee.getReadyToRelocate())
+				readyToRelocate_input = 1;
+
+			String applyBaseMLUrl = environment.getProperty("applyBaseMLUrl");
+			String canApplyJobUrl = applyBaseMLUrl + "/" + payPerHour_input + "/"
+					+ workHoursPerWeekGreatethan21Hours_input + "/" + hasDrivingLicense_input + "/" + hasvehicle_input
+					+ "/" + waitingTime_input + "/" + blokSameAsJob_input + "/" + districtSameAsJob_input + "/"
+					+ stateSameAsJob_input + "/" + readyToRelocate_input + "/";
+
+			log.error(applyBaseMLUrl);
+
+			RestTemplate restTemplate = new RestTemplate();
+			ResponseEntity<String> response = restTemplate.getForEntity(canApplyJobUrl, String.class);
+
+			if (response.getBody().equals("1")) {
+				count += 1;
+				ListJobModel jobSList = modelMapper.map(job, ListJobModel.class);
+				if(jobSList.getCompany() == null) {
+					CreateOrUpdateCompanyModel companyC = new CreateOrUpdateCompanyModel();
+					companyC.setImageUrl(employeeId);
+					companyC.setImageUrl("https://www.betterteam.com/images/betterteam-free-job-posting-sites-5877x3918-20210222.jpg?crop=40:21,smart&width=1200&dpr=2");
+					jobSList.setCompany(companyC);
+				}
+				returnValue.add(jobSList);
+
+				if (returnValue.size() == jobs.size() || returnValue.size() == 9)
+					break;
+			}
+		}
+		return returnValue;
 	}
 
 }

@@ -26,5 +26,7 @@ public class EmployerModel implements Serializable {
 	private String address;
 	
 	private String location;
+	
+	private Boolean isContractor;
 
 }

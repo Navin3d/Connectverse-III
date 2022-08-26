@@ -167,6 +167,12 @@ public class EmployeeEntity implements Serializable {
 	@ManyToOne
 	private JobEntity job;
 	
+	@ManyToMany(cascade = CascadeType.PERSIST)
+	private Set<SchemesEntity> appliedSchemes = new HashSet<>();
+	
+	@ManyToMany(cascade = CascadeType.PERSIST)
+	private Set<SchemesEntity> benifittedSchemes = new HashSet<>();
+	
 	public EmployeeEntity() {
 		super();
 		this.requestedProjects = new HashSet<>();

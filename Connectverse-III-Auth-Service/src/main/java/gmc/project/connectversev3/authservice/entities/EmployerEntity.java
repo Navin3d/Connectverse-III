@@ -60,6 +60,9 @@ public class EmployerEntity implements Serializable {
 	@Column(name = "is_blocked")
 	private Boolean isBlocked = false;
 	
+	@Column(name = "is_contractor")
+	private Boolean isContractor;
+	
 	@OneToOne(optional = true, cascade = CascadeType.PERSIST)
 	private CompanyEntity company;
 

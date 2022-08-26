@@ -19,7 +19,7 @@ public class JobModel implements Serializable {
 	
 	private Integer noOfDays;
 	
-	private Integer workHoursPerDay;
+	private Integer workHoursPerWeek;
 	
 	private Integer payPerHour;
 	

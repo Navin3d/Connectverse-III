@@ -18,4 +18,5 @@ public interface JobService {
 	public void reportJob(Long jobId, String employeeId, String employerId, String points);
 	public void createOrUpdateJob(JobCreateOrUpdateModel jobCreateOrUpdateModel);
 	public void sendTenJobSuggestions();
+	public List<ListJobModel> getTenJobForEmployee(String employeeId);
 }

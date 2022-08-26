@@ -80,6 +80,9 @@ public class JobEntity implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private CompanyEntity company;
 	
+	@Column(name = "employer_id")
+	private String employerId;
+	
 	@Column(name = "is_blocked")
 	private Boolean isBlocked = false;
 	

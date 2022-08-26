@@ -12,4 +12,5 @@ import gmc.project.connectversev3.jobservice.entities.EmployeeEntity;
 @Transactional
 public interface EmployeeDao extends JpaRepository<EmployeeEntity, String> {
 	List<EmployeeEntity> findByIsTechnicalWorker(Boolean isTechnicalWorker);
+	List<EmployeeEntity> findByAddress(String address);
 }

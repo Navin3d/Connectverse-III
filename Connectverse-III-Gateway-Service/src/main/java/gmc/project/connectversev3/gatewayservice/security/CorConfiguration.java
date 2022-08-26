@@ -15,7 +15,7 @@ public class CorConfiguration {
 	public CorsWebFilter corsWebFilter() {
 		final CorsConfiguration corsConfig = new CorsConfiguration();
 //		corsConfig.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
-		corsConfig.setAllowedOrigins(Arrays.asList("https://projectistic.herokuapp.com/", "http://localhost:3000"));
+		corsConfig.setAllowedOrigins(Arrays.asList("https://connectverse.live", "http://localhost:3000"));
         corsConfig.setAllowedMethods(Arrays.asList("GET", "POST"));
         corsConfig.addAllowedHeader("*");
         corsConfig.setExposedHeaders(Arrays.asList("Authorization", "Refresh_Token", "Employer_Id", "Employee_Id"));

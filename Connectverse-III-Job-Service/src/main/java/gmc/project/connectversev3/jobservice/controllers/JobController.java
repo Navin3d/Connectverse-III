@@ -71,5 +71,17 @@ public class JobController {
 		jobService.createOrUpdateJob(jobCreateOrUpdateModel);
 		return ResponseEntity.status(HttpStatus.OK).body("Job Saved Successfully...");
 	}
+	
+	@GetMapping(path = "/get/10/jobs")
+	public ResponseEntity<String> sendTenJobs() {
+		jobService.sendTenJobSuggestions();
+		return ResponseEntity.status(HttpStatus.OK).body("Job sent Successfully...");
+	}
+	
+	@GetMapping(path = "contractor/get/10/jobs/{employeeId}")
+	public ResponseEntity<List<ListJobModel>> sendTenJobs(@PathVariable String employeeId) {
+		List<ListJobModel> returnValue = jobService.getTenJobForEmployee(employeeId);
+		return ResponseEntity.status(HttpStatus.OK).body(returnValue);
+	}
 
 }
