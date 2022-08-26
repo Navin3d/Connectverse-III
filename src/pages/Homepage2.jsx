@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Grid, Stack } from "@mui/material";
-
+import { getUserId, getEmployeeId, getEmployerId } from "../utils/auth";
 import Independence_day from "../assets/images/Independence_day.webp";
 import EShram from "../assets/images/EShram.jpeg";
 import Ministry from "../assets/images/Ministry.jpeg";
@@ -24,6 +24,7 @@ const HomePage = () => {
   const [data, setData] = useState(JsonData.Hindi);
 
   useEffect(() => {
+    console.log(getEmployeeId)
     getLanguage() == "Hindi"
       ? setData(JsonData.Hindi)
       : getLanguage() == "Kanada"

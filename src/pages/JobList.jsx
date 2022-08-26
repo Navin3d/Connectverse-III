@@ -11,6 +11,19 @@ import Data from "../data";
 import "../styles/pages/job-list.css";
 
 
+const INITIAL_DATA = {
+    id: 1,
+    title: `Job Tittle 1`,
+    subTittle: "Fuck You...",
+    totalMembers: 10,
+    description: 'This project is basically designed to take up my life and sleep and also litttle amount f existing peace from me',
+    detailedDescription: "",
+    durationInMonths: 8,
+    projectType: "INTERMEDIATE",
+    skills: Data.Courses,
+    content: 'This project is basically designed to take up my life and sleep and also litttle amount f existing peace from me.',
+}
+
 const data = Array.from({
     length: 23,
 }).map((_, i) => ({
@@ -85,7 +98,7 @@ const JobList = () => {
                                 <img
                                     width={272}
                                     alt="logo"
-                                    src={ (item.company.imageUrl) ? `${item.company.imageUrl}` : "https://www.betterteam.com/images/betterteam-free-job-posting-sites-5877x3918-20210222.jpg?crop=40:21,smart&width=1200&dpr=2"}
+                                    src={item.company.imageUrl}
                                 />
                             }
                         >

@@ -8,17 +8,14 @@ export const getRefreshToken = () => (
 );
 
 export const getUserId = () => {
-    var userId;
 
-    if(localStorage.getItem("Employee_Id") != null) {
-        userId = localStorage.getItem("Employee_Id");
-    } else if(localStorage.getItem("Employer_Id") != null) {
-        userId = localStorage.getItem("Employer_Id");
+    if(localStorage.getItem("Employee_Id") != "undefined") {
+        return localStorage.getItem("Employee_Id");
+    } else if(localStorage.getItem("Employer_Id") != "undefined") {
+        return localStorage.getItem("Employer_Id");
     } else {
-        userId = null;
+       return null;
     }
-
-    return userId;
     
     // "0dfbd498-4bc4-472b-a322-a28847d16e34"
     // return "00ddc37e-6c39-4701-924f-34c67295f080"
@@ -38,6 +35,7 @@ export const getEmployeeId = () => (
 export const handleLogin = (headers) => {
     console.log(headers);
     const { employer_id, employee_id, authorization, refresh_token } = headers;
+    console.log(headers);
     localStorage.setItem("Authorization", authorization);
     localStorage.setItem("Refresh_Token", refresh_token);
     localStorage.setItem("Employee_Id", employee_id);
