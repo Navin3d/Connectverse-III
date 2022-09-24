@@ -1,5 +1,5 @@
 ## [Connectverse](https://connectverse.live)
-   This is an website made for Smart India Hackathon.
+   This is an website cum *IOT* untility made for Smart India Hackathon.
 
 ## Domain
    Agriculture & Rural Development., Education, IoT based technologies.
