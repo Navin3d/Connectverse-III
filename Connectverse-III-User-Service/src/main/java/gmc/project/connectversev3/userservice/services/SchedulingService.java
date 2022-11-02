@@ -73,7 +73,7 @@ public class SchedulingService {
 		});
 	}
 
-	@Scheduled(fixedDelay = 60000)
+//	@Scheduled(fixedDelay = 60000)
 	public void fetchAndAssignJob() {
 		log.error("One Min...");
 		List<EmployeeEntity> employees = userService.fetchFromEshram();
