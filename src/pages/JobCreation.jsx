@@ -15,6 +15,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  TextareaAutosize
 } from "@mui/material";
 
 import { getEmployerId, getToken } from "../utils/auth";
@@ -50,6 +51,10 @@ const INITIAL_SKILLS = [
 
 const JobCreation = () => {
   const navigate = useNavigate();
+
+  const [states, setStates] = useState([]);
+  const [workType, setWorkType] = useState([]);
+  const [difficultyLevel, setDifficultyLevel] = useState([]);
 
   const [skills, setSkills] = useState(INITIAL_SKILLS);
   const [jobSkills, setJobSkills] = useState([]);
@@ -113,9 +118,26 @@ const JobCreation = () => {
     }
   };
 
+  const initOptions = async () => {
+    try {
+      setLoading(true);
+      const baseUrl = Data.AppSettings.baseUrl;
+      const url = `${baseUrl}/auth/states`;
+      const resonse = await axios.get(url);
+      if (resonse.status == 200) {
+        setStates(resonse.data);
+      }
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   useEffect(() => {
     (!getEmployerId()) && navigate("/login");
     initSkills();
+    initOptions();
   }, [requestBody]);
 
   return (
@@ -324,23 +346,12 @@ const JobCreation = () => {
                   </FormControl>
                 </Grid>
               </Grid>
-              <Grid container item>
-                <TextField
-                  id="outlined-basic"
-                  label="Job-Description"
-                  variant="outlined"
-                  fullWidth
-                  name="description"
-                  value={requestBody.description}
-                  onChange={handleChange}
-                  required
-                />
-              </Grid>
-              <Grid container item>
+              <Grid xs={12} md={6} item>
                 <Multiselect
                   placeholder="Select the skills required to work in this project"
                   style={{
                     width: "100%",
+                    height: "15px"
                   }}
                   fullWidth
                   options={skills} // Options to display in the dropdown
@@ -350,7 +361,7 @@ const JobCreation = () => {
                   displayValue="name" // Property name to display in the dropdown options
                 />
               </Grid>
-              <Grid container item>
+              <Grid xs={12} md={6} item>
                 <TextField
                   id="outlined-basic"
                   label="Address"
@@ -359,6 +370,23 @@ const JobCreation = () => {
                   name="address"
                   value={requestBody.address}
                   onChange={handleChange}
+                  required
+                />
+              </Grid>
+              <Grid container item>
+                <InputLabel id="demo-simple-select-label">
+                  Job Description
+                </InputLabel>
+                <TextareaAutosize
+                  maxRows={6}
+                  id="outlined-basic"
+                  label="Job-Description"
+                  variant="outlined"
+                  fullWidth
+                  name="description"
+                  value={requestBody.description}
+                  onChange={handleChange}
+                  style={{ width: "100%", height: "100px", padding: "1%" }}
                   required
                 />
               </Grid>

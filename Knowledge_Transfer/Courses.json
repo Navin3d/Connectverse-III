@@ -1471,5 +1471,295 @@
                 ]
             }
         ]
+    },
+    {
+        "tittle": " Food production worker",
+        "subTittle": "Production",
+        "skillsGained": "Advanced knowledge in Production Sector",
+        "provider": "Raizen Foods India Private Limited",
+        "jobTittles": "Food process operative, food processing worker, assembling goods on production lines, monitoring the process, Draper",
+        "preRequirements": "Basic tools to hand loom",
+        "averageTimeToFinishCourse": "50",
+        "jobsCanBeApplied": "Can get a job in any product Based Comapany.",
+        "roadMapUrl": "",
+        "youtubeUrl": "https://www.youtube.com/embed/o1b7NrXoEjM",
+        "useFulLink": "https://www.canr.msu.edu/resources/food-manufacturing-and-processing-career-pathway-maps",
+        "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/A1HxfZt4WaL.jpg",
+        "isHidden": null,
+        "comments": [],
+        "courseContents": [
+            {
+                "tittle": "Forklift operation",
+                "subTittles": [
+                    "Do not give rides or use the forks to lift people.",
+                    "Use proper footing and the handhold, if available, when entering the lift.",
+                    "Always wear a seatbelt when the forklift has one",
+                    "Never exceed the rated load and ensure it is stable and balanced.",
+                    "Keep a safe distance from platform and ramp edges.",
+                    "Always operate the vehicle according to the manufacturer’s instructions.",
+                    "Watch for pedestrians and observe the speed limit.",
+                    "Do not raise or lower the load while traveling",
+                    "Be aware of other vehicles in the work area.",
+                    "Have clear visibility of the work area and ensure you have enough clearance when raising, loading, and operating a forklift.",
+                    "Use horns at cross aisles and obstructed areas."
+                ]
+            },
+            {
+                "tittle": "Skills Required to get better at food production sector",
+                "subTittles": [
+                    "Machinery Operation",
+                    "Material Loading and Unloading",
+                    "Forklift operation",
+                    "Assembly protocols",
+                    "scissor Lifts"
+                ]
+            },
+            {
+                "tittle": "Machinery Operation",
+                "subTittles": [
+                    "PREPARATION EQUIPMENT- Cleaning, grading, sorting, peeling or skinning",
+                    "MECHANICAL PROCESSING EQUIPMENT- Size Reduction, Size Enlargement, Homogenization/Emulsification, Mixing/Bending, "
+                ]
+            },
+            {
+                "tittle": "Assembly protocols",
+                "subTittles": [
+                    "Reduced miscommunications",
+                    "Standardization and consistency",
+                    "Accountability",
+                    "Creating failsafes",
+                    "More efficient training and coaching",
+                    "Clarity",
+                    "Establishing labor and supply usage"
+                ]
+            },
+            {
+                "tittle": "scissor Lifts",
+                "subTittles": [
+                    "Clear the surrounding area",
+                    "Confirm all crew members received training ",
+                    "Conduct a pre-operation safety check"
+                ]
+            },
+            {
+                "tittle": "Material Loading and Unloading",
+                "subTittles": [
+                    "Racking systems and internal transport",
+                    "Cold-store loading dock",
+                    "High-bay cold store",
+                    "Adjustable pallet racking",
+                    "Mobile racking",
+                    "Drive-in racking",
+                    "Load and palletisation",
+                    "Pallet-live system"
+                ]
+            }
+        ]
+    },
+    {
+        "tittle": "Hand Looming",
+        "subTittle": "Cloths",
+        "provider": "Khadhi Crafts pvt ltd",
+        "skillsGained": "Advanced knowledge in looming cloths",
+        "jobTittles": "Bookbinder, Cordwainer, Corsetier, Draper",
+        "preRequirements": "Basic tools to hand loom",
+        "averageTimeToFinishCourse": 50,
+        "jobsCanBeApplied": "Can get a job in any product Based Comapany.",
+        "roadMapUrl": "",
+        "youtubeUrl": "https://www.youtube.com/embed/hCy3Crq7fYs",
+        "useFulLink": "https://www.schoolofsweetgeorgia.com/roadmap/",
+        "imageUrl": "https://st.adda247.com/https://wpassets.adda247.com/wp-content/uploads/multisite/2022/08/06161639/National-Handloom-Day-2022.png",
+        "courseContents": [
+            {
+                "tittle": "Skills Required to master hand looming",
+                "subTittles": [
+                    "Raw material selection",
+                    "Raw material to yarn conversion",
+                    "Dyeing of yarns",
+                    "Bobbin winding and warping",
+                    "Sizing of warp yarns",
+                    "Dressing and winding of warp yarns",
+                    "Attaching Warp Yarns on Loom",
+                    "Weft yarn winding"
+                ]
+            },
+            {
+                "tittle": "Raw material selection",
+                "subTittles": [
+                    "Cotton",
+                    "Wool",
+                    "Lenin",
+                    "Silk"
+                ]
+            },
+            {
+                "tittle": "Raw material to yarn conversion",
+                "subTittles": [
+                    "Treatment of raw fibre",
+                    "Early spinning methods",
+                    "Modern spinning",
+                    "Reeling and throwing",
+                    "Yarn packages"
+                ]
+            },
+            {
+                "tittle": "Dyeing of yarns",
+                "subTittles": [
+                    "Scouring",
+                    "Bleaching",
+                    "Dyeing",
+                    "Hydro-extractor system",
+                    "Dry",
+                    "Finishing"
+                ]
+            },
+            {
+                "tittle": "Bobbin winding and warping",
+                "subTittles": [
+                    "The objectionable yarn faults should be eliminated up to the optimum level",
+                    "The yarn should not be damaged during the winding process",
+                    "Easy unwinding should be ensured in the winding package",
+                    "The shape and size of the package should be proper and suitable for the next processes",
+                    "The package winding density should be correct",
+                    "The winding of the package should be cost-effective"
+                ]
+            },
+            {
+                "tittle": "Sizing of warp yarns",
+                "subTittles": [
+                    "Wet Sizing",
+                    "Solvent Sizing",
+                    "Hot melt Sizing",
+                    "Foam Sizing",
+                    "Blend Sizing",
+                    "Double Cylinder Sizing",
+                    "Multi Cylinder Sizing",
+                    "Draw-sizing"
+                ]
+            },
+            {
+                "tittle": "Dressing and winding of warp yarns",
+                "subTittles": [
+                    "Warping board or mill",
+                    "Smooth, strong scrap yarn (in a contrasting color to your warp yarn)",
+                    "Scissors",
+                    "Painters tape/washi tape"
+                ]
+            },
+            {
+                "tittle": "Attaching Warp Yarns on Loom",
+                "subTittles": [
+                    "Secure warp chains with bow knots",
+                    "Use a counting thread at the cross to separate the warp into 1-inch sections",
+                    "Use paper to tie the top two warp layers on each side of the cross",
+                    "Secure your lease sticks for sleying and threading",
+                    "Use bamboo blinds or placemats as warp separators",
+                    "Use a weight to keep even tension on your warp as you beam"
+                ]
+            },
+            {
+                "tittle": "Weft yarn winding",
+                "subTittles": [
+                    "Pirn or weft winding is the process of transferring weft yarn on the small Pirn able to use in the shuttle of a loom",
+                    "A tapered bobbin having weft yarn on it is known as Pirn",
+                    "A Pirn is used on end feed shuttles",
+                    "The pirn differs from bobbins in that the pirns are tapered"
+                ]
+            }
+        ]
+    },
+    {
+        "tittle": "Sewing",
+        "subTittle": "Cloths",
+        "provider": "Khadhi Crafts pvt ltd",
+        "skillsGained": "Advanced knowledge in Sewing cloths",
+        "jobTittles": "Bookbinder, Cordwainer, Corsetier, Draper",
+        "preRequirements": "Basic tools to sew",
+        "averageTimeToFinishCourse": 50,
+        "jobsCanBeApplied": "Can get a job in any product Based Comapany.",
+        "roadMapUrl": "",
+        "youtubeUrl": "https://www.youtube.com/watch?v=rnTwT-ifLkU",
+        "useFulLink": "https://www.fashionmakerspace.com/pages/class-guide",
+        "imageUrl": "https://unsplash.com/photos/qQKv7r1BaRw",
+        "courseContents": [
+            {
+                "tittle": "Skills Required to master Sewing",
+                "subTittles": [
+                    "Learn sewing terminology",
+                    "Thread a needle",
+                    "Choose your thread",
+                    "Sew a straight stitch",
+                    "Sew a button",
+                    "Use a pattern",
+                    "Tools",
+                    "Tie a knot"
+                ]
+            },
+            {
+                "tittle": "Learn sewing terminology",
+                "subTittles": [
+                    "Anchoring stitches. These are machine stitches that are sewn with zero stitch length, to keep from pulling out.",
+                    "Ballpoint needles",
+                    "Baste",
+                    "Bias",
+                    "Binding",
+                    "Blanket stitch"
+                ]
+            },
+            {
+                "tittle": "Thread a needle",
+                "subTittles": [
+                    "Wind a bobbin",
+                    "Load your wound bobbin",
+                    "Place the spool",
+                    "Thread through the thread guide",
+                    "Pull the thread through the U-shaped guidel",
+                    "Wrap the thread around the thread take-up lever",
+                    "Thread the needle",
+                    "Catch the thread"
+                ]
+            },
+            {
+                "tittle": "Choose your thread",
+                "subTittles": [
+                    "Identify which type of sewing you are undertaking",
+                    "Learn the main types of sewing thread",
+                    "Consider the qualities of sewing thread",
+                    "Select sewing thread according to the right color.",
+                    "Consult the sewing instructions",
+                    "Purchase quality thread"
+                ]
+            },
+            {
+                "tittle": "Sew a straight stitch",
+                "subTittles": [
+                    "Choose a sewing needle and thread that matches the color of your fabric",
+                    "Thread the needle and tie a knot in the thread.",
+                    "Use a ruler and chalk to draw a guideline for a perfectly straight line.",
+                    "Bring the needle up from the bottom of the fabric",
+                    "Push the needle down to make 1 straight stitch about 1⁄4 in (0.64 cm) long",
+                    "Bring the needle back up to make another stitch that's the same length"
+                ]
+            },
+            {
+                "tittle": "Sew a button",
+                "subTittles": [
+                    "Thread the Needle & Knot the End",
+                    "Create Anchor “X” Poin",
+                    "Position the Button",
+                    "Create the Shank",
+                    "Tie It Off"
+                ]
+            },
+            {
+                "tittle": "Tie a knot",
+                "subTittles": [
+                    "Tying Off With a Double Threaded Needle",
+                    "Tying Off With a Single Threaded Needle by Knotting",
+                    "Tying Off With a Double or Single Threaded Needle Without a Knot",
+                    "Tying Off on Felt"
+                ]
+            }
+        ]
     }
 ]

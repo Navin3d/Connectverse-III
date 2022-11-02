@@ -12,6 +12,10 @@ import {
   RadioGroup,
   FormGroup,
   FormLabel,
+  Select,
+  InputLabel,
+  MenuItem,
+  FormControl
 } from "@mui/material";
 
 import { getUserId } from "../utils/auth";
@@ -39,6 +43,7 @@ const INITIAL_USER = {
 const Signup2 = () => {
 
   const navigate = useNavigate();
+  const [states, setStates] = useState([]);
   const [requestBody, setRequestBody] = useState(INITIAL_USER);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -76,8 +81,25 @@ const Signup2 = () => {
     }
   }
 
+  const initState = async () => {
+    try {
+      setLoading(true);
+      const baseUrl = Data.AppSettings.baseUrl;
+      const url = `${baseUrl}/auth/states`;
+      const resonse = await axios.get(url);
+      if (resonse.status == 200) {
+        setStates(resonse.data);
+      }
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   useEffect(() => {
     (getUserId()) && navigate("/");
+    initState();
   }, [requestBody]);
 
   return (
@@ -207,14 +229,31 @@ const Signup2 = () => {
                     />
                   </div>
                   <div className="input-firstname">
-                    <TextField
+                    {/* <TextField
                       id="standard-basic"
                       label="State"
                       variant="standard"
                       name="state"
                       value={requestBody.state}
                       onChange={handleChange}
-                    />
+                    /> */}
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">State</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        name="state"
+                        value={requestBody.state}
+                        label="State"
+                        onChange={handleChange}
+                      >
+                        {
+                          states.map(state => (
+                            <MenuItem value={state}>{state}</MenuItem>
+                          ))
+                        }
+                      </Select>
+                    </FormControl>
                   </div>
                   <div className="input-firstname">
                     <FormGroup>
