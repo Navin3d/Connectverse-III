@@ -27,6 +27,8 @@ import Homepage2 from "../pages/Homepage2";
 import ContractorPortal from "../pages/ContractorPortal";
 import ContractorEmployeesJob from "../pages/ContractorEmployeesJob";
 
+import CopyrightsProject from "../pages/Copyright-Projects";
+
 const AppRouter = () => (
   <BrowserRouter>
     <Navbar />
@@ -53,6 +55,9 @@ const AppRouter = () => (
       <Route path="/job/:jid" element={<JobDetail />} />
       <Route path="/job/:jid/join" element={<JobJoining />} />
       <Route path="/chat" element={<Chat />} />
+
+      <Route path="/copyrights/project" element={<CopyrightsProject />} />
+
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     <Footer />
